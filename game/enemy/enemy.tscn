@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bxdssv880wo0p"]
+
+[ext_resource type="Script" uid="uid://bh3k8jhh4tbj4" path="res://game/enemy/enemy.gd" id="1_2mvqj"]
+[ext_resource type="PackedScene" uid="uid://blsg4naun2754" path="res://game/enemy/soft_collision/soft_collision.tscn" id="2_q106d"]
+[ext_resource type="PackedScene" uid="uid://dxcwnd01jn8s8" path="res://game/combat_collision/hit_box/hit_box.tscn" id="3_8s3bx"]
+
+[node name="Enemy" type="CharacterBody2D" unique_id=618280856]
+collision_layer = 4
+collision_mask = 3
+motion_mode = 1
+script = ExtResource("1_2mvqj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=363437164]
+
+[node name="SoftCollision" parent="." unique_id=1353088001 instance=ExtResource("2_q106d")]
+
+[node name="HitBox" parent="." unique_id=456550994 instance=ExtResource("3_8s3bx")]
+collision_layer = 1536
+
+[node name="ImmuneTimer" parent="HitBox" index="1" unique_id=1380030965]
+wait_time = 0.001
+
+[editable path="HitBox"]

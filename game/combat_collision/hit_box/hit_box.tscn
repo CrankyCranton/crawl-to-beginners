@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dxcwnd01jn8s8"]
+
+[ext_resource type="Script" uid="uid://s2igl4llanj" path="res://game/combat_collision/hit_box/hit_box.gd" id="1_6tsfm"]
+
+[node name="HitBox" type="Area2D" unique_id=456550994]
+collision_layer = 512
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_6tsfm")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="." unique_id=672786274]
+
+[node name="ImmuneTimer" type="Timer" parent="." unique_id=1380030965]
+one_shot = true
+
+[connection signal="timeout" from="ImmuneTimer" to="." method="_on_immune_timer_timeout"]

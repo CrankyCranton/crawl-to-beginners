@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cpvvr321bffiw"]
+
+[ext_resource type="Script" uid="uid://dud6rlfqfc7j8" path="res://game/ghost/ghost.gd" id="1_xe3x1"]
+[ext_resource type="Texture2D" uid="uid://dnpoq1nirc2ow" path="res://icon.svg" id="2_2iaaw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2iaaw"]
+radius = 64.0
+
+[node name="Ghost" type="Marker2D" unique_id=948892706]
+script = ExtResource("1_xe3x1")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1732253768]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_2iaaw")
+
+[node name="InteractionZone" type="Area2D" parent="." unique_id=1151679937]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionZone" unique_id=1089921698]
+shape = SubResource("CircleShape2D_2iaaw")

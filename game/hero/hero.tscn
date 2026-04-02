@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://ccravkxuofnl3"]
+
+[ext_resource type="Script" uid="uid://ddpvmt1ruyxxq" path="res://game/hero/hero.gd" id="1_dpa0h"]
+[ext_resource type="PackedScene" uid="uid://dxcwnd01jn8s8" path="res://game/combat_collision/hit_box/hit_box.tscn" id="2_msmgc"]
+[ext_resource type="PackedScene" uid="uid://blsg4naun2754" path="res://game/enemy/soft_collision/soft_collision.tscn" id="3_dk5tg"]
+
+[node name="Hero" type="CharacterBody2D" unique_id=1983593253]
+collision_layer = 2
+collision_mask = 7
+motion_mode = 1
+script = ExtResource("1_dpa0h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=907237478]
+
+[node name="HitBox" parent="." unique_id=456550994 instance=ExtResource("2_msmgc")]
+collision_layer = 2560
+
+[node name="SoftCollision" parent="." unique_id=1353088001 instance=ExtResource("3_dk5tg")]
+
+[editable path="HitBox"]

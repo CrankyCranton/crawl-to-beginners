@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://blsg4naun2754"]
+
+[ext_resource type="Script" uid="uid://pktpiuapgqwx" path="res://game/enemy/soft_collision/soft_collision.gd" id="1_rvoal"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rvoal"]
+resource_local_to_scene = true
+radius = 32.0
+
+[node name="SoftCollision" type="Area2D" unique_id=1353088001]
+collision_layer = 4096
+collision_mask = 4096
+script = ExtResource("1_rvoal")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="." unique_id=1699220739]
+shape = SubResource("CircleShape2D_rvoal")
