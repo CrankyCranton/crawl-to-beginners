@@ -2,18 +2,22 @@
 
 [ext_resource type="Script" uid="uid://dud6rlfqfc7j8" path="res://game/ghost/ghost.gd" id="1_xe3x1"]
 [ext_resource type="Texture2D" uid="uid://dnpoq1nirc2ow" path="res://icon.svg" id="2_2iaaw"]
+[ext_resource type="PackedScene" uid="uid://bxgcm2uyt1qg7" path="res://game/gun/gun.tscn" id="3_fuwrd"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_2iaaw"]
-radius = 64.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_fuwrd"]
+radius = 16.0
 
-[node name="Ghost" type="Marker2D" unique_id=948892706]
+[node name="Ghost" type="CharacterBody2D" unique_id=507860525]
+collision_layer = 8
 script = ExtResource("1_xe3x1")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1732253768]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_2iaaw")
 
-[node name="InteractionZone" type="Area2D" parent="." unique_id=1151679937]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2103159467]
+shape = SubResource("CircleShape2D_fuwrd")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionZone" unique_id=1089921698]
-shape = SubResource("CircleShape2D_2iaaw")
+[node name="Hand" type="Marker2D" parent="." unique_id=1134716458]
+
+[node name="Gun" parent="Hand" unique_id=738278615 instance=ExtResource("3_fuwrd")]

@@ -5,7 +5,6 @@ class_name Room extends Node2D
 var coords: Vector2i
 
 @onready var tile_map_layer: TileMapLayer = $TileMapLayer
-@onready var bounds: ReferenceRect = $Bounds
 @onready var enemies: Node2D = $Enemies
 @onready var hero: Hero:
 	set(value):
@@ -25,7 +24,3 @@ func generate(generation_data: Dictionary) -> void:
 		if tile_data.has_custom_data("type"):
 			match tile_data.get_custom_data("type"):
 				pass
-
-
-func get_bounding_rect() -> Rect2:
-	return bounds.get_rect()

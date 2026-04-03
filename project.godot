@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="Crawl to Beginners"
+run/main_scene="uid://cgm7awe7mia4h"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=320
-window/size/viewport_height=320
+window/size/viewport_width=512
+window/size/viewport_height=512
 window/size/mode=2
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
@@ -78,6 +79,7 @@ interact={
 2d_physics/layer_1="Room"
 2d_physics/layer_2="Hero"
 2d_physics/layer_3="Enemy"
+2d_physics/layer_4="Ghost"
 2d_physics/layer_9="Interactable"
 2d_physics/layer_10="Hit Box"
 2d_physics/layer_11="Enemy Hit Box"

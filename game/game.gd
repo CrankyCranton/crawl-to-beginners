@@ -30,5 +30,5 @@ func create_room(coords: Vector2i) -> void:
 	room.hero = hero
 	room.generate(room_data[coords])
 
-	ghost.bounds = room.get_bounding_rect()
+	await get_tree().create_timer(0.0).timeout
 	# TODO: Set player/ghost positions.

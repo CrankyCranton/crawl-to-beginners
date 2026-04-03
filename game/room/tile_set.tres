@@ -27,7 +27,7 @@ texture_region_size = Vector2i(32, 32)
 [resource]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
-physics_layer_0/collision_mask = 7
+physics_layer_0/collision_mask = 15
 custom_data_layer_0/name = "type"
 custom_data_layer_0/type = 21
 sources/1 = SubResource("TileSetAtlasSource_xv1ly")

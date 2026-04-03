@@ -8,5 +8,7 @@
 script = ExtResource("1_h7iqs")
 
 [node name="Ghost" parent="." unique_id=948892706 instance=ExtResource("1_vasa2")]
+position = Vector2(250, 250)
 
 [node name="Hero" parent="." unique_id=1983593253 instance=ExtResource("2_h7iqs")]
+position = Vector2(250, 250)
