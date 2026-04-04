@@ -2,10 +2,9 @@
 
 [ext_resource type="Script" uid="uid://ddpvmt1ruyxxq" path="res://game/hero/hero.gd" id="1_dpa0h"]
 [ext_resource type="PackedScene" uid="uid://dxcwnd01jn8s8" path="res://game/combat_collision/hit_box/hit_box.tscn" id="2_msmgc"]
-[ext_resource type="PackedScene" uid="uid://blsg4naun2754" path="res://game/enemy/soft_collision/soft_collision.tscn" id="3_dk5tg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dk5tg"]
-radius = 16.0
+radius = 15.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ojoo"]
 radius = 8.0
@@ -13,6 +12,7 @@ radius = 8.0
 [node name="Hero" type="CharacterBody2D" unique_id=1983593253]
 collision_layer = 2
 motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_dpa0h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=907237478]
@@ -24,13 +24,16 @@ collision_layer = 2560
 [node name="CollisionShape" parent="HitBox" index="0" unique_id=672786274]
 shape = SubResource("CircleShape2D_4ojoo")
 
-[node name="SoftCollision" parent="." unique_id=1353088001 instance=ExtResource("3_dk5tg")]
-
 [node name="NavigationAgent" type="NavigationAgent2D" parent="." unique_id=1848058624]
 avoidance_enabled = true
-radius = 16.0
+radius = 15.0
 neighbor_distance = 512.0
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(0, 1, 0, 1)
 
 [connection signal="damage_taken" from="HitBox" to="." method="_on_hit_box_damage_taken"]
+[connection signal="target_reached" from="NavigationAgent" to="." method="_on_navigation_agent_target_reached"]
+[connection signal="velocity_computed" from="NavigationAgent" to="." method="_on_navigation_agent_velocity_computed"]
 
 [editable path="HitBox"]

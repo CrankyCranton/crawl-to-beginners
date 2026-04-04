@@ -3,13 +3,29 @@
 [ext_resource type="Script" uid="uid://bh3k8jhh4tbj4" path="res://game/enemy/enemy.gd" id="1_2mvqj"]
 [ext_resource type="PackedScene" uid="uid://blsg4naun2754" path="res://game/enemy/soft_collision/soft_collision.tscn" id="2_q106d"]
 [ext_resource type="PackedScene" uid="uid://dxcwnd01jn8s8" path="res://game/combat_collision/hit_box/hit_box.tscn" id="3_8s3bx"]
+[ext_resource type="PackedScene" uid="uid://bxgcm2uyt1qg7" path="res://game/gun/gun.tscn" id="4_lw4yu"]
+[ext_resource type="Script" uid="uid://dedfsv5rhjqa1" path="res://game/gun/magazine.gd" id="5_7388b"]
+[ext_resource type="PackedScene" uid="uid://rfcj4vqyv1bl" path="res://game/combat_collision/hurt_box/bullet/bullet.tscn" id="5_glrgy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8s3bx"]
+radius = 14.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7388b"]
 radius = 16.0
+
+[sub_resource type="Resource" id="Resource_glrgy"]
+script = ExtResource("5_7388b")
+ammo_type = ExtResource("5_glrgy")
+max_ammo = -1
+metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_glrgy"]
+radius = 8.0
 
 [node name="Enemy" type="CharacterBody2D" unique_id=618280856]
 collision_layer = 4
 motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_2mvqj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=363437164]
@@ -20,7 +36,32 @@ shape = SubResource("CircleShape2D_8s3bx")
 [node name="HitBox" parent="." unique_id=456550994 instance=ExtResource("3_8s3bx")]
 collision_layer = 1536
 
+[node name="CollisionShape" parent="HitBox" index="0" unique_id=672786274]
+shape = SubResource("CircleShape2D_7388b")
+
 [node name="ImmuneTimer" parent="HitBox" index="1" unique_id=1380030965]
 wait_time = 0.001
+
+[node name="Hand" type="Marker2D" parent="." unique_id=1151683513]
+
+[node name="Gun" parent="Hand" unique_id=738278615 instance=ExtResource("4_lw4yu")]
+magazine = SubResource("Resource_glrgy")
+collision_mask = 2049
+
+[node name="LOS" type="ShapeCast2D" parent="Hand" unique_id=315253745]
+unique_name_in_owner = true
+visible = false
+shape = SubResource("CircleShape2D_glrgy")
+target_position = Vector2(0, 0)
+collision_mask = 5
+
+[node name="NavigationAgent" type="NavigationAgent2D" parent="." unique_id=1288865449]
+path_postprocessing = 1
+debug_enabled = true
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." unique_id=179663014]
+radius = 16.0
+
+[connection signal="damage_taken" from="HitBox" to="." method="_on_hit_box_damage_taken"]
 
 [editable path="HitBox"]

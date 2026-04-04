@@ -11,5 +11,7 @@ one_shot = true
 [node name="ReloadTime" type="Timer" parent="." unique_id=1620430261]
 one_shot = true
 
+[node name="Barrel" type="Marker2D" parent="." unique_id=1811445942]
+
 [connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]
 [connection signal="timeout" from="ReloadTime" to="." method="_on_reload_time_timeout"]

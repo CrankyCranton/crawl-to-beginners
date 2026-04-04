@@ -3,20 +3,21 @@
 [ext_resource type="PackedScene" uid="uid://rf3ntbrhu7an" path="res://game/combat_collision/hurt_box/hurt_box.tscn" id="1_oxxqr"]
 [ext_resource type="Script" uid="uid://bwaxf7qh4x8au" path="res://game/combat_collision/hurt_box/bullet/bullet.gd" id="2_82ryt"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_oxxqr"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_82ryt"]
 resource_local_to_scene = true
 radius = 8.0
 
 [node name="Bullet" unique_id=1457563552 instance=ExtResource("1_oxxqr")]
 collision_mask = 513
+monitorable = true
 script = ExtResource("2_82ryt")
-speed = 256.0
+speed = 128.0
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=1319386538]
-shape = SubResource("CircleShape2D_oxxqr")
+shape = SubResource("CircleShape2D_82ryt")
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." index="1" unique_id=2143050115]
-radius = 16.0
+radius = 32.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="hit" from="." to="." method="_on_hit"]

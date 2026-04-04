@@ -3,12 +3,30 @@
 [ext_resource type="Script" uid="uid://dud6rlfqfc7j8" path="res://game/ghost/ghost.gd" id="1_xe3x1"]
 [ext_resource type="Texture2D" uid="uid://dnpoq1nirc2ow" path="res://icon.svg" id="2_2iaaw"]
 [ext_resource type="PackedScene" uid="uid://bxgcm2uyt1qg7" path="res://game/gun/gun.tscn" id="3_fuwrd"]
+[ext_resource type="PackedScene" uid="uid://rfcj4vqyv1bl" path="res://game/combat_collision/hurt_box/bullet/bullet.tscn" id="4_1vx3s"]
+[ext_resource type="Script" uid="uid://dedfsv5rhjqa1" path="res://game/gun/magazine.gd" id="5_13suh"]
+[ext_resource type="PackedScene" uid="uid://dxcwnd01jn8s8" path="res://game/combat_collision/hit_box/hit_box.tscn" id="6_13suh"]
+[ext_resource type="PackedScene" uid="uid://blsg4naun2754" path="res://game/enemy/soft_collision/soft_collision.tscn" id="7_h2o8k"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fuwrd"]
+radius = 15.0
+
+[sub_resource type="Resource" id="Resource_h2o8k"]
+script = ExtResource("5_13suh")
+ammo_type = ExtResource("4_1vx3s")
+max_ammo = -1
+metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_13suh"]
+radius = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h2o8k"]
+resource_local_to_scene = true
 radius = 16.0
 
 [node name="Ghost" type="CharacterBody2D" unique_id=507860525]
 collision_layer = 8
+motion_mode = 1
 script = ExtResource("1_xe3x1")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1732253768]
@@ -21,3 +39,30 @@ shape = SubResource("CircleShape2D_fuwrd")
 [node name="Hand" type="Marker2D" parent="." unique_id=1134716458]
 
 [node name="Gun" parent="Hand" unique_id=738278615 instance=ExtResource("3_fuwrd")]
+magazine = SubResource("Resource_h2o8k")
+collision_mask = 1025
+
+[node name="Cooldown" parent="Hand/Gun" index="0" unique_id=500018778]
+wait_time = 0.2
+
+[node name="Sheild" parent="." unique_id=456550994 instance=ExtResource("6_13suh")]
+collision_layer = 2560
+
+[node name="CollisionShape" parent="Sheild" index="0" unique_id=672786274]
+shape = SubResource("CircleShape2D_13suh")
+
+[node name="ImmuneTimer" parent="Sheild" index="1" unique_id=1380030965]
+wait_time = 0.001
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." unique_id=1299172499]
+radius = 15.0
+
+[node name="EnemyShover" parent="." unique_id=1353088001 instance=ExtResource("7_h2o8k")]
+influence = 3.0
+
+[node name="CollisionShape" parent="EnemyShover" index="0" unique_id=1699220739]
+shape = SubResource("CircleShape2D_h2o8k")
+
+[editable path="Hand/Gun"]
+[editable path="Sheild"]
+[editable path="EnemyShover"]
