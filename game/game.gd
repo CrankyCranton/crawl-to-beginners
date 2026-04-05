@@ -27,8 +27,5 @@ func create_room(coords: Vector2i) -> void:
 	# TODO: Add doors randomly taking into account the surrounding rooms.
 	room_data[coords] = room.get_random_data()
 	add_child(room)
-	room.hero = hero
 	room.generate(room_data[coords])
-
-	await get_tree().create_timer(0.0).timeout
-	# TODO: Set player/ghost positions.
+	room.hero = hero

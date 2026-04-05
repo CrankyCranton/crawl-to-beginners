@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c3shbkqf6vcns"]
+
+[ext_resource type="Script" uid="uid://dw0heronxvr6" path="res://game/hero/steering/steering.gd" id="1_myw1d"]
+
+[node name="Steering" type="Node2D" unique_id=733190711]
+script = ExtResource("1_myw1d")

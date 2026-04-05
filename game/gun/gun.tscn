@@ -4,6 +4,7 @@
 
 [node name="Gun" type="Marker2D" unique_id=738278615]
 script = ExtResource("1_vcvyd")
+collision_mask = 8705
 
 [node name="Cooldown" type="Timer" parent="." unique_id=500018778]
 one_shot = true

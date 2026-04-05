@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bxgcm2uyt1qg7" path="res://game/gun/gun.tscn" id="4_lw4yu"]
 [ext_resource type="Script" uid="uid://dedfsv5rhjqa1" path="res://game/gun/magazine.gd" id="5_7388b"]
 [ext_resource type="PackedScene" uid="uid://rfcj4vqyv1bl" path="res://game/combat_collision/hurt_box/bullet/bullet.tscn" id="5_glrgy"]
+[ext_resource type="Texture2D" uid="uid://dnpoq1nirc2ow" path="res://icon.svg" id="7_s5ebu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8s3bx"]
 radius = 14.0
@@ -46,22 +47,27 @@ wait_time = 0.001
 
 [node name="Gun" parent="Hand" unique_id=738278615 instance=ExtResource("4_lw4yu")]
 magazine = SubResource("Resource_glrgy")
-collision_mask = 2049
+collision_mask = 10241
 
 [node name="LOS" type="ShapeCast2D" parent="Hand" unique_id=315253745]
 unique_name_in_owner = true
 visible = false
 shape = SubResource("CircleShape2D_glrgy")
 target_position = Vector2(0, 0)
-collision_mask = 5
+collision_mask = 9
 
 [node name="NavigationAgent" type="NavigationAgent2D" parent="." unique_id=1288865449]
 path_postprocessing = 1
-debug_enabled = true
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." unique_id=179663014]
 radius = 16.0
 
+[node name="Icon" type="Sprite2D" parent="." unique_id=2007736382]
+modulate = Color(1.369439, 0.5333553, 0.5333553, 1)
+scale = Vector2(0.1, 0.25)
+texture = ExtResource("7_s5ebu")
+
 [connection signal="damage_taken" from="HitBox" to="." method="_on_hit_box_damage_taken"]
 
 [editable path="HitBox"]
+[editable path="Hand/Gun"]

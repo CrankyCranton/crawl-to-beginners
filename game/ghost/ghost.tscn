@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dud6rlfqfc7j8" path="res://game/ghost/ghost.gd" id="1_xe3x1"]
 [ext_resource type="Texture2D" uid="uid://dnpoq1nirc2ow" path="res://icon.svg" id="2_2iaaw"]
 [ext_resource type="PackedScene" uid="uid://bxgcm2uyt1qg7" path="res://game/gun/gun.tscn" id="3_fuwrd"]
-[ext_resource type="PackedScene" uid="uid://rfcj4vqyv1bl" path="res://game/combat_collision/hurt_box/bullet/bullet.tscn" id="4_1vx3s"]
+[ext_resource type="PackedScene" uid="uid://cb3gs06s87ka3" path="res://game/combat_collision/hurt_box/bullet/player_bullet.tscn" id="4_h2o8k"]
 [ext_resource type="Script" uid="uid://dedfsv5rhjqa1" path="res://game/gun/magazine.gd" id="5_13suh"]
 [ext_resource type="PackedScene" uid="uid://dxcwnd01jn8s8" path="res://game/combat_collision/hit_box/hit_box.tscn" id="6_13suh"]
 [ext_resource type="PackedScene" uid="uid://blsg4naun2754" path="res://game/enemy/soft_collision/soft_collision.tscn" id="7_h2o8k"]
@@ -13,7 +13,7 @@ radius = 15.0
 
 [sub_resource type="Resource" id="Resource_h2o8k"]
 script = ExtResource("5_13suh")
-ammo_type = ExtResource("4_1vx3s")
+ammo_type = ExtResource("4_h2o8k")
 max_ammo = -1
 metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
 
@@ -30,6 +30,7 @@ motion_mode = 1
 script = ExtResource("1_xe3x1")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1732253768]
+rotation = 0.7853982
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_2iaaw")
 
@@ -40,10 +41,10 @@ shape = SubResource("CircleShape2D_fuwrd")
 
 [node name="Gun" parent="Hand" unique_id=738278615 instance=ExtResource("3_fuwrd")]
 magazine = SubResource("Resource_h2o8k")
-collision_mask = 1025
+collision_mask = 9217
 
 [node name="Cooldown" parent="Hand/Gun" index="0" unique_id=500018778]
-wait_time = 0.2
+wait_time = 0.1
 
 [node name="Sheild" parent="." unique_id=456550994 instance=ExtResource("6_13suh")]
 collision_layer = 2560
@@ -58,7 +59,7 @@ wait_time = 0.001
 radius = 15.0
 
 [node name="EnemyShover" parent="." unique_id=1353088001 instance=ExtResource("7_h2o8k")]
-influence = 3.0
+influence = 1.5
 
 [node name="CollisionShape" parent="EnemyShover" index="0" unique_id=1699220739]
 shape = SubResource("CircleShape2D_h2o8k")

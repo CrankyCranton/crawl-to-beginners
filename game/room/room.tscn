@@ -4,6 +4,10 @@
 [ext_resource type="TileSet" uid="uid://drrag0uxgijfc" path="res://game/room/tile_set.tres" id="2_0jn80"]
 [ext_resource type="PackedScene" uid="uid://bxdssv880wo0p" path="res://game/enemy/enemy.tscn" id="3_fmuou"]
 
+[sub_resource type="Gradient" id="Gradient_fmuou"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0, 0, 1, 0.2509804, 0, 1, 0, 0.2509804, 1, 0, 0, 0.2509804)
+
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_fmuou"]
 vertices = PackedVector2Array(465, 47, 465, 465, 463, 303, 463, 209, 303, 463, 47, 465, 209, 463, 431, 175, 305, 209, 303, 207, 337, 175, 431, 399, 431, 337, 431, 113, 175, 431, 113, 431, 303, 49, 337, 81, 209, 49, 209, 207, 207, 209, 175, 175, 175, 81, 305, 303, 337, 337, 303, 305, 209, 305, 175, 337, 207, 303, 399, 113, 399, 81, 113, 81, 113, 113, 81, 113, 47, 47, 49, 209, 81, 175, 399, 431, 399, 399, 337, 431, 49, 303, 81, 337, 81, 399, 113, 399)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 1, 5, 6), PackedInt32Array(7, 3, 8, 9, 10), PackedInt32Array(2, 1, 11, 12), PackedInt32Array(0, 3, 7, 13), PackedInt32Array(14, 6, 5, 15), PackedInt32Array(10, 9, 16, 17), PackedInt32Array(18, 19, 20, 21, 22), PackedInt32Array(23, 2, 12, 24, 25), PackedInt32Array(26, 6, 14, 27, 28), PackedInt32Array(13, 29, 30, 0), PackedInt32Array(31, 32, 33, 34), PackedInt32Array(9, 8, 23, 25, 26, 28, 20, 19), PackedInt32Array(21, 20, 35, 36), PackedInt32Array(37, 38, 11, 1), PackedInt32Array(37, 1, 4, 39), PackedInt32Array(39, 4, 25, 24), PackedInt32Array(40, 28, 27, 41), PackedInt32Array(42, 43, 15, 5), PackedInt32Array(30, 17, 16, 0), PackedInt32Array(34, 0, 16, 18), PackedInt32Array(34, 18, 22, 31), PackedInt32Array(33, 36, 35, 34), PackedInt32Array(5, 34, 35, 40), PackedInt32Array(42, 5, 40, 41)])
@@ -14,27 +18,31 @@ agent_radius = 15.0
 
 [node name="Room" type="Node2D" unique_id=1676743731]
 script = ExtResource("1_ppkfq")
+heatmap_color = SubResource("Gradient_fmuou")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=849273825 groups=["navigation_polygon_source_geometry_group"]]
+show_behind_parent = true
 tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAAABAAAAAQAAAAAAAAACAAAAAQAAAAAAAAADAAAAAQAAAAAAAAAEAAAAAQAAAAAAAAAFAAAAAQAAAAAAAAAGAAAAAQAAAAAAAAAHAAAAAQAAAAAAAAAIAAAAAQAAAAAAAAAJAAAAAQAAAAAAAAAKAAAAAQAAAAAAAAALAAAAAQAAAAAAAAAMAAAAAQAAAAAAAAANAAAAAQAAAAAAAAAOAAAAAQAAAAAAAAAPAAAAAQAAAAAAAAAPAAEAAQAAAAAAAAAPAAIAAQAAAAAAAAAPAAMAAQAAAAAAAAAPAAYAAQAAAAAAAAAPAAcAAQAAAAAAAAAPAAgAAQAAAAAAAAAPAAkAAQAAAAAAAAAPAAoAAQAAAAAAAAAPAAsAAQAAAAAAAAAPAAwAAQAAAAAAAAAPAA0AAQAAAAAAAAAPAA4AAQAAAAAAAAAPAA8AAQAAAAAAAAAJAA8AAQAAAAAAAAAIAA8AAQAAAAAAAAAHAA8AAQAAAAAAAAAGAA8AAQAAAAAAAAAFAA8AAQAAAAAAAAAEAA8AAQAAAAAAAAADAA8AAQAAAAAAAAACAA8AAQAAAAAAAAABAA8AAQAAAAAAAAAAAA8AAQAAAAAAAAAAAA4AAQAAAAAAAAAAAA0AAQAAAAAAAAAAAAwAAQAAAAAAAAAAAAsAAQAAAAAAAAAAAAoAAQAAAAAAAAAAAAgAAQAAAAAAAAAAAAcAAQAAAAAAAAAAAAYAAQAAAAAAAAAAAAUAAQAAAAAAAAAAAAQAAQAAAAAAAAAAAAMAAQAAAAAAAAAAAAIAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAkAAQAAAAAAAAAKAA8AAQAAAAAAAAALAA8AAQAAAAAAAAAMAA8AAQAAAAAAAAANAA8AAQAAAAAAAAAOAA8AAQAAAAAAAAAPAAQAAQAAAAAAAAAPAAUAAQAAAAAAAAADAAQAAQAAAAAAAAAEAAQAAQAAAAAAAAAEAAMAAQAAAAAAAAALAAMAAQAAAAAAAAALAAQAAQAAAAAAAAAMAAQAAQAAAAAAAAALAAwAAQAAAAAAAAALAAsAAQAAAAAAAAAMAAsAAQAAAAAAAAAEAAwAAQAAAAAAAAAEAAsAAQAAAAAAAAADAAsAAQAAAAAAAAAFAAcAAQAAAAAAAAAFAAgAAQAAAAAAAAAEAAgAAQAAAAAAAAADAAgAAQAAAAAAAAADAAcAAQAAAAAAAAAEAAcAAQAAAAAAAAAHAAMAAQAAAAAAAAAHAAQAAQAAAAAAAAAHAAUAAQAAAAAAAAAIAAUAAQAAAAAAAAAIAAQAAQAAAAAAAAAIAAMAAQAAAAAAAAAKAAcAAQAAAAAAAAALAAcAAQAAAAAAAAAMAAcAAQAAAAAAAAAMAAgAAQAAAAAAAAALAAgAAQAAAAAAAAAKAAgAAQAAAAAAAAAIAAoAAQAAAAAAAAAHAAsAAQAAAAAAAAAHAAoAAQAAAAAAAAAHAAwAAQAAAAAAAAAIAAwAAQAAAAAAAAAIAAsAAQAAAAAAAAAHAA0AAQAAAAAAAAAIAA0AAQAAAAAAAAACAAcAAQAAAAAAAAACAAgAAQAAAAAAAAAHAAIAAQAAAAAAAAAIAAIAAQAAAAAAAAANAAcAAQAAAAAAAAANAAgAAQAAAAAAAAA=")
 tile_set = ExtResource("2_0jn80")
-collision_visibility_mode = 1
 
 [node name="Enemies" type="Node2D" parent="." unique_id=126288652]
+show_behind_parent = true
 
 [node name="Enemy" parent="Enemies" unique_id=618280856 instance=ExtResource("3_fmuou")]
 position = Vector2(64, 64)
 
-[node name="Enemy2" parent="Enemies" unique_id=1505849107 instance=ExtResource("3_fmuou")]
-position = Vector2(448, 64)
-
-[node name="Enemy3" parent="Enemies" unique_id=851674030 instance=ExtResource("3_fmuou")]
+[node name="Enemy2" parent="Enemies" unique_id=678883406 instance=ExtResource("3_fmuou")]
 position = Vector2(448, 448)
 
-[node name="Enemy4" parent="Enemies" unique_id=319182545 instance=ExtResource("3_fmuou")]
+[node name="Enemy3" parent="Enemies" unique_id=1318924085 instance=ExtResource("3_fmuou")]
+position = Vector2(448, 64)
+
+[node name="Enemy4" parent="Enemies" unique_id=1596475068 instance=ExtResource("3_fmuou")]
 position = Vector2(64, 448)
 
 [node name="EnemySpawnPoints" type="Node2D" parent="." unique_id=1664263378]
+show_behind_parent = true
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=977941482]
+show_behind_parent = true
 navigation_polygon = SubResource("NavigationPolygon_fmuou")

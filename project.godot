@@ -93,6 +93,7 @@ shoot={
 2d_physics/layer_11="Enemy Hit Box"
 2d_physics/layer_12="Hero Hit Box"
 2d_physics/layer_13="Soft Collision"
+2d_physics/layer_14="Bullet"
 
 [physics]
 

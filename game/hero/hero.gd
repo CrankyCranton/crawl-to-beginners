@@ -1,16 +1,19 @@
 class_name Hero extends CharacterBody2D
 
 
-const SPEED: float = 64.0
-const DODGE_INFLUENCE: float = 1.0
+const SPEED: float = 128.0
+const PANIC_SPEED: float = 256.0
+const DODGE_INFLUENCE: float = 0.5
+const PATH_DESIRED_DISTANCE: float = pow(8.0, 2.0)
+const HEAT_SWITCH_MARGIN: float = 0.1
+const DISTANCE_PREFERENCE: float = 0.002
 
 enum State {
 	NORMAL, # Navigates to random points on the map.
-	AFRAID, # Normal but sped up and with randomness.
+	PANIC,
 	FOLLOW, # Follow the player outside of combat.
 }
 
-var state: State = State.NORMAL
 var max_health: int = 3:
 	set(value):
 		max_health = value
@@ -20,10 +23,17 @@ var health: int = max_health:
 		health = mini(max_health, value)
 		if health <= 0:
 			die()
+var state: State = State.NORMAL
 var safe_vel := Vector2()
+var astar: AStarGrid2D
+var path: PackedVector2Array = []
+var target_cell := Vector2i.MAX
 
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent
 @onready var target_pos := Vector2()
+@onready var steering: Steering = $Steering
+@onready var panic_timer: Timer = $PanicTimer
+@onready var soft_collision: SoftCollision = $SoftCollision
 
 
 func _ready() -> void:
@@ -36,18 +46,52 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	match state:
 		State.NORMAL:
+			#velocity = get_longest_direction() * SPEED
+
+			for y: int in range(astar.region.position.y, astar.region.end.y):
+				for x: int in range(astar.region.position.x, astar.region.end.x):
+					var cell := Vector2i(x, y)
+					if target_cell == Vector2i.MAX or (get_cell_weight(target_cell)
+							- get_cell_weight(cell)) > HEAT_SWITCH_MARGIN:
+						target_cell = cell
+
+			path = astar.get_point_path(Room.get_cell_id(global_position,
+					astar.cell_size), target_cell)
+			if path.size() > 0:
+				path.remove_at(0)
+
+			if path.size() > 0:
+				velocity = global_position.direction_to(path[0]) * SPEED + safe_vel
+				if global_position.distance_squared_to(path[0]) <= PATH_DESIRED_DISTANCE:
+					path.remove_at(0)
+			else:
+				velocity = Vector2.ZERO
+		State.PANIC:
 			nav_agent.target_position = target_pos
 			var path_vel: Vector2 = global_position.direction_to(
-					nav_agent.get_next_path_position()) * SPEED
-			velocity = (path_vel + safe_vel)#.limit_length(SPEED)
-		State.AFRAID:
-			# NOTE: Can use a looping timer to randomly set the direction,
-			# with priority towards away from the enemy.
-			pass
+					nav_agent.get_next_path_position()) * PANIC_SPEED
+			velocity = path_vel + safe_vel
 		State.FOLLOW:
 			pass
 
+	#velocity = velocity.limit_length(SPEED)
 	move_and_slide()
+	queue_redraw()
+
+
+#func _draw() -> void:
+	#for i in path.size() - 1:
+		#draw_line(to_local(path[i]), to_local(path[i + 1]), Color.GREEN, 4.0)
+
+
+func get_cell_weight(cell: Vector2i) -> float:
+	var dist: float = 0.0
+	var test_path: PackedVector2Array = astar.get_point_path(
+			Room.get_cell_id(global_position, astar.cell_size), cell)
+	for i: int in range(1, test_path.size()):
+		dist += test_path[i - 1].distance_to(test_path[i])
+
+	return astar.get_point_weight_scale(cell) * (1.0 + dist * DISTANCE_PREFERENCE)
 
 
 func die() -> void:
@@ -59,12 +103,24 @@ func get_random_point() -> Vector2:
 			nav_agent.navigation_layers, false)
 
 
+func get_longest_direction() -> Vector2:
+	var current_dir := Vector2.ZERO
+	for direction: Vector2 in steering.get_directions():
+		if direction.length_squared() > current_dir.length_squared():
+			current_dir = direction
+	return current_dir.normalized()
+
+
 func get_map_rid() -> RID:
 	return NavigationServer2D.agent_get_map(nav_agent.get_rid())
 
 
 func _on_hit_box_damage_taken(damage: int) -> void:
 	health -= damage
+	state = State.PANIC
+	path = []
+	target_cell = Vector2i.MAX
+	panic_timer.start()
 
 
 func _on_navigation_agent_velocity_computed(safe_velocity: Vector2) -> void:
@@ -72,5 +128,8 @@ func _on_navigation_agent_velocity_computed(safe_velocity: Vector2) -> void:
 
 
 func _on_navigation_agent_target_reached() -> void:
-	if state == State.NORMAL:
-		target_pos = get_random_point()
+	target_pos = get_random_point()
+
+
+func _on_panic_timer_timeout() -> void:
+	state = State.NORMAL
