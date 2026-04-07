@@ -3,7 +3,7 @@ class_name Game extends Node
 
 const MAP_BOUNDS := Rect2i(Vector2i(-1, -5), Vector2i(3, 5))
 const ROOM_TYPES: Array[PackedScene] = [
-	preload("uid://dve2qpah2d01m"), # Temp
+	preload("uid://b7382teb2u2p"),
 ]
 
 var current_room: Room = null
