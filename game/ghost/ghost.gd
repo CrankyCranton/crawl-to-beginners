@@ -1,7 +1,7 @@
 class_name Ghost extends CharacterBody2D
 
 
-const SPEED: float = 256.0
+const SPEED: float = 128.0
 # Potentially move this to the gun so that different guns can feel heavier than others.
 const AIM_SPEED: float = 15.0
 
