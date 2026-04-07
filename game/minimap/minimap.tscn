@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bks3i1d362lr"]
+
+[ext_resource type="Script" uid="uid://c354nihhndasg" path="res://game/minimap/minimap.gd" id="1_kf0af"]
+
+[node name="Minimap" type="GridContainer" unique_id=1179685109]
+columns = 3
+script = ExtResource("1_kf0af")

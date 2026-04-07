@@ -2,14 +2,25 @@ class_name Room extends Node2D
 # Max of 4 doors: 1 for each side.
 
 
+signal door_entered(direction: Vector2i)
+
+enum Mod {
+	NM,
+	HR,
+	HD,
+	DT,
+}
+
 @export var heatmap_color: Gradient
 
 var coords: Vector2i
 var astar := AStarGrid2D.new()
 var astar_heatmap := AStarGrid2D.new()
 
+@onready var darkness: CanvasModulate = $Darkness
 @onready var tile_map_layer: TileMapLayer = $TileMapLayer
 @onready var enemies: Node2D = $Enemies
+@onready var doors: Node2D = $Doors
 @onready var hero: Hero:
 	set(value):
 		hero = value
@@ -18,9 +29,30 @@ var astar_heatmap := AStarGrid2D.new()
 			enemy.hero = hero
 
 
+func _ready() -> void:
+	for door: Door in doors.get_children():
+		door.entered.connect(_on_door_entered)
+
+	init_astar_grid(astar)
+	init_astar_grid(astar_heatmap)
+
+	for cell: Vector2i in tile_map_layer.get_used_cells():
+		astar.set_point_solid(cell)
+		astar_heatmap.set_point_solid(cell)
+
+		var tile_data: TileData = tile_map_layer.get_cell_tile_data(cell)
+		if tile_data.has_custom_data("type"):
+			match tile_data.get_custom_data("type"):
+				pass
+
+	for enemy: Enemy in enemies.get_children():
+		enemy.astar = astar_heatmap
+		enemy.room = self
+
+
 func _process(_delta: float) -> void:
 	const ENEMY_RANGE: float = 192.0
-	const MAX_ENEMY_WEIGHT: float = 8.0
+	const MAX_ENEMY_WEIGHT: float = 4.0
 	const BULLET_RANGE: float = 256.0
 	const MAX_BULLET_WEIGHT: float = 4.0
 
@@ -37,7 +69,7 @@ func _process(_delta: float) -> void:
 			for heat_node: Node in heat_nodes:
 				var length: float = 0.0
 				var path: PackedVector2Array = astar.get_point_path(
-						Room.get_cell_id(heat_node.global_position, astar.cell_size), cell)
+						get_cell_id(heat_node.global_position), cell)
 				for i: int in range(1, path.size()):
 					length += path[i - 1].distance_to(path[i])
 
@@ -64,27 +96,28 @@ func _process(_delta: float) -> void:
 		#draw_rect(rect, Color(1.0, 1.0, 1.0, 0.1), false, 1.0)
 
 
-func get_random_data() -> Dictionary:
-	return {} # TBD
+
+func set_mod(mod: Mod) -> void:
+	match mod:
+		Mod.HR:
+			pass
+		Mod.HD:
+			darkness.show()
+		Mod.DT:
+			Engine.time_scale = 1.5
+			# TODO: Speed up music as well.
+			tree_exiting.connect(func() -> void: Engine.time_scale = 1.0)
 
 
-func generate(generation_data: Dictionary) -> void:
-	# TODO: Generate doors from the data.
+func disable_door(direction: Vector2i) -> void:
+	get_door(direction).queue_free()
 
-	init_astar_grid(astar)
-	init_astar_grid(astar_heatmap)
 
-	for cell: Vector2i in tile_map_layer.get_used_cells():
-		astar.set_point_solid(cell)
-		astar_heatmap.set_point_solid(cell)
-
-		var tile_data: TileData = tile_map_layer.get_cell_tile_data(cell)
-		if tile_data.has_custom_data("type"):
-			match tile_data.get_custom_data("type"):
-				pass
-
-	for enemy: Enemy in enemies.get_children():
-		enemy.astar = astar_heatmap
+func get_door(direction: Vector2i) -> Door:
+	for door: Door in doors.get_children():
+		if door.direction == direction:
+			return door
+	return null
 
 
 func init_astar_grid(astar_grid: AStarGrid2D) -> void:
@@ -96,5 +129,20 @@ func init_astar_grid(astar_grid: AStarGrid2D) -> void:
 	astar_grid.update()
 
 
-static func get_cell_id(pos: Vector2, cell_size: Vector2) -> Vector2i:
-	return Vector2i((pos / cell_size).floor())
+func get_cell_id(global_pos: Vector2) -> Vector2i:
+	global_pos -= position
+	return Vector2i((global_pos / astar.cell_size).floor())
+
+
+func unlock() -> void:
+	for door: Door in doors.get_children():
+		door.unlock()
+
+
+func _on_door_entered(direction: Vector2i) -> void:
+	door_entered.emit(direction)
+
+
+func _on_enemy_tree_exited() -> void:
+	if enemies.get_child_count() <= 0:
+		unlock()

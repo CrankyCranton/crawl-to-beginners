@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://ddpvmt1ruyxxq" path="res://game/hero/hero.gd" id="1_dpa0h"]
 [ext_resource type="PackedScene" uid="uid://dxcwnd01jn8s8" path="res://game/combat_collision/hit_box/hit_box.tscn" id="2_msmgc"]
 [ext_resource type="Texture2D" uid="uid://dnpoq1nirc2ow" path="res://icon.svg" id="2_t00gq"]
-[ext_resource type="PackedScene" uid="uid://c3shbkqf6vcns" path="res://game/hero/steering/steering.tscn" id="3_dk5tg"]
 [ext_resource type="PackedScene" uid="uid://blsg4naun2754" path="res://game/enemy/soft_collision/soft_collision.tscn" id="5_4ojoo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dk5tg"]
@@ -12,7 +11,7 @@ radius = 15.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ojoo"]
 radius = 8.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_tlrx4"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_t00gq"]
 resource_local_to_scene = true
 radius = 16.0
 
@@ -43,10 +42,6 @@ neighbor_distance = 512.0
 debug_use_custom = true
 debug_path_custom_color = Color(0, 1, 0, 1)
 
-[node name="Steering" parent="." unique_id=733190711 instance=ExtResource("3_dk5tg")]
-visible = false
-collision_mask = 8205
-
 [node name="PanicTimer" type="Timer" parent="." unique_id=1373828957]
 wait_time = 3.0
 one_shot = true
@@ -55,7 +50,7 @@ one_shot = true
 influence = 0.0
 
 [node name="CollisionShape" parent="SoftCollision" index="0" unique_id=1699220739]
-shape = SubResource("CircleShape2D_tlrx4")
+shape = SubResource("CircleShape2D_t00gq")
 
 [connection signal="damage_taken" from="HitBox" to="." method="_on_hit_box_damage_taken"]
 [connection signal="target_reached" from="NavigationAgent" to="." method="_on_navigation_agent_target_reached"]

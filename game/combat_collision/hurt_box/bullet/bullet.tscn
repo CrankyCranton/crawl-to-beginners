@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bwaxf7qh4x8au" path="res://game/combat_collision/hurt_box/bullet/bullet.gd" id="2_82ryt"]
 [ext_resource type="Texture2D" uid="uid://dnpoq1nirc2ow" path="res://icon.svg" id="3_d0uod"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_82ryt"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_d0uod"]
 resource_local_to_scene = true
 radius = 8.0
 
@@ -12,14 +12,14 @@ radius = 8.0
 collision_mask = 8705
 monitorable = true
 script = ExtResource("2_82ryt")
-speed = 128.0
+speed = 256.0
 
 [node name="Icon" type="Sprite2D" parent="." index="0" unique_id=2070606876]
 scale = Vector2(0.125, 0.125)
 texture = ExtResource("3_d0uod")
 
 [node name="CollisionShape2D" parent="." index="1" unique_id=1319386538]
-shape = SubResource("CircleShape2D_82ryt")
+shape = SubResource("CircleShape2D_d0uod")
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." index="2" unique_id=2143050115]
 radius = 32.0

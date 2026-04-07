@@ -3,12 +3,42 @@
 [ext_resource type="Script" uid="uid://mcvl876godw7" path="res://game/game.gd" id="1_h7iqs"]
 [ext_resource type="PackedScene" uid="uid://cpvvr321bffiw" path="res://game/ghost/ghost.tscn" id="1_vasa2"]
 [ext_resource type="PackedScene" uid="uid://ccravkxuofnl3" path="res://game/hero/hero.tscn" id="2_h7iqs"]
+[ext_resource type="PackedScene" uid="uid://bks3i1d362lr" path="res://game/minimap/minimap.tscn" id="4_4fuuu"]
 
 [node name="Game" type="Node" unique_id=481701368]
 script = ExtResource("1_h7iqs")
 
-[node name="Ghost" parent="." unique_id=948892706 instance=ExtResource("1_vasa2")]
-position = Vector2(240, 256)
+[node name="BG" type="ColorRect" parent="." unique_id=684894635]
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [node name="Hero" parent="." unique_id=1983593253 instance=ExtResource("2_h7iqs")]
-position = Vector2(272, 256)
+position = Vector2(400, 464)
+
+[node name="Ghost" parent="." unique_id=948892706 instance=ExtResource("1_vasa2")]
+position = Vector2(368, 464)
+
+[node name="SideBar" type="PanelContainer" parent="." unique_id=312929444]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -128.0
+offset_bottom = 27.0
+grow_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SideBar" unique_id=2070651007]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SideBar/VBoxContainer" unique_id=1216781555]
+layout_mode = 2
+text = "Minimap"
+horizontal_alignment = 1
+
+[node name="Minimap" parent="SideBar/VBoxContainer" unique_id=1179685109 instance=ExtResource("4_4fuuu")]
+unique_name_in_owner = true
+layout_mode = 2

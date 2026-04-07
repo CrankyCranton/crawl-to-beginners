@@ -28,10 +28,11 @@ var safe_vel := Vector2()
 var astar: AStarGrid2D
 var path: PackedVector2Array = []
 var target_cell := Vector2i.MAX
+var room: Room
 
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent
 @onready var target_pos := Vector2()
-@onready var steering: Steering = $Steering
+#@onready var steering: Steering = $Steering
 @onready var panic_timer: Timer = $PanicTimer
 @onready var soft_collision: SoftCollision = $SoftCollision
 
@@ -55,14 +56,14 @@ func _physics_process(_delta: float) -> void:
 							- get_cell_weight(cell)) > HEAT_SWITCH_MARGIN:
 						target_cell = cell
 
-			path = astar.get_point_path(Room.get_cell_id(global_position,
-					astar.cell_size), target_cell)
+			path = astar.get_point_path(room.get_cell_id(global_position), target_cell)
 			if path.size() > 0:
 				path.remove_at(0)
 
 			if path.size() > 0:
-				velocity = global_position.direction_to(path[0]) * SPEED + safe_vel
-				if global_position.distance_squared_to(path[0]) <= PATH_DESIRED_DISTANCE:
+				var local_pos: Vector2 = room.to_local(global_position)
+				velocity = local_pos.direction_to(path[0]) * SPEED + safe_vel
+				if local_pos.distance_squared_to(path[0]) <= PATH_DESIRED_DISTANCE:
 					path.remove_at(0)
 			else:
 				velocity = Vector2.ZERO
@@ -87,7 +88,7 @@ func _physics_process(_delta: float) -> void:
 func get_cell_weight(cell: Vector2i) -> float:
 	var dist: float = 0.0
 	var test_path: PackedVector2Array = astar.get_point_path(
-			Room.get_cell_id(global_position, astar.cell_size), cell)
+			room.get_cell_id(global_position), cell)
 	for i: int in range(1, test_path.size()):
 		dist += test_path[i - 1].distance_to(test_path[i])
 
@@ -103,12 +104,12 @@ func get_random_point() -> Vector2:
 			nav_agent.navigation_layers, false)
 
 
-func get_longest_direction() -> Vector2:
-	var current_dir := Vector2.ZERO
-	for direction: Vector2 in steering.get_directions():
-		if direction.length_squared() > current_dir.length_squared():
-			current_dir = direction
-	return current_dir.normalized()
+#func get_longest_direction() -> Vector2:
+	#var current_dir := Vector2.ZERO
+	#for direction: Vector2 in steering.get_directions():
+		#if direction.length_squared() > current_dir.length_squared():
+			#current_dir = direction
+	#return current_dir.normalized()
 
 
 func get_map_rid() -> RID:

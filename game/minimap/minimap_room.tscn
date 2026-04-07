@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://bbowvsr77x6ag"]
+
+[ext_resource type="Texture2D" uid="uid://dnpoq1nirc2ow" path="res://icon.svg" id="1_b24ku"]
+[ext_resource type="Script" uid="uid://d08528a8k7rdh" path="res://game/minimap/minimap_room.gd" id="1_msnn8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_msnn8"]
+font_size = 12
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="MinimapRoom" type="Control" unique_id=1693571185]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 3
+script = ExtResource("1_msnn8")
+
+[node name="Icon" type="TextureRect" parent="." unique_id=2074982563]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("1_b24ku")
+expand_mode = 1
+
+[node name="TempLabel" type="Label" parent="Icon" unique_id=437228193]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_msnn8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UnknownIcon" type="TextureRect" parent="." unique_id=664312661]
+visible = false
+modulate = Color(0.36, 0.36, 0.36, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("1_b24ku")
+expand_mode = 1
