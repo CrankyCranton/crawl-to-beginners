@@ -2,6 +2,8 @@ class_name Room extends Node2D
 # Max of 4 doors: 1 for each side.
 
 
+const ENEMY_TYPES: Array[PackedScene] = [preload("uid://bxdssv880wo0p")]
+
 signal door_entered(direction: Vector2i)
 
 enum Mod {
@@ -20,6 +22,7 @@ var astar_heatmap := AStarGrid2D.new()
 @onready var darkness: CanvasModulate = $Darkness
 @onready var tile_map_layer: TileMapLayer = $TileMapLayer
 @onready var enemies: Node2D = $Enemies
+@onready var enemy_spawn_points: Node2D = $EnemySpawnPoints
 @onready var doors: Node2D = $Doors
 @onready var hero: Hero:
 	set(value):
@@ -40,12 +43,16 @@ func _ready() -> void:
 		astar.set_point_solid(cell)
 		astar_heatmap.set_point_solid(cell)
 
-		var tile_data: TileData = tile_map_layer.get_cell_tile_data(cell)
-		if tile_data.has_custom_data("type"):
-			match tile_data.get_custom_data("type"):
-				pass
+		#var tile_data: TileData = tile_map_layer.get_cell_tile_data(cell)
+		#if tile_data.has_custom_data("type"):
+			#match tile_data.get_custom_data("type"):
+				#pass
 
-	for enemy: Enemy in enemies.get_children():
+	for spawn_point: Marker2D in enemy_spawn_points.get_children():
+		var enemy: Enemy = ENEMY_TYPES[0].instantiate()
+		enemy.position = spawn_point.position
+		enemy.tree_exited.connect(_on_enemy_tree_exited)
+		enemies.add_child(enemy)
 		enemy.astar = astar_heatmap
 		enemy.room = self
 

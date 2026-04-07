@@ -77,23 +77,30 @@ func enter_room(coords: Vector2i) -> void:
 	room.coords = coords
 	current_room = room
 	room.door_entered.connect(_on_room_door_entered)
-	add_child(room)
+
+	ghost.process_mode = Node.PROCESS_MODE_DISABLED
+	hero.process_mode = Node.PROCESS_MODE_DISABLED
+	call_deferred(&"add_child", room)
+	await room.ready
 
 	room.hero = hero
 	hero.room = room
 
 	for dir: Vector2i in [Vector2i.RIGHT, Vector2i.LEFT, Vector2i.UP, Vector2i.DOWN]:
-		var include_bounds: Rect2i = MAP_BOUNDS.grow_side(SIDE_RIGHT, 1).grow_side(SIDE_BOTTOM, 1)
-		if not include_bounds.has_point(coords + dir):
+		if not MAP_BOUNDS.has_point(coords + dir):
 			room.disable_door(dir)
+	room.set_mod(room_data[coords].mod)
 
+	await get_tree().create_timer(0.0).timeout
 	if enter_direction != Vector2i.ZERO:
 		var spawn_point: Vector2 = room.get_door(-enter_direction).spawn_point.global_position
-		const OFFSET := Vector2(16.0, 0.0)
-		hero.global_position = spawn_point + OFFSET
-		ghost.global_position = spawn_point - OFFSET
+		#const RAND_OFFSET: float = 8.0
+		hero.global_position = spawn_point# + Utils.rand_vec2_radial(RAND_OFFSET)
+		ghost.global_position = spawn_point# + Utils.rand_vec2_radial(RAND_OFFSET)
 
-	room.set_mod(room_data[coords].mod)
+
+	ghost.process_mode = Node.PROCESS_MODE_INHERIT
+	hero.process_mode = Node.PROCESS_MODE_INHERIT
 
 
 func _on_room_door_entered(direction: Vector2i) -> void:
