@@ -1,12 +1,12 @@
 class_name Hero extends CharacterBody2D
 
 
-const SPEED: float = 128.0
-const PANIC_SPEED: float = 256.0
+const SPEED: float = 96.0
+const PANIC_SPEED: float = 192.0
 const DODGE_INFLUENCE: float = 0.5
 const PATH_DESIRED_DISTANCE: float = pow(8.0, 2.0)
 const HEAT_SWITCH_MARGIN: float = 0.1
-const DISTANCE_PREFERENCE: float = 0.002
+const DISTANCE_PREFERENCE: float = 0.001
 
 enum State {
 	NORMAL, # Navigates to random points on the map.
@@ -14,7 +14,7 @@ enum State {
 	FOLLOW, # Follow the player outside of combat.
 }
 
-var max_health: int = 3:
+var max_health: int = 5:
 	set(value):
 		max_health = value
 		health = health
@@ -118,10 +118,14 @@ func get_map_rid() -> RID:
 
 func _on_hit_box_damage_taken(damage: int) -> void:
 	health -= damage
-	state = State.PANIC
-	path = []
-	target_cell = Vector2i.MAX
-	panic_timer.start()
+	if damage > 0:
+		state = State.PANIC
+		path = []
+		target_cell = Vector2i.MAX
+		panic_timer.start()
+	elif state == State.PANIC:
+		panic_timer.stop()
+		state = State.NORMAL
 
 
 func _on_navigation_agent_velocity_computed(safe_velocity: Vector2) -> void:

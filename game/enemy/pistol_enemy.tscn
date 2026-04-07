@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://df6a8qn3gwxbg"]
+
+[ext_resource type="PackedScene" uid="uid://bxdssv880wo0p" path="res://game/enemy/enemy.tscn" id="1_hbgeo"]
+[ext_resource type="PackedScene" uid="uid://d2oxbvp4kbxhu" path="res://game/gun/pistol/pistol.tscn" id="2_6cbxb"]
+
+[node name="PistolEnemy" unique_id=618280856 node_paths=PackedStringArray("gun") instance=ExtResource("1_hbgeo")]
+gun = NodePath("Hand/Pistol")
+
+[node name="Pistol" parent="Hand" parent_id_path=PackedInt32Array(1151683513) index="1" unique_id=738278615 instance=ExtResource("2_6cbxb")]
+collision_mask = 10241
+
+[editable path="HitBox"]

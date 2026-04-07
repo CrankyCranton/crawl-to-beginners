@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://dmdxf7xv5sgwu"]
+
+[ext_resource type="Script" uid="uid://bcmc448x3h7yi" path="res://game/gun/grenade_launcher/grenade/grenade.gd" id="1_h4leg"]
+[ext_resource type="Texture2D" uid="uid://dnpoq1nirc2ow" path="res://icon.svg" id="2_7c235"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8p8jd"]
+friction = 0.0
+bounce = 0.5
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h4leg"]
+radius = 8.0
+
+[node name="Grenade" type="RigidBody2D" unique_id=1315122539]
+collision_layer = 0
+physics_material_override = SubResource("PhysicsMaterial_8p8jd")
+gravity_scale = 0.0
+script = ExtResource("1_h4leg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1056251957]
+shape = SubResource("CircleShape2D_h4leg")
+
+[node name="ExplodeTimer" type="Timer" parent="." unique_id=437681081]
+wait_time = 1.5
+autostart = true
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=885174995]
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("2_7c235")
+
+[connection signal="timeout" from="ExplodeTimer" to="." method="_on_explode_timer_timeout"]

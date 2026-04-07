@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bxgcm2uyt1qg7"]
 
 [ext_resource type="Script" uid="uid://bh1o7lkbkquuk" path="res://game/gun/gun.gd" id="1_vcvyd"]
+[ext_resource type="Texture2D" uid="uid://dnpoq1nirc2ow" path="res://icon.svg" id="2_i80m3"]
 
 [node name="Gun" type="Marker2D" unique_id=738278615]
 script = ExtResource("1_vcvyd")
@@ -13,6 +14,11 @@ one_shot = true
 one_shot = true
 
 [node name="Barrel" type="Marker2D" parent="." unique_id=1811445942]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1184722041]
+position = Vector2(16, 0)
+scale = Vector2(0.25, 0.125)
+texture = ExtResource("2_i80m3")
 
 [connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]
 [connection signal="timeout" from="ReloadTime" to="." method="_on_reload_time_timeout"]

@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://binfmuy2x2bt0"]
+
+[ext_resource type="PackedScene" uid="uid://bxdssv880wo0p" path="res://game/enemy/enemy.tscn" id="1_ia0d8"]
+[ext_resource type="Script" uid="uid://ct4wf3amn0y7u" path="res://game/enemy/shot_gun_enemy/shot_gun_enemy.gd" id="2_41q4j"]
+[ext_resource type="PackedScene" uid="uid://b162116bnrs7i" path="res://game/gun/shot_gun/shot_gun.tscn" id="2_rgdja"]
+[ext_resource type="PackedScene" uid="uid://c2nv850tt4f68" path="res://game/gun/shot_gun/shot/shot.tscn" id="4_uvvsq"]
+[ext_resource type="Script" uid="uid://dedfsv5rhjqa1" path="res://game/gun/magazine.gd" id="5_nbywm"]
+
+[sub_resource type="Resource" id="Resource_ewucm"]
+resource_local_to_scene = true
+script = ExtResource("5_nbywm")
+ammo_type = ExtResource("4_uvvsq")
+max_ammo = 2
+metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
+
+[node name="ShotGunEnemy" unique_id=618280856 instance=ExtResource("1_ia0d8")]
+editor_description = "Probs take out for now just bcz of scope."
+script = ExtResource("2_41q4j")
+
+[node name="ShotGun" parent="Hand" parent_id_path=PackedInt32Array(1151683513) index="1" unique_id=738278615 instance=ExtResource("2_rgdja")]
+magazine = SubResource("Resource_ewucm")
+
+[editable path="HitBox"]

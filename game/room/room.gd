@@ -2,7 +2,11 @@ class_name Room extends Node2D
 # Max of 4 doors: 1 for each side.
 
 
-const ENEMY_TYPES: Array[PackedScene] = [preload("uid://bxdssv880wo0p")]
+const ENEMY_TYPES: Array[PackedScene] = [
+	preload("uid://df6a8qn3gwxbg"),
+	preload("uid://gm0er2jonp50"),
+	preload("uid://bmihvidakaood"),
+]
 
 signal door_entered(direction: Vector2i)
 
@@ -49,46 +53,12 @@ func _ready() -> void:
 				#pass
 
 	for spawn_point: Marker2D in enemy_spawn_points.get_children():
-		var enemy: Enemy = ENEMY_TYPES[0].instantiate()
+		var enemy: Enemy = ENEMY_TYPES.pick_random().instantiate()
 		enemy.position = spawn_point.position
 		enemy.tree_exited.connect(_on_enemy_tree_exited)
 		enemies.add_child(enemy)
 		enemy.astar = astar_heatmap
 		enemy.room = self
-
-
-func _process(_delta: float) -> void:
-	const ENEMY_RANGE: float = 192.0
-	const MAX_ENEMY_WEIGHT: float = 4.0
-	const BULLET_RANGE: float = 256.0
-	const MAX_BULLET_WEIGHT: float = 4.0
-
-	for y: int in range(astar_heatmap.region.position.y, astar_heatmap.region.end.y):
-		for x: int in range(astar_heatmap.region.position.x, astar_heatmap.region.end.x):
-			var cell := Vector2i(x, y)
-			#if astar_heatmap.is_point_solid(cell):
-				#continue
-
-			var weight_scale: float = 1.0
-
-			var heat_nodes: Array[Node] = enemies.get_children()
-			heat_nodes.append_array(get_tree().get_nodes_in_group(&"bullets"))
-			for heat_node: Node in heat_nodes:
-				var length: float = 0.0
-				var path: PackedVector2Array = astar.get_point_path(
-						get_cell_id(heat_node.global_position), cell)
-				for i: int in range(1, path.size()):
-					length += path[i - 1].distance_to(path[i])
-
-				var heat_range: float = BULLET_RANGE if heat_node is Bullet else ENEMY_RANGE
-				length = minf(length, heat_range)
-				var max_weight: float = (MAX_BULLET_WEIGHT
-						if heat_node is Bullet else MAX_ENEMY_WEIGHT)
-				weight_scale *= remap(length, 0.0, heat_range, max_weight, 1.0)
-
-			astar_heatmap.set_point_weight_scale(cell, weight_scale)
-
-	queue_redraw()
 
 
 # WARNING:
@@ -98,7 +68,7 @@ func _process(_delta: float) -> void:
 #func _draw() -> void:
 	#for point_data: Dictionary in astar_heatmap.get_point_data_in_region(astar_heatmap.region):
 		#var rect := Rect2(point_data.position - astar_heatmap.offset, astar_heatmap.cell_size)
-		#var color: Color = heatmap_color.sample(remap(point_data.weight_scale, 1.0, 32.0, 0.0, 1.0))
+		#var color: Color = heatmap_color.sample(remap(point_data.weight_scale, 1.0, 64.0, 0.0, 1.0))
 		#draw_rect(rect, color)
 		#draw_rect(rect, Color(1.0, 1.0, 1.0, 0.1), false, 1.0)
 
@@ -113,7 +83,6 @@ func set_mod(mod: Mod) -> void:
 		Mod.DT:
 			Engine.time_scale = 1.5
 			# TODO: Speed up music as well.
-			tree_exiting.connect(func() -> void: Engine.time_scale = 1.0)
 
 
 func disable_door(direction: Vector2i) -> void:
@@ -153,3 +122,37 @@ func _on_door_entered(direction: Vector2i) -> void:
 func _on_enemy_tree_exited() -> void:
 	if enemies.get_child_count() <= 0:
 		unlock()
+
+
+func _on_heatmap_update_interval_timeout() -> void:
+	const ENEMY_RANGE: float = 192.0
+	const MAX_ENEMY_WEIGHT: float = 4.0
+	const BULLET_RANGE: float = 256.0
+	const MAX_BULLET_WEIGHT: float = 4.0
+
+	for y: int in range(astar_heatmap.region.position.y, astar_heatmap.region.end.y):
+		for x: int in range(astar_heatmap.region.position.x, astar_heatmap.region.end.x):
+			var cell := Vector2i(x, y)
+			#if astar_heatmap.is_point_solid(cell):
+				#continue
+
+			var weight_scale: float = 1.0
+
+			var heat_nodes: Array[Node] = enemies.get_children()
+			heat_nodes.append_array(get_tree().get_nodes_in_group(&"bullets"))
+			for heat_node: Node in heat_nodes:
+				var length: float = 0.0
+				var path: PackedVector2Array = astar.get_point_path(
+						get_cell_id(heat_node.global_position), cell)
+				for i: int in range(1, path.size()):
+					length += path[i - 1].distance_to(path[i])
+
+				var heat_range: float = BULLET_RANGE if heat_node is Bullet else ENEMY_RANGE
+				length = minf(length, heat_range)
+				var max_weight: float = (MAX_BULLET_WEIGHT
+						if heat_node is Bullet else MAX_ENEMY_WEIGHT)
+				weight_scale *= remap(length, 0.0, heat_range, max_weight, 1.0)
+
+			astar_heatmap.set_point_weight_scale(cell, weight_scale)
+
+	queue_redraw()

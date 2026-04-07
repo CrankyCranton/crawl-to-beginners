@@ -2,16 +2,16 @@
 
 [ext_resource type="PackedScene" uid="uid://rfcj4vqyv1bl" path="res://game/combat_collision/hurt_box/bullet/bullet.tscn" id="1_6q6jt"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_w0qlw"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_6q6jt"]
 resource_local_to_scene = true
 radius = 8.0
 
 [node name="PlayerBullet" unique_id=1457563552 instance=ExtResource("1_6q6jt")]
 collision_mask = 9217
-speed = 256.0
+speed = 192.0
 
 [node name="Icon" parent="." index="0" unique_id=2070606876]
 modulate = Color(1.8118116, 0.88890123, 1.8118116, 1)
 
 [node name="CollisionShape2D" parent="." index="1" unique_id=1319386538]
-shape = SubResource("CircleShape2D_w0qlw")
+shape = SubResource("CircleShape2D_6q6jt")

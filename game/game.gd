@@ -54,7 +54,7 @@ func generate_data() -> void:
 				continue
 
 			var mod := (randi() % Room.Mod.size()) as Room.Mod
-			var unknown: bool = randf() < 1.0 / ROOM_TYPES.size() and mod != Room.Mod.NM
+			var unknown: bool = randf() < 1.0 / Room.Mod.size() and mod != Room.Mod.NM
 			room_data[coords] = {
 				"type": ROOM_TYPES.pick_random(),
 				"mod": mod,
@@ -71,6 +71,7 @@ func enter_room(coords: Vector2i) -> void:
 		# don't forget to reparent the enemy to the next room.
 		enter_direction = coords - current_room.coords
 		current_room.queue_free()
+		Engine.time_scale = 1.0
 
 	minimap.set_unknown(coords, false)
 	var room: Room = room_data[coords].type.instantiate()

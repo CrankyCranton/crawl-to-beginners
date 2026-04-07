@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://c2nv850tt4f68"]
+
+[ext_resource type="Script" uid="uid://bvm12e73hkgdl" path="res://game/gun/shot_gun/shot/shot.gd" id="1_aqvib"]
+
+[node name="Shot" type="RayCast2D" unique_id=945068932]
+enabled = false
+target_position = Vector2(64, 0)
+collision_mask = 512
+hit_from_inside = true
+script = ExtResource("1_aqvib")

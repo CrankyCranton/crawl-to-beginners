@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://c11ky7q8072ol"]
+
+[ext_resource type="PackedScene" uid="uid://rfcj4vqyv1bl" path="res://game/combat_collision/hurt_box/bullet/bullet.tscn" id="1_6u8hc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6u8hc"]
+resource_local_to_scene = true
+radius = 8.0
+
+[node name="SniperBullet" unique_id=1457563552 instance=ExtResource("1_6u8hc")]
+speed = 576.0
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=1319386538]
+shape = SubResource("CircleShape2D_6u8hc")

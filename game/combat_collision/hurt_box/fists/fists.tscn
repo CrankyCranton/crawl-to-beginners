@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://cap0tc1j8ohhe"]
+
+[ext_resource type="PackedScene" uid="uid://rf3ntbrhu7an" path="res://game/combat_collision/hurt_box/hurt_box.tscn" id="1_ts824"]
+[ext_resource type="Script" uid="uid://d1tbcn24coj85" path="res://game/combat_collision/hurt_box/fists/fists.gd" id="2_aseoe"]
+[ext_resource type="Texture2D" uid="uid://dnpoq1nirc2ow" path="res://icon.svg" id="3_q8poh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ts824"]
+
+[sub_resource type="Animation" id="Animation_q8poh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_aseoe"]
+resource_name = "punch"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q8poh"]
+_data = {
+&"RESET": SubResource("Animation_q8poh"),
+&"punch": SubResource("Animation_aseoe")
+}
+
+[node name="Fists" unique_id=1457563552 instance=ExtResource("1_ts824")]
+script = ExtResource("2_aseoe")
+
+[node name="Icon" type="Sprite2D" parent="." index="0" unique_id=872635594]
+position = Vector2(32, 0)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_q8poh")
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=1319386538]
+position = Vector2(32, 0)
+shape = SubResource("RectangleShape2D_ts824")
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2" unique_id=757557881]
+libraries/ = SubResource("AnimationLibrary_q8poh")

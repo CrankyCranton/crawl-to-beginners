@@ -1,11 +1,15 @@
 class_name Gun extends Marker2D
 
 
+signal mag_empty
+
 @export var magazine: Magazine
 @export_flags_2d_physics var collision_mask: int = 513
 
 var cooling := false
 var reloading := false
+@warning_ignore("shadowed_global_identifier")
+var range: float = INF
 
 @onready var cooldown: Timer = $Cooldown
 @onready var reload_time: Timer = $ReloadTime
@@ -19,11 +23,13 @@ func shoot() -> void:
 	magazine.ammo -= 1
 	var bullet: Node2D = magazine.ammo_type.instantiate()
 	get_room().add_child(bullet)
-	if bullet is CollisionObject2D:
+	if bullet is CollisionObject2D or bullet is RayCast2D or bullet is ShapeCast2D:
 		bullet.collision_mask = collision_mask
 	bullet.global_transform = barrel.global_transform
 	cooling = true
 	cooldown.start()
+	if magazine.ammo == 0:
+		mag_empty.emit()
 
 
 func reload(from_mag: Magazine) -> void:

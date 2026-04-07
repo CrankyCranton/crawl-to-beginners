@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://brhngjxnxdqyj"]
+
+[ext_resource type="PackedScene" uid="uid://b8vdimhtce6tn" path="res://game/combat_collision/ray_projectile/ray_projectile.tscn" id="1_1gxij"]
+
+[node name="Grenade" unique_id=2137766871 instance=ExtResource("1_1gxij")]
+collision_mask = 1
+collide_with_areas = false
+speed = 512.0

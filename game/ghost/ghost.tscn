@@ -44,7 +44,7 @@ magazine = SubResource("Resource_h2o8k")
 collision_mask = 9217
 
 [node name="Cooldown" parent="Hand/Gun" index="0" unique_id=500018778]
-wait_time = 0.1
+wait_time = 0.5
 
 [node name="Sheild" parent="." unique_id=456550994 instance=ExtResource("6_13suh")]
 collision_layer = 2560
