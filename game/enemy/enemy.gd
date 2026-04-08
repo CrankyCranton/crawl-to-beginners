@@ -1,6 +1,9 @@
 class_name Enemy extends CharacterBody2D
 
 
+signal died
+signal removed
+
 enum State {
 	NORMAL,
 	POSSESSED,
@@ -20,17 +23,24 @@ const PATH_DESIRED_DISTANCE: float = pow(8.0, 2.0)
 		if health <= 0:
 			die()
 
+var dead := false
 var hero: Hero
 var last_hero_pos := Vector2i.MAX
 var astar: AStarGrid2D
 var path: PackedVector2Array = []
 var room: Room
-var state: State = State.NORMAL
+var state: State = State.NORMAL:
+	set(value):
+		state = value
+		if state == State.POSSESSED:
+			removed.emit()
 
 @onready var soft_collision: SoftCollision = $SoftCollision
 @onready var hand: Marker2D = $Hand
 @onready var los: ShapeCast2D = %LOS
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent
+@onready var hit_box: HitBox = $HitBox
+@onready var collision_shape: CollisionShape2D = $CollisionShape
 
 
 func _ready() -> void:
@@ -53,6 +63,7 @@ func _physics_process(delta: float) -> void:
 				los.target_position = los.to_local(hero.global_position)
 				var aim_accuracy: float = absf(hand.global_transform.x.angle_to(
 						hand.global_position.direction_to(hero.global_position)))
+
 
 				if not los.is_colliding():
 					if aim_accuracy <= aim_margin:
@@ -87,12 +98,18 @@ func _physics_process(delta: float) -> void:
 
 
 func die() -> void:
+	dead = true
+	collision_shape.set_deferred(&"disabled", true)
+	#remove_from_group(&"enemies")
+	removed.emit()
+	died.emit()
 	queue_free()
 
 
 func drop_gun() -> void:
 	gun.queue_free()
 	var fists: Fists = preload("uid://cap0tc1j8ohhe").instantiate()
+	fists.collision_mask = gun.collision_mask
 	hand.add_child(fists)
 	gun = fists
 

@@ -2,25 +2,16 @@
 
 [ext_resource type="Script" uid="uid://dud6rlfqfc7j8" path="res://game/ghost/ghost.gd" id="1_xe3x1"]
 [ext_resource type="Texture2D" uid="uid://dnpoq1nirc2ow" path="res://icon.svg" id="2_2iaaw"]
-[ext_resource type="PackedScene" uid="uid://bxgcm2uyt1qg7" path="res://game/gun/gun.tscn" id="3_fuwrd"]
-[ext_resource type="PackedScene" uid="uid://cb3gs06s87ka3" path="res://game/combat_collision/hurt_box/bullet/player_bullet.tscn" id="4_h2o8k"]
-[ext_resource type="Script" uid="uid://dedfsv5rhjqa1" path="res://game/gun/magazine.gd" id="5_13suh"]
 [ext_resource type="PackedScene" uid="uid://dxcwnd01jn8s8" path="res://game/combat_collision/hit_box/hit_box.tscn" id="6_13suh"]
 [ext_resource type="PackedScene" uid="uid://blsg4naun2754" path="res://game/enemy/soft_collision/soft_collision.tscn" id="7_h2o8k"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fuwrd"]
 radius = 15.0
 
-[sub_resource type="Resource" id="Resource_h2o8k"]
-script = ExtResource("5_13suh")
-ammo_type = ExtResource("4_h2o8k")
-max_ammo = -1
-metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_13suh"]
 radius = 16.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_h2o8k"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_1vx3s"]
 resource_local_to_scene = true
 radius = 16.0
 
@@ -32,12 +23,17 @@ gradient = SubResource("Gradient_dk5tg")
 width = 1024
 height = 1024
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_14dsv"]
+radius = 32.0
+
 [node name="Ghost" type="CharacterBody2D" unique_id=507860525]
 collision_layer = 8
+collision_mask = 17
 motion_mode = 1
 script = ExtResource("1_xe3x1")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1732253768]
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1732253768]
+modulate = Color(1.353256, 0.75257814, 1.3031998, 1)
 rotation = 0.7853982
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_2iaaw")
@@ -45,20 +41,12 @@ texture = ExtResource("2_2iaaw")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2103159467]
 shape = SubResource("CircleShape2D_fuwrd")
 
-[node name="Hand" type="Marker2D" parent="." unique_id=1134716458]
-
-[node name="Gun" parent="Hand" unique_id=738278615 instance=ExtResource("3_fuwrd")]
-magazine = SubResource("Resource_h2o8k")
-collision_mask = 9217
-
-[node name="Cooldown" parent="Hand/Gun" index="0" unique_id=500018778]
-wait_time = 0.5
-
 [node name="Sheild" parent="." unique_id=456550994 instance=ExtResource("6_13suh")]
 collision_layer = 2560
 
 [node name="CollisionShape" parent="Sheild" index="0" unique_id=672786274]
 shape = SubResource("CircleShape2D_13suh")
+disabled = true
 
 [node name="ImmuneTimer" parent="Sheild" index="1" unique_id=1380030965]
 wait_time = 0.001
@@ -67,16 +55,23 @@ wait_time = 0.001
 radius = 15.0
 
 [node name="EnemyShover" parent="." unique_id=1353088001 instance=ExtResource("7_h2o8k")]
-influence = 1.5
 
 [node name="CollisionShape" parent="EnemyShover" index="0" unique_id=1699220739]
-shape = SubResource("CircleShape2D_h2o8k")
+shape = SubResource("CircleShape2D_1vx3s")
+disabled = true
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=706404092]
 shadow_enabled = true
 shadow_color = Color(0, 0, 0, 1)
 texture = SubResource("GradientTexture2D_c2int")
 
-[editable path="Hand/Gun"]
+[node name="PossessionDetector" type="Area2D" parent="." unique_id=1685347127]
+collision_layer = 0
+collision_mask = 6
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PossessionDetector" unique_id=153437342]
+shape = SubResource("CircleShape2D_14dsv")
+
 [editable path="Sheild"]
 [editable path="EnemyShover"]

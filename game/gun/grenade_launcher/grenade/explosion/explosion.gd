@@ -13,6 +13,6 @@ func _on_area_entered(area: HitBox) -> void:
 		return
 	los.target_position = los.to_local(area.global_position)
 	los.force_raycast_update()
-	if not los.is_colliding():
+	if los.get_collider() == area:
 		area.take_damage(DAMAGE)
 		hit_list.append(area)

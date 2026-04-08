@@ -27,6 +27,7 @@ var room_data: Dictionary[Vector2i, Dictionary] = {
 @onready var hero: Hero = $Hero
 @onready var minimap: Minimap = %Minimap
 @onready var hud: CanvasLayer = $HUD
+@onready var fps: Label = %FPS
 
 
 func _ready() -> void:
@@ -38,6 +39,10 @@ func _ready() -> void:
 		minimap.add_room(coords, data.mod, data.unknown)
 
 	enter_room(Vector2(0, -1))
+
+
+func _process(_delta: float) -> void:
+	fps.text = str(Performance.get_monitor(Performance.TIME_FPS))
 
 
 func sort_coords(a: Vector2i, b: Vector2i) -> bool:
@@ -74,11 +79,14 @@ func enter_room(coords: Vector2i) -> void:
 		current_room.queue_free()
 		Engine.time_scale = 1.0
 
+	# FIXME: Needs to reveal the adjacent rooms as well, and show the room you're currently in.
 	minimap.set_unknown(coords, false)
+
 	var room: Room = room_data[coords].type.instantiate()
 	room.coords = coords
 	current_room = room
 	room.door_entered.connect(_on_room_door_entered)
+	room.unlocked.connect(_on_room_unlocked)
 
 	ghost.process_mode = Node.PROCESS_MODE_DISABLED
 	hero.process_mode = Node.PROCESS_MODE_DISABLED
@@ -87,6 +95,7 @@ func enter_room(coords: Vector2i) -> void:
 
 	room.hero = hero
 	hero.room = room
+	ghost.room = room
 
 	for dir: Vector2i in [Vector2i.RIGHT, Vector2i.LEFT, Vector2i.UP, Vector2i.DOWN]:
 		if not MAP_BOUNDS.has_point(coords + dir):
@@ -96,17 +105,25 @@ func enter_room(coords: Vector2i) -> void:
 	await get_tree().create_timer(0.0).timeout
 	if enter_direction != Vector2i.ZERO:
 		var spawn_point: Vector2 = room.get_door(-enter_direction).spawn_point.global_position
-		#const RAND_OFFSET: float = 8.0
-		hero.global_position = spawn_point# + Utils.rand_vec2_radial(RAND_OFFSET)
-		ghost.global_position = spawn_point# + Utils.rand_vec2_radial(RAND_OFFSET)
+		const RAND_OFFSET: float = 8.0
+		hero.global_position = spawn_point + Utils.rand_vec2_radial(RAND_OFFSET)
+		ghost.global_position = spawn_point + Utils.rand_vec2_radial(RAND_OFFSET)
+		if ghost.possessing:
+			ghost.possessing.global_position = ghost.global_position
+			ghost.possessing.room = room
 
 
-	ghost.process_mode = Node.PROCESS_MODE_INHERIT
 	hero.process_mode = Node.PROCESS_MODE_INHERIT
+	ghost.process_mode = Node.PROCESS_MODE_INHERIT
+	ghost.can_possess = true
 
 
 func _on_room_door_entered(direction: Vector2i) -> void:
 	enter_room(current_room.coords + direction)
+
+
+func _on_room_unlocked() -> void:
+	ghost.can_possess = false
 
 
 func _on_hero_died() -> void:

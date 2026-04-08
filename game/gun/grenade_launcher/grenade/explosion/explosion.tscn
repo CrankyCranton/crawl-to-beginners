@@ -73,7 +73,8 @@ shape = SubResource("CircleShape2D_nnd2y")
 [node name="LOS" type="RayCast2D" parent="." unique_id=1511013529]
 enabled = false
 target_position = Vector2(0, 0)
-collision_mask = 9
+collision_mask = 513
+collide_with_areas = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=883403549]
 libraries/ = SubResource("AnimationLibrary_3gvk6")

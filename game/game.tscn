@@ -5,6 +5,17 @@
 [ext_resource type="PackedScene" uid="uid://ccravkxuofnl3" path="res://game/hero/hero.tscn" id="2_h7iqs"]
 [ext_resource type="PackedScene" uid="uid://bks3i1d362lr" path="res://game/minimap/minimap.tscn" id="4_4fuuu"]
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4fuuu"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_dxrkv"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_dakft"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_u5opy"]
+normal = Vector2(1, 0)
+
 [node name="Game" type="Node" unique_id=481701368]
 script = ExtResource("1_h7iqs")
 
@@ -54,5 +65,30 @@ horizontal_alignment = 1
 [node name="Minimap" parent="HUD/SideBar/VBoxContainer" unique_id=1179685109 instance=ExtResource("4_4fuuu")]
 unique_name_in_owner = true
 layout_mode = 2
+
+[node name="FPS" type="Label" parent="HUD" unique_id=2002869948]
+unique_name_in_owner = true
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="GhostBounds" type="StaticBody2D" parent="." unique_id=978751926]
+collision_layer = 16
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GhostBounds" unique_id=579562516]
+position = Vector2(384, 512)
+shape = SubResource("WorldBoundaryShape2D_4fuuu")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="GhostBounds" unique_id=1550202679]
+position = Vector2(384, 0)
+shape = SubResource("WorldBoundaryShape2D_dxrkv")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="GhostBounds" unique_id=634372355]
+position = Vector2(640, 256)
+shape = SubResource("WorldBoundaryShape2D_dakft")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="GhostBounds" unique_id=517696610]
+position = Vector2(128, 256)
+shape = SubResource("WorldBoundaryShape2D_u5opy")
 
 [connection signal="died" from="Hero" to="." method="_on_hero_died"]

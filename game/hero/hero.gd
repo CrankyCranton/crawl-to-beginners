@@ -77,7 +77,7 @@ func _physics_process(_delta: float) -> void:
 		State.FOLLOW:
 			pass
 		State.POSSESSED:
-			pass
+			return
 
 	#velocity = velocity.limit_length(SPEED)
 	move_and_slide()
@@ -115,7 +115,7 @@ func get_map_rid() -> RID:
 
 func _on_hit_box_damage_taken(damage: int) -> void:
 	health -= damage
-	if damage > 0:
+	if damage > 0 and state != State.POSSESSED:
 		state = State.PANIC
 		path = []
 		target_cell = Vector2i.MAX

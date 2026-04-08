@@ -2,6 +2,8 @@ class_name Room extends Node2D
 # Max of 4 doors: 1 for each side.
 
 
+signal unlocked
+
 const ENEMY_TYPES: Array[PackedScene] = [
 	preload("uid://df6a8qn3gwxbg"),
 	preload("uid://gm0er2jonp50"),
@@ -55,10 +57,8 @@ func _ready() -> void:
 	for spawn_point: Marker2D in enemy_spawn_points.get_children():
 		var enemy: Enemy = ENEMY_TYPES.pick_random().instantiate()
 		enemy.position = spawn_point.position
-		enemy.tree_exited.connect(_on_enemy_tree_exited)
 		enemies.add_child(enemy)
-		enemy.astar = astar_heatmap
-		enemy.room = self
+		set_up_enemy(enemy)
 
 
 # WARNING:
@@ -72,6 +72,12 @@ func _ready() -> void:
 		#draw_rect(rect, color)
 		#draw_rect(rect, Color(1.0, 1.0, 1.0, 0.1), false, 1.0)
 
+
+func set_up_enemy(enemy: Enemy) -> void:
+	if not enemy.removed.is_connected(_on_enemy_removed):
+		enemy.removed.connect(_on_enemy_removed)
+	enemy.astar = astar_heatmap
+	enemy.room = self
 
 
 func set_mod(mod: Mod) -> void:
@@ -113,15 +119,18 @@ func get_cell_id(global_pos: Vector2) -> Vector2i:
 func unlock() -> void:
 	for door: Door in doors.get_children():
 		door.unlock()
+	unlocked.emit()
 
 
 func _on_door_entered(direction: Vector2i) -> void:
 	door_entered.emit(direction)
 
 
-func _on_enemy_tree_exited() -> void:
-	if enemies.get_child_count() <= 0:
-		unlock()
+func _on_enemy_removed() -> void:
+	for enemy: Enemy in enemies.get_children():
+		if not enemy.dead:
+			return
+	unlock()
 
 
 func _on_heatmap_update_interval_timeout() -> void:
@@ -141,6 +150,8 @@ func _on_heatmap_update_interval_timeout() -> void:
 			var heat_nodes: Array[Node] = enemies.get_children()
 			heat_nodes.append_array(get_tree().get_nodes_in_group(&"bullets"))
 			for heat_node: Node in heat_nodes:
+				if heat_node is Enemy and heat_node.state == Enemy.State.POSSESSED:
+					continue
 				var length: float = 0.0
 				var path: PackedVector2Array = astar.get_point_path(
 						get_cell_id(heat_node.global_position), cell)

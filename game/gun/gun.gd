@@ -40,6 +40,20 @@ func reload(from_mag: Magazine) -> void:
 	reload_time.start()
 
 
+func set_collision_mask_value(layer_number: int, value: bool) -> void:
+	# IDK how to deal with bits, so I'll just cheat a "bit".
+	var temp := Area2D.new()
+	temp.collision_mask = collision_mask
+	temp.set_collision_mask_value(layer_number, value)
+	collision_mask = temp.collision_mask
+
+
+func get_collision_mask_value(layer_number: int) -> bool:
+	var temp := Area2D.new()
+	temp.collision_mask = collision_mask
+	return temp.get_collision_mask_value(layer_number)
+
+
 func get_room() -> Node:
 	var result: Node = get_parent()
 	while (result != get_tree().current_scene and result != get_node(^"/root")

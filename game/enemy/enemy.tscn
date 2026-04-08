@@ -20,7 +20,7 @@ motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_2mvqj")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=363437164]
+[node name="CollisionShape" type="CollisionShape2D" parent="." unique_id=363437164]
 shape = SubResource("CircleShape2D_8s3bx")
 
 [node name="SoftCollision" parent="." unique_id=1353088001 instance=ExtResource("2_q106d")]
@@ -41,7 +41,6 @@ unique_name_in_owner = true
 visible = false
 shape = SubResource("CircleShape2D_glrgy")
 target_position = Vector2(0, 0)
-collision_mask = 9
 
 [node name="NavigationAgent" type="NavigationAgent2D" parent="." unique_id=1288865449]
 path_postprocessing = 1
