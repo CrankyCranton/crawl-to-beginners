@@ -13,7 +13,7 @@ metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
 
 [node name="GrenadeLauncher" unique_id=738278615 instance=ExtResource("1_5q4we")]
 magazine = SubResource("Resource_t6eoq")
-collision_mask = 1
+collision_mask = 9
 
 [node name="Cooldown" parent="." index="0" unique_id=500018778]
 wait_time = 2.5
