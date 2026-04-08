@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://beiuvxh8fcqp4"]
+
+[ext_resource type="Script" uid="uid://b6j14gsw5ml85" path="res://menus/lose_overlay.gd" id="1_xc37i"]
+
+[sub_resource type="Animation" id="Animation_xc37i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_01tll"]
+resource_name = "lose"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6pnbb"]
+_data = {
+&"RESET": SubResource("Animation_xc37i"),
+&"lose": SubResource("Animation_01tll")
+}
+
+[node name="LoseOverlay" type="ColorRect" unique_id=575272660]
+process_mode = 3
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.27058825, 0.0828435, 0.04313725, 0.5019608)
+script = ExtResource("1_xc37i")
+
+[node name="Label" type="Label" parent="." unique_id=387475666]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Game Over"
+horizontal_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=276597502]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -51.5
+offset_top = -50.5
+offset_right = 51.5
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+
+[node name="Label" type="Label" parent="VBoxContainer2" unique_id=567117443]
+layout_mode = 2
+text = "Progress: 75%"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2" unique_id=681467446]
+layout_mode = 2
+
+[node name="TryAgainButton" type="Button" parent="VBoxContainer2/VBoxContainer" unique_id=1835842148]
+layout_mode = 2
+text = "Try Again"
+
+[node name="BackToTitleButton" type="Button" parent="VBoxContainer2/VBoxContainer" unique_id=201264963]
+layout_mode = 2
+text = "Back to Title"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer2/VBoxContainer" unique_id=1371244370]
+layout_mode = 2
+text = "Quit"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=10279980]
+libraries/ = SubResource("AnimationLibrary_6pnbb")
+autoplay = &"lose"
+
+[connection signal="pressed" from="VBoxContainer2/VBoxContainer/TryAgainButton" to="." method="_on_try_again_button_pressed"]
+[connection signal="pressed" from="VBoxContainer2/VBoxContainer/BackToTitleButton" to="." method="_on_back_to_title_button_pressed"]
+[connection signal="pressed" from="VBoxContainer2/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

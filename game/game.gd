@@ -26,6 +26,7 @@ var room_data: Dictionary[Vector2i, Dictionary] = {
 @onready var ghost: Ghost = $Ghost
 @onready var hero: Hero = $Hero
 @onready var minimap: Minimap = %Minimap
+@onready var hud: CanvasLayer = $HUD
 
 
 func _ready() -> void:
@@ -106,3 +107,8 @@ func enter_room(coords: Vector2i) -> void:
 
 func _on_room_door_entered(direction: Vector2i) -> void:
 	enter_room(current_room.coords + direction)
+
+
+func _on_hero_died() -> void:
+	# IDK about these UIDs, they're hard to read.
+	hud.add_child(preload("uid://beiuvxh8fcqp4").instantiate())

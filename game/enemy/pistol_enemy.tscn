@@ -2,11 +2,22 @@
 
 [ext_resource type="PackedScene" uid="uid://bxdssv880wo0p" path="res://game/enemy/enemy.tscn" id="1_hbgeo"]
 [ext_resource type="PackedScene" uid="uid://d2oxbvp4kbxhu" path="res://game/gun/pistol/pistol.tscn" id="2_6cbxb"]
+[ext_resource type="PackedScene" uid="uid://cfb8piwhbwlhf" path="res://game/combat_collision/hurt_box/bullet/laser.tscn" id="3_60nni"]
+[ext_resource type="Script" uid="uid://dedfsv5rhjqa1" path="res://game/gun/magazine.gd" id="4_0yy8n"]
+
+[sub_resource type="Resource" id="Resource_60nni"]
+resource_local_to_scene = true
+script = ExtResource("4_0yy8n")
+ammo_type = ExtResource("3_60nni")
+max_ammo = 20
+metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
 
 [node name="PistolEnemy" unique_id=618280856 node_paths=PackedStringArray("gun") instance=ExtResource("1_hbgeo")]
+aim_margin = 5.0
 gun = NodePath("Hand/Pistol")
 
 [node name="Pistol" parent="Hand" parent_id_path=PackedInt32Array(1151683513) index="1" unique_id=738278615 instance=ExtResource("2_6cbxb")]
+magazine = SubResource("Resource_60nni")
 collision_mask = 10241
 
 [editable path="HitBox"]

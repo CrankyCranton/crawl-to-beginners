@@ -15,7 +15,7 @@ metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
 magazine = SubResource("Resource_fr7tr")
 
 [node name="Cooldown" parent="." index="0" unique_id=500018778]
-wait_time = 0.5
+wait_time = 0.3
 
 [node name="Sprite2D" parent="." index="3" unique_id=1184722041]
 position = Vector2(24, 0)

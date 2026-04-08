@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://chcpjqhlh4a3g" path="res://game/gun/grenade_launcher/grenade/explosion/explosion.gd" id="2_d21ko"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nnd2y"]
-radius = 160.798
+radius = 128.0
 
 [sub_resource type="Animation" id="Animation_3gvk6"]
 length = 0.001
@@ -64,7 +64,7 @@ script = ExtResource("2_d21ko")
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=1389931744]
 modulate = Color(1, 1, 1, 0.2509804)
-scale = Vector2(3, 3)
+scale = Vector2(2, 2)
 texture = ExtResource("2_3gvk6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1319386538]

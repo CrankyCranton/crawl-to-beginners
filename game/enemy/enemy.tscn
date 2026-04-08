@@ -48,6 +48,7 @@ path_postprocessing = 1
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." unique_id=179663014]
 radius = 16.0
+avoidance_enabled = false
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=2007736382]
 modulate = Color(1.369439, 0.5333553, 0.5333553, 1)

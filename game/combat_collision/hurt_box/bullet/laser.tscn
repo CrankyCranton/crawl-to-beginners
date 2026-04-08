@@ -7,7 +7,6 @@ resource_local_to_scene = true
 radius = 8.0
 
 [node name="Laser" unique_id=1457563552 instance=ExtResource("1_xm4mm")]
-speed = 96.0
 
 [node name="CollisionShape2D" parent="." index="1" unique_id=1319386538]
 shape = SubResource("CircleShape2D_xm4mm")

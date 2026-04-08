@@ -6,9 +6,9 @@ class_name Magazine extends Resource
 @export var max_ammo: int = 6:
 	set(value):
 		max_ammo = value
-		ammo = ammo
+		ammo = max_ammo
 
-var ammo: int = max_ammo:
+var ammo: int:
 	set(value):
 		ammo = mini(value, max_ammo)
 

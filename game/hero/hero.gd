@@ -1,6 +1,8 @@
 class_name Hero extends CharacterBody2D
 
 
+signal died
+
 const SPEED: float = 96.0
 const PANIC_SPEED: float = 192.0
 const DODGE_INFLUENCE: float = 0.5
@@ -9,11 +11,18 @@ const HEAT_SWITCH_MARGIN: float = 0.1
 const DISTANCE_PREFERENCE: float = 0.001
 
 enum State {
-	NORMAL, # Navigates to random points on the map.
+	NORMAL,
 	PANIC,
-	FOLLOW, # Follow the player outside of combat.
+	FOLLOW, # TODO: Follow the player outside of combat.
+	POSSESSED,
 }
 
+var state: State = State.NORMAL
+var safe_vel := Vector2()
+var astar: AStarGrid2D
+var path: PackedVector2Array = []
+var target_cell := Vector2i.MAX
+var room: Room
 var max_health: int = 5:
 	set(value):
 		max_health = value
@@ -23,32 +32,22 @@ var health: int = max_health:
 		health = mini(max_health, value)
 		if health <= 0:
 			die()
-var state: State = State.NORMAL
-var safe_vel := Vector2()
-var astar: AStarGrid2D
-var path: PackedVector2Array = []
-var target_cell := Vector2i.MAX
-var room: Room
 
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent
 @onready var target_pos := Vector2()
-#@onready var steering: Steering = $Steering
 @onready var panic_timer: Timer = $PanicTimer
-@onready var soft_collision: SoftCollision = $SoftCollision
 
 
 func _ready() -> void:
 	nav_agent.max_speed = SPEED / DODGE_INFLUENCE
 	for i: int in 2:
-		await get_tree().process_frame
+		await get_tree().process_frame # Wait for the navigation to load.
 	target_pos = get_random_point()
 
 
 func _physics_process(_delta: float) -> void:
 	match state:
 		State.NORMAL:
-			#velocity = get_longest_direction() * SPEED
-
 			for y: int in range(astar.region.position.y, astar.region.end.y):
 				for x: int in range(astar.region.position.x, astar.region.end.x):
 					var cell := Vector2i(x, y)
@@ -62,22 +61,27 @@ func _physics_process(_delta: float) -> void:
 
 			if path.size() > 0:
 				var local_pos: Vector2 = room.to_local(global_position)
-				velocity = local_pos.direction_to(path[0]) * SPEED + safe_vel
+				velocity = local_pos.direction_to(path[0]) * SPEED
 				if local_pos.distance_squared_to(path[0]) <= PATH_DESIRED_DISTANCE:
 					path.remove_at(0)
 			else:
 				velocity = Vector2.ZERO
+			velocity += safe_vel
+
 		State.PANIC:
 			nav_agent.target_position = target_pos
 			var path_vel: Vector2 = global_position.direction_to(
 					nav_agent.get_next_path_position()) * PANIC_SPEED
 			velocity = path_vel + safe_vel
+
 		State.FOLLOW:
+			pass
+		State.POSSESSED:
 			pass
 
 	#velocity = velocity.limit_length(SPEED)
 	move_and_slide()
-	queue_redraw()
+	#queue_redraw()
 
 
 #func _draw() -> void:
@@ -96,20 +100,13 @@ func get_cell_weight(cell: Vector2i) -> float:
 
 
 func die() -> void:
-	queue_free()
+	died.emit()
+	#queue_free()
 
 
 func get_random_point() -> Vector2:
 	return NavigationServer2D.map_get_random_point(get_map_rid(),
 			nav_agent.navigation_layers, false)
-
-
-#func get_longest_direction() -> Vector2:
-	#var current_dir := Vector2.ZERO
-	#for direction: Vector2 in steering.get_directions():
-		#if direction.length_squared() > current_dir.length_squared():
-			#current_dir = direction
-	#return current_dir.normalized()
 
 
 func get_map_rid() -> RID:

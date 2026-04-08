@@ -15,5 +15,5 @@ func set_unknown(coords: Vector2i, unknown: bool) -> void:
 			room.unknown = unknown
 
 
-func select_room(coords: Vector2i) -> void:
+func select_room(_coords: Vector2i) -> void:
 	pass

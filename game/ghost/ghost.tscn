@@ -24,6 +24,14 @@ radius = 16.0
 resource_local_to_scene = true
 radius = 16.0
 
+[sub_resource type="Gradient" id="Gradient_dk5tg"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_c2int"]
+gradient = SubResource("Gradient_dk5tg")
+width = 1024
+height = 1024
+
 [node name="Ghost" type="CharacterBody2D" unique_id=507860525]
 collision_layer = 8
 motion_mode = 1
@@ -63,6 +71,11 @@ influence = 1.5
 
 [node name="CollisionShape" parent="EnemyShover" index="0" unique_id=1699220739]
 shape = SubResource("CircleShape2D_h2o8k")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=706404092]
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+texture = SubResource("GradientTexture2D_c2int")
 
 [editable path="Hand/Gun"]
 [editable path="Sheild"]

@@ -3,12 +3,22 @@
 [ext_resource type="PackedScene" uid="uid://bxdssv880wo0p" path="res://game/enemy/enemy.tscn" id="1_inwsk"]
 [ext_resource type="Script" uid="uid://d3syqkeeysyb4" path="res://game/enemy/sniper_enemy/sniper_enemy.gd" id="2_tn24w"]
 [ext_resource type="PackedScene" uid="uid://dt0jywpm04ogf" path="res://game/gun/sniper_rifle/sniper_rifle.tscn" id="3_k6hx3"]
+[ext_resource type="PackedScene" uid="uid://c11ky7q8072ol" path="res://game/combat_collision/hurt_box/bullet/sniper_bullet.tscn" id="4_8mlk5"]
+[ext_resource type="Script" uid="uid://dedfsv5rhjqa1" path="res://game/gun/magazine.gd" id="5_bhvkp"]
+
+[sub_resource type="Resource" id="Resource_8xrx7"]
+resource_local_to_scene = true
+script = ExtResource("5_bhvkp")
+ammo_type = ExtResource("4_8mlk5")
+max_ammo = 2
+metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
 
 [node name="SniperEnemy" unique_id=618280856 node_paths=PackedStringArray("gun") instance=ExtResource("1_inwsk")]
 script = ExtResource("2_tn24w")
 gun = NodePath("Hand/SniperRifle")
 
 [node name="SniperRifle" parent="Hand" parent_id_path=PackedInt32Array(1151683513) index="1" unique_id=738278615 instance=ExtResource("3_k6hx3")]
+magazine = SubResource("Resource_8xrx7")
 collision_mask = 10241
 
 [editable path="HitBox"]
