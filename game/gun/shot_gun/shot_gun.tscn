@@ -14,6 +14,14 @@ metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
 [node name="ShotGun" unique_id=738278615 instance=ExtResource("1_wga7x")]
 magazine = SubResource("Resource_hkwnd")
 collision_mask = 512
+range = 64.0
 
 [node name="Cooldown" parent="." index="0" unique_id=500018778]
 wait_time = 1.5
+
+[node name="Barrel" parent="." index="2" unique_id=1811445942]
+position = Vector2(16, 0)
+
+[node name="Sprite2D" parent="." index="3" unique_id=1184722041]
+modulate = Color(0.5723417, 1, 0.6210622, 1)
+scale = Vector2(0.1, 0.1)

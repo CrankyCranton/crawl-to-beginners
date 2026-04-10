@@ -100,7 +100,7 @@ func enter_room(coords: Vector2i) -> void:
 	for dir: Vector2i in [Vector2i.RIGHT, Vector2i.LEFT, Vector2i.UP, Vector2i.DOWN]:
 		if not MAP_BOUNDS.has_point(coords + dir):
 			room.disable_door(dir)
-	room.set_mod(room_data[coords].mod)
+	#room.set_mod(room_data[coords].mod)
 
 	await get_tree().create_timer(0.0).timeout
 	if enter_direction != Vector2i.ZERO:

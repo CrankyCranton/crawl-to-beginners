@@ -8,6 +8,7 @@ const ENEMY_TYPES: Array[PackedScene] = [
 	preload("uid://df6a8qn3gwxbg"),
 	preload("uid://gm0er2jonp50"),
 	preload("uid://bmihvidakaood"),
+	preload("uid://binfmuy2x2bt0"),
 ]
 
 signal door_entered(direction: Vector2i)
@@ -20,6 +21,7 @@ enum Mod {
 }
 
 @export var heatmap_color: Gradient
+@export var track := &"game"
 
 var coords: Vector2i
 var astar := AStarGrid2D.new()
@@ -39,6 +41,7 @@ var astar_heatmap := AStarGrid2D.new()
 
 
 func _ready() -> void:
+	MusicManager.set(&"parameters/switch_to_clip", track)
 	for door: Door in doors.get_children():
 		door.entered.connect(_on_door_entered)
 
@@ -80,14 +83,14 @@ func set_up_enemy(enemy: Enemy) -> void:
 	enemy.room = self
 
 
-func set_mod(mod: Mod) -> void:
-	match mod:
-		Mod.HR:
-			pass
-		Mod.HD:
-			darkness.show()
-		Mod.DT:
-			Engine.time_scale = 1.5
+#func set_mod(mod: Mod) -> void:
+	#match mod:
+		#Mod.HR:
+			#pass
+		#Mod.HD:
+			#darkness.show()
+		#Mod.DT:
+			#Engine.time_scale = 1.5
 			# TODO: Speed up music as well.
 
 

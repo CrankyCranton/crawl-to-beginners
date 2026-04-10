@@ -17,7 +17,6 @@ one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1184722041]
 position = Vector2(16, 0)
-scale = Vector2(0.25, 0.125)
 texture = ExtResource("2_i80m3")
 
 [connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]

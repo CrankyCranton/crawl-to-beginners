@@ -36,6 +36,13 @@ var health: int = max_health:
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent
 @onready var target_pos := Vector2()
 @onready var panic_timer: Timer = $PanicTimer
+@onready var animation_tree: AnimationTree = $AnimationTree
+@onready var playback: AnimationNodeStateMachinePlayback = animation_tree.get(&"parameters/playback")
+@onready var anim_dir := Vector2.DOWN:
+	set(value):
+		anim_dir = value
+		animation_tree.set(&"parameters/idle/blend_position", anim_dir)
+		animation_tree.set(&"parameters/walk/blend_position", anim_dir)
 
 
 func _ready() -> void:
@@ -76,17 +83,28 @@ func _physics_process(_delta: float) -> void:
 
 		State.FOLLOW:
 			pass
-		State.POSSESSED:
-			return
 
-	#velocity = velocity.limit_length(SPEED)
-	move_and_slide()
+	if state != State.POSSESSED:
+		#velocity = velocity.limit_length(SPEED)
+		move_and_slide()
+
+
 	#queue_redraw()
+	animate()
 
 
 #func _draw() -> void:
 	#for i in path.size() - 1:
 		#draw_line(to_local(path[i]), to_local(path[i + 1]), Color.GREEN, 4.0)
+
+
+# Copied from enemy.gd. I should probably merge 'em somehow.
+func animate() -> void:
+	var anim_state: StringName = &"walk" if velocity != Vector2.ZERO else &"idle"
+	if anim_state != playback.get_current_node():
+		playback.travel(anim_state)
+	if anim_state == &"walk":
+		anim_dir = velocity.normalized()
 
 
 func get_cell_weight(cell: Vector2i) -> float:
@@ -100,6 +118,10 @@ func get_cell_weight(cell: Vector2i) -> float:
 
 
 func die() -> void:
+	hide()
+	var death_effect: AnimatedSprite2D = preload("uid://dwxvg56mqxrq3").instantiate()
+	get_tree().current_scene.add_child(death_effect)
+	death_effect.global_position = global_position
 	died.emit()
 	#queue_free()
 
@@ -134,4 +156,5 @@ func _on_navigation_agent_target_reached() -> void:
 
 
 func _on_panic_timer_timeout() -> void:
-	state = State.NORMAL
+	if state == State.PANIC:
+		state = State.NORMAL

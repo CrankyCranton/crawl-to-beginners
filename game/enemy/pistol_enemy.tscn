@@ -9,7 +9,6 @@
 resource_local_to_scene = true
 script = ExtResource("4_0yy8n")
 ammo_type = ExtResource("3_60nni")
-max_ammo = 20
 metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
 
 [node name="PistolEnemy" unique_id=618280856 node_paths=PackedStringArray("gun") instance=ExtResource("1_hbgeo")]

@@ -5,11 +5,11 @@ signal mag_empty
 
 @export var magazine: Magazine
 @export_flags_2d_physics var collision_mask: int = 513
+@warning_ignore("shadowed_global_identifier")
+@export var range: float = INF
 
 var cooling := false
 var reloading := false
-@warning_ignore("shadowed_global_identifier")
-var range: float = INF
 
 @onready var cooldown: Timer = $Cooldown
 @onready var reload_time: Timer = $ReloadTime

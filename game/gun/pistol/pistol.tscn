@@ -8,7 +8,6 @@
 resource_local_to_scene = true
 script = ExtResource("2_ql0ky")
 ammo_type = ExtResource("2_fr7tr")
-max_ammo = 20
 metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
 
 [node name="Pistol" unique_id=738278615 instance=ExtResource("1_hoa6r")]

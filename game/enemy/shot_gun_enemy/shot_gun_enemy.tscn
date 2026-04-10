@@ -6,18 +6,21 @@
 [ext_resource type="PackedScene" uid="uid://c2nv850tt4f68" path="res://game/gun/shot_gun/shot/shot.tscn" id="4_uvvsq"]
 [ext_resource type="Script" uid="uid://dedfsv5rhjqa1" path="res://game/gun/magazine.gd" id="5_nbywm"]
 
-[sub_resource type="Resource" id="Resource_ewucm"]
+[sub_resource type="Resource" id="Resource_uvvsq"]
 resource_local_to_scene = true
 script = ExtResource("5_nbywm")
 ammo_type = ExtResource("4_uvvsq")
-max_ammo = 2
+max_ammo = 1
 metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
 
-[node name="ShotGunEnemy" unique_id=618280856 instance=ExtResource("1_ia0d8")]
+[node name="ShotGunEnemy" unique_id=618280856 node_paths=PackedStringArray("gun") instance=ExtResource("1_ia0d8")]
 editor_description = "Probs take out for now just bcz of scope."
 script = ExtResource("2_41q4j")
+speed = 80.0
+gun = NodePath("Hand/ShotGun")
 
 [node name="ShotGun" parent="Hand" parent_id_path=PackedInt32Array(1151683513) index="1" unique_id=738278615 instance=ExtResource("2_rgdja")]
-magazine = SubResource("Resource_ewucm")
+magazine = SubResource("Resource_uvvsq")
+collision_mask = 1024
 
 [editable path="HitBox"]

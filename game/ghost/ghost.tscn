@@ -61,6 +61,7 @@ shape = SubResource("CircleShape2D_1vx3s")
 disabled = true
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=706404092]
+visible = false
 shadow_enabled = true
 shadow_color = Color(0, 0, 0, 1)
 texture = SubResource("GradientTexture2D_c2int")

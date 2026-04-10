@@ -8,6 +8,7 @@ radius = 8.0
 
 [node name="SniperBullet" unique_id=1457563552 instance=ExtResource("1_6u8hc")]
 speed = 576.0
+damage = 2
 
 [node name="CollisionShape2D" parent="." index="1" unique_id=1319386538]
 shape = SubResource("CircleShape2D_6u8hc")

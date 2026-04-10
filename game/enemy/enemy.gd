@@ -17,7 +17,7 @@ const PATH_DESIRED_DISTANCE: float = pow(8.0, 2.0)
 @export var aim_speed: float = 15.0
 @export var aim_margin: float = 1.0
 @export var gun: Node2D
-@export var health: int = 3:
+@export var health: int = 2:
 	set(value):
 		health = value
 		if health <= 0:
@@ -25,7 +25,7 @@ const PATH_DESIRED_DISTANCE: float = pow(8.0, 2.0)
 
 var dead := false
 var hero: Hero
-var last_hero_pos := Vector2i.MAX
+var last_target_pos := Vector2i.MAX
 var astar: AStarGrid2D
 var path: PackedVector2Array = []
 var room: Room
@@ -41,6 +41,14 @@ var state: State = State.NORMAL:
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent
 @onready var hit_box: HitBox = $HitBox
 @onready var collision_shape: CollisionShape2D = $CollisionShape
+@onready var animation_tree: AnimationTree = $AnimationTree
+@onready var playback: AnimationNodeStateMachinePlayback = animation_tree.get(&"parameters/playback")
+@onready var max_health: int = health
+@onready var anim_dir := Vector2.DOWN:
+	set(value):
+		anim_dir = value
+		animation_tree.set(&"parameters/idle/blend_position", anim_dir)
+		animation_tree.set(&"parameters/walk/blend_position", anim_dir)
 
 
 func _ready() -> void:
@@ -53,26 +61,27 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	match state:
 		State.NORMAL:
-			if hero == null:
+			var target: Node2D = _get_target()
+			if target == null:
 				return
+			var target_pos: Vector2 = target.global_position
 
-			if gun.global_position.distance_to(hero.global_position) <= gun.range:
-				var target_angle: float = hand.global_position.angle_to_point(hero.global_position)
-				hand.global_rotation = lerp_angle(hand.global_rotation,
-						target_angle, aim_speed * delta)
-				los.target_position = los.to_local(hero.global_position)
-				var aim_accuracy: float = absf(hand.global_transform.x.angle_to(
-						hand.global_position.direction_to(hero.global_position)))
+			var target_angle: float = hand.global_position.angle_to_point(target_pos)
+			hand.global_rotation = lerp_angle(hand.global_rotation,
+					target_angle, aim_speed * delta)
+			los.target_position = los.to_local(target_pos)
+			var aim_accuracy: float = absf(hand.global_transform.x.angle_to(
+					hand.global_position.direction_to(target_pos)))
 
-
-				if not los.is_colliding():
-					if aim_accuracy <= aim_margin:
-						gun.shoot()
+			if (gun.global_position.distance_to(target_pos) <= gun.range
+					and _extra_shoot_conds() and aim_accuracy <= aim_margin
+					and not los.is_colliding()):
+				gun.shoot()
 			#else:
-			var hero_cell_pos: Vector2i = room.get_cell_id(hero.global_position)
-			if last_hero_pos != hero_cell_pos:
-				last_hero_pos = hero_cell_pos
-				path = astar.get_point_path(room.get_cell_id(global_position), hero_cell_pos)
+			var target_cell_pos: Vector2i = room.get_cell_id(target_pos)
+			if last_target_pos != target_cell_pos:
+				last_target_pos = target_cell_pos
+				path = astar.get_point_path(room.get_cell_id(global_position), target_cell_pos)
 				if path.size() > 0:
 					path.remove_at(0)
 
@@ -91,16 +100,37 @@ func _physics_process(delta: float) -> void:
 
 			#queue_redraw()
 
+	animate()
+
 
 #func _draw() -> void:
 	#for i in path.size() - 1:
 		#draw_line(to_local(path[i]), to_local(path[i + 1]), Color.RED, 1.0)
 
 
+func _get_target() -> Node2D:
+	return hero
+
+
+func _extra_shoot_conds() -> bool:
+	return true
+
+
+func animate() -> void:
+	var anim_state: StringName = &"walk" if velocity != Vector2.ZERO else &"idle"
+	if anim_state != playback.get_current_node():
+		playback.travel(anim_state)
+	if anim_state == &"walk":
+		anim_dir = velocity.normalized()
+
+
 func die() -> void:
 	dead = true
 	collision_shape.set_deferred(&"disabled", true)
-	#remove_from_group(&"enemies")
+	remove_from_group(&"enemies")
+	var death_effect: AnimatedSprite2D = preload("uid://dwxvg56mqxrq3").instantiate()
+	get_tree().current_scene.add_child(death_effect)
+	death_effect.global_position = global_position
 	removed.emit()
 	died.emit()
 	queue_free()

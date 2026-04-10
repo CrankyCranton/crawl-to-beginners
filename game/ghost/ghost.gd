@@ -57,14 +57,14 @@ func _input(event: InputEvent) -> void:
 				if possessing is Enemy:
 					possessing.reparent(room.enemies)
 					room.set_up_enemy(possessing)
-					#possessing.add_to_group(&"enemies")
+					possessing.add_to_group(&"enemies")
 					flip_mask()
 
 			collider.died.connect(_on_possessing_died)
 			possessing = collider
 			if collider is Enemy:
 				collider.reparent(get_parent())
-				#collider.remove_from_group(&"enemies")
+				collider.remove_from_group(&"enemies")
 				flip_mask()
 			collider.state = collider.State.POSSESSED
 			#sprite.visible = possessing == self
