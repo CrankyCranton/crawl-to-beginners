@@ -30,6 +30,7 @@ var room_data: Dictionary[Vector2i, Dictionary] = {
 @onready var fps: Label = %FPS
 @onready var health_bar: ProgressBar = %HealthBar
 @onready var health_bar_tween: ProgressBar = %HealthBarTween
+@onready var health_bar_hud: HBoxContainer = %HealthBarHUD
 
 
 func _ready() -> void:
@@ -139,6 +140,8 @@ func _on_hero_health_set(health: int) -> void:
 	health_bar.value = health
 	var tween_value: float = remap(health_bar.value, health_bar.min_value, health_bar.max_value,
 			health_bar_tween.min_value, health_bar_tween.max_value)
-	health_bar_tween.create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS
-				).tween_property(health_bar_tween, ^"value", tween_value, 0.75
-				).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CIRC)
+	var tween: Tween = create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS
+			).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CIRC).set_parallel()
+	tween.tween_property(health_bar_tween, ^"value", tween_value, 0.75)
+	health_bar_hud.modulate = Color.LIGHT_BLUE * 2.0
+	tween.tween_property(health_bar_hud, ^"modulate", Color.WHITE, 0.75)

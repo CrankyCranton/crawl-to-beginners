@@ -7,9 +7,11 @@ func _get_target() -> Node2D:
 
 	var target: Enemy = null
 	for enemy: Enemy in get_tree().get_nodes_in_group(&"enemies"):
-		if enemy != self and (target == null or enemy.global_position.distance_squared_to(
+		if enemy is ShotGunEnemy:
+			continue
+		if target == null or enemy.global_position.distance_squared_to(
 				self.global_position) < target.global_position.distance_squared_to(
-				self.global_position)):
+				self.global_position):
 			target = enemy
 
 	if target == null:

@@ -10,6 +10,7 @@ const DODGE_INFLUENCE: float = 0.5
 const PATH_DESIRED_DISTANCE: float = pow(8.0, 2.0)
 const HEAT_SWITCH_MARGIN: float = 0.1
 const DISTANCE_PREFERENCE: float = 0.001
+const PANIC_DISTANCE_PREF: float = 0.0
 
 enum State {
 	NORMAL,
@@ -34,6 +35,9 @@ var health: int = max_health:
 		health_set.emit(health)
 		if health <= 0:
 			die()
+var speed: float:
+	get:
+		return PANIC_SPEED if state == State.PANIC else SPEED
 
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent
 @onready var target_pos := Vector2()
@@ -49,19 +53,21 @@ var health: int = max_health:
 
 func _ready() -> void:
 	nav_agent.max_speed = SPEED / DODGE_INFLUENCE
-	for i: int in 2:
-		await get_tree().process_frame # Wait for the navigation to load.
-	target_pos = get_random_point()
+	#for i: int in 3:
+		#await get_tree().process_frame # Wait for the navigation to load.
+	#target_pos = get_random_point()
 
 
 func _physics_process(_delta: float) -> void:
 	match state:
-		State.NORMAL:
+		State.NORMAL:#, State.PANIC:
 			for y: int in range(astar.region.position.y, astar.region.end.y):
 				for x: int in range(astar.region.position.x, astar.region.end.x):
 					var cell := Vector2i(x, y)
+					var heat_switch_margin: float = (0.0 if state == State.PANIC
+							else HEAT_SWITCH_MARGIN)
 					if target_cell == Vector2i.MAX or (get_cell_weight(target_cell)
-							- get_cell_weight(cell)) > HEAT_SWITCH_MARGIN:
+							- get_cell_weight(cell)) > heat_switch_margin or (state == State.PANIC and room.get_cell_id(global_position) == target_cell):
 						target_cell = cell
 
 			path = astar.get_point_path(room.get_cell_id(global_position), target_cell)
@@ -70,7 +76,7 @@ func _physics_process(_delta: float) -> void:
 
 			if path.size() > 0:
 				var local_pos: Vector2 = room.to_local(global_position)
-				velocity = local_pos.direction_to(path[0]) * SPEED
+				velocity = local_pos.direction_to(path[0]) * speed
 				if local_pos.distance_squared_to(path[0]) <= PATH_DESIRED_DISTANCE:
 					path.remove_at(0)
 			else:
@@ -116,7 +122,9 @@ func get_cell_weight(cell: Vector2i) -> float:
 	for i: int in range(1, test_path.size()):
 		dist += test_path[i - 1].distance_to(test_path[i])
 
-	return astar.get_point_weight_scale(cell) * (1.0 + dist * DISTANCE_PREFERENCE)
+	var distance_preference: float = (PANIC_DISTANCE_PREF if state == State.PANIC
+			else DISTANCE_PREFERENCE)
+	return astar.get_point_weight_scale(cell) * (1.0 + dist * distance_preference)
 
 
 func die() -> void:
@@ -141,6 +149,7 @@ func _on_hit_box_damage_taken(damage: int) -> void:
 	health -= damage
 	if damage > 0 and state != State.POSSESSED:
 		state = State.PANIC
+		target_pos = get_random_point()
 		path = []
 		target_cell = Vector2i.MAX
 		panic_timer.start()

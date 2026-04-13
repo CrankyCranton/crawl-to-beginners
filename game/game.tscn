@@ -60,18 +60,19 @@ offset_right = 128.0
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/BarLeft" unique_id=98675420]
+[node name="HealthBarHUD" type="HBoxContainer" parent="HUD/BarLeft" unique_id=98675420]
+unique_name_in_owner = true
 layout_mode = 0
 offset_right = 112.0
 offset_bottom = 40.0
 
-[node name="Icon" type="TextureRect" parent="HUD/BarLeft/HBoxContainer" unique_id=360189235]
+[node name="Icon" type="TextureRect" parent="HUD/BarLeft/HealthBarHUD" unique_id=360189235]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 texture = SubResource("AtlasTexture_dakft")
 stretch_mode = 5
 
-[node name="HealthBar" type="ProgressBar" parent="HUD/BarLeft/HBoxContainer" unique_id=274431851]
+[node name="HealthBar" type="ProgressBar" parent="HUD/BarLeft/HealthBarHUD" unique_id=274431851]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
@@ -83,7 +84,7 @@ max_value = 5.0
 value = 5.0
 show_percentage = false
 
-[node name="HealthBarTween" type="ProgressBar" parent="HUD/BarLeft/HBoxContainer/HealthBar" unique_id=139407289]
+[node name="HealthBarTween" type="ProgressBar" parent="HUD/BarLeft/HealthBarHUD/HealthBar" unique_id=139407289]
 unique_name_in_owner = true
 show_behind_parent = true
 custom_minimum_size = Vector2(0, 16)

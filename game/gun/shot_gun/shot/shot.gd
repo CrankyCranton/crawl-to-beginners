@@ -8,9 +8,9 @@ func _ready() -> void:
 	if is_colliding():
 		get_collider(0).take_damage(-1)
 		print(get_collider(0).get_parent())
-	get_tree().paused = true
-	var freeze_frames: int = 10
-	for i: int in freeze_frames:
-		await get_tree().physics_frame
-	get_tree().paused = false
+	#get_tree().paused = true
+	#var freeze_frames: int = 10
+	#for i: int in freeze_frames:
+		#await get_tree().physics_frame
+	#get_tree().paused = false
 	queue_free()
