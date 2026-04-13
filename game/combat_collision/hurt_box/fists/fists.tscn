@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dnpoq1nirc2ow" path="res://icon.svg" id="3_q8poh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ts824"]
+size = Vector2(42, 20)
 
 [sub_resource type="Animation" id="Animation_q8poh"]
 length = 0.001
@@ -52,7 +53,7 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_q8poh")
 
 [node name="CollisionShape2D" parent="." index="1" unique_id=1319386538]
-position = Vector2(32, 0)
+position = Vector2(21, 0)
 shape = SubResource("RectangleShape2D_ts824")
 disabled = true
 

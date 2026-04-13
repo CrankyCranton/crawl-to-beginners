@@ -33,6 +33,5 @@ func drop_gun() -> void:
 	fists.set_collision_mask_value(HERO_HIT_BOX,
 			not fists.get_collision_mask_value(HERO_HIT_BOX))
 
-
 	hand.add_child(fists)
 	gun = fists

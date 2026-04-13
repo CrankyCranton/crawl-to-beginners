@@ -25,5 +25,29 @@ position = Vector2(448, 448)
 [node name="Marker2D3" type="Marker2D" parent="EnemySpawnPoints" parent_id_path=PackedInt32Array(1664263378) index="2" unique_id=910120670]
 position = Vector2(64, 64)
 
+[node name="Marker2D4" type="Marker2D" parent="EnemySpawnPoints" parent_id_path=PackedInt32Array(1664263378) index="3" unique_id=1969568764]
+position = Vector2(64, 96)
+
+[node name="Marker2D5" type="Marker2D" parent="EnemySpawnPoints" parent_id_path=PackedInt32Array(1664263378) index="4" unique_id=1733801960]
+position = Vector2(64, 128)
+
+[node name="Marker2D6" type="Marker2D" parent="EnemySpawnPoints" parent_id_path=PackedInt32Array(1664263378) index="5" unique_id=1700396156]
+position = Vector2(96, 128)
+
+[node name="Marker2D7" type="Marker2D" parent="EnemySpawnPoints" parent_id_path=PackedInt32Array(1664263378) index="6" unique_id=1460665333]
+position = Vector2(96, 96)
+
+[node name="Marker2D8" type="Marker2D" parent="EnemySpawnPoints" parent_id_path=PackedInt32Array(1664263378) index="7" unique_id=1032843019]
+position = Vector2(96, 64)
+
+[node name="Marker2D9" type="Marker2D" parent="EnemySpawnPoints" parent_id_path=PackedInt32Array(1664263378) index="8" unique_id=360707939]
+position = Vector2(128, 64)
+
+[node name="Marker2D10" type="Marker2D" parent="EnemySpawnPoints" parent_id_path=PackedInt32Array(1664263378) index="9" unique_id=1245481937]
+position = Vector2(128, 96)
+
+[node name="Marker2D11" type="Marker2D" parent="EnemySpawnPoints" parent_id_path=PackedInt32Array(1664263378) index="10" unique_id=1270384956]
+position = Vector2(128, 128)
+
 [node name="NavigationRegion2D" parent="." index="5" unique_id=977941482]
 navigation_polygon = SubResource("NavigationPolygon_bxd0y")

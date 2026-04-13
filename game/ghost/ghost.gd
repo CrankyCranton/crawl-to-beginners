@@ -60,7 +60,6 @@ func _input(event: InputEvent) -> void:
 					possessing.add_to_group(&"enemies")
 					flip_mask()
 
-			collider.died.connect(_on_possessing_died)
 			possessing = collider
 			if collider is Enemy:
 				collider.reparent(get_parent())
@@ -68,6 +67,7 @@ func _input(event: InputEvent) -> void:
 				flip_mask()
 			collider.state = collider.State.POSSESSED
 			#sprite.visible = possessing == self
+			collider.died.connect(_on_possessing_died)
 
 
 # OK, the entire code base is messy, but this might just take the cake.

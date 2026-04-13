@@ -2,6 +2,7 @@ class_name Hero extends CharacterBody2D
 
 
 signal died
+signal health_set(health: int)
 
 const SPEED: float = 96.0
 const PANIC_SPEED: float = 192.0
@@ -30,6 +31,7 @@ var max_health: int = 5:
 var health: int = max_health:
 	set(value):
 		health = mini(max_health, value)
+		health_set.emit(health)
 		if health <= 0:
 			die()
 

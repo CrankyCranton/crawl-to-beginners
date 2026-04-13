@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bvm12e73hkgdl" path="res://game/gun/shot_gun/shot/shot.gd" id="1_aqvib"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aqvib"]
-radius = 32.0
+radius = 64.0
 
 [node name="Shot" type="ShapeCast2D" unique_id=1471342420]
 enabled = false

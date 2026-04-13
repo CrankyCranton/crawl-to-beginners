@@ -19,8 +19,9 @@ script = ExtResource("2_41q4j")
 speed = 80.0
 gun = NodePath("Hand/ShotGun")
 
-[node name="ShotGun" parent="Hand" parent_id_path=PackedInt32Array(1151683513) index="1" unique_id=738278615 instance=ExtResource("2_rgdja")]
+[node name="ShotGun" parent="Hand" parent_id_path=PackedInt32Array(1151683513) index="1" unique_id=738278615 node_paths=PackedStringArray("exceptions") instance=ExtResource("2_rgdja")]
 magazine = SubResource("Resource_uvvsq")
 collision_mask = 1024
+exceptions = [NodePath("../../HitBox")]
 
 [editable path="HitBox"]

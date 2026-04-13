@@ -28,9 +28,13 @@ var room_data: Dictionary[Vector2i, Dictionary] = {
 @onready var minimap: Minimap = %Minimap
 @onready var hud: CanvasLayer = $HUD
 @onready var fps: Label = %FPS
+@onready var health_bar: ProgressBar = %HealthBar
+@onready var health_bar_tween: ProgressBar = %HealthBarTween
 
 
 func _ready() -> void:
+	health_bar.max_value = hero.max_health
+	health_bar.value = hero.health
 	generate_data()
 	var sorted_coords: Array = room_data.keys()
 	sorted_coords.sort_custom(sort_coords)
@@ -129,3 +133,12 @@ func _on_room_unlocked() -> void:
 func _on_hero_died() -> void:
 	# IDK about these UIDs, they're hard to read.
 	hud.add_child(preload("uid://beiuvxh8fcqp4").instantiate())
+
+
+func _on_hero_health_set(health: int) -> void:
+	health_bar.value = health
+	var tween_value: float = remap(health_bar.value, health_bar.min_value, health_bar.max_value,
+			health_bar_tween.min_value, health_bar_tween.max_value)
+	health_bar_tween.create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS
+				).tween_property(health_bar_tween, ^"value", tween_value, 0.75
+				).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CIRC)

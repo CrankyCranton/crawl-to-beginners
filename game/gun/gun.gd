@@ -7,6 +7,7 @@ signal mag_empty
 @export_flags_2d_physics var collision_mask: int = 513
 @warning_ignore("shadowed_global_identifier")
 @export var range: float = INF
+@export var exceptions: Array[Node] = []
 
 var cooling := false
 var reloading := false
@@ -22,9 +23,17 @@ func shoot() -> void:
 
 	magazine.ammo -= 1
 	var bullet: Node2D = magazine.ammo_type.instantiate()
-	get_room().add_child(bullet)
+	# Kinda redundant.
 	if bullet is CollisionObject2D or bullet is RayCast2D or bullet is ShapeCast2D:
 		bullet.collision_mask = collision_mask
+	if bullet is PhysicsBody2D or bullet is RayCast2D or bullet is ShapeCast2D:
+		var method: Callable = (bullet.add_collision_exception_with if bullet is PhysicsBody2D
+			else bullet.add_exception)
+		for exception: Node in exceptions:
+			method.call(exception)
+
+
+	get_room().add_child(bullet)
 	bullet.global_transform = barrel.global_transform
 	cooling = true
 	cooldown.start()
