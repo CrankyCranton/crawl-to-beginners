@@ -7,6 +7,10 @@ func _ready() -> void:
 	force_shapecast_update()
 	if is_colliding():
 		get_collider(0).take_damage(-1)
+		var heal_particles: GPUParticles2D = preload("uid://bsdrsnnco6xng").instantiate()
+		get_collider(0).add_child(heal_particles)
+		heal_particles.global_position = get_collider(0).global_position
+		heal_particles.emitting = true
 		#print(get_collider(0).get_parent())
 	#get_tree().paused = true
 	#var freeze_frames: int = 10

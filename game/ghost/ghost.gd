@@ -5,6 +5,7 @@ const SPEED: float = 256.0
 # Potentially move this to the gun so that different guns can feel heavier than others.
 const AIM_SPEED: float = 15.0
 const POSSESS_FOLLOW_SPEED: float = 5.0
+const HERO_POSSESS_PREFERENCE: float = 1000.0
 const POSSESSION_SHADER: ShaderMaterial = preload("res://game/vfx/possession.material")
 const PRE_POSSESSION_SHADER: ShaderMaterial = preload("res://game/vfx/pre_possession.material")
 
@@ -16,6 +17,10 @@ var room: Room
 @onready var sprite: Sprite2D = $Sprite
 @onready var possession_detector: Area2D = $PossessionDetector
 @onready var possess_notifier: Marker2D = $PossessNotifier
+
+
+func _ready() -> void:
+	POSSESSION_SHADER.set_shader_parameter(&"number_of_images", Vector2.ONE)
 
 
 func _process(delta: float) -> void:
@@ -40,7 +45,10 @@ func _physics_process(delta: float) -> void:
 		return possession_detector.global_position.distance_squared_to(a.global_position)
 	for body: Node2D in possession_detector.get_overlapping_bodies():
 		if body != possessing:
-			if (collider == null or poss_dist.call(body) < poss_dist.call(collider)):
+			var body_dist: float = poss_dist.call(body)
+			if body is Hero:
+				body_dist /= HERO_POSSESS_PREFERENCE
+			if (collider == null or body_dist < poss_dist.call(collider)):
 				if can_possess:
 					collider = body
 			else:
@@ -73,7 +81,10 @@ func _input(event: InputEvent) -> void:
 		for body: Node2D in possession_detector.get_overlapping_bodies():
 			if body == possessing:
 				continue
-			if collider == null or poss_dist.call(body) < poss_dist.call(collider):
+			var body_dist: float = poss_dist.call(body)
+			if body is Hero:
+				body_dist /= HERO_POSSESS_PREFERENCE
+			if collider == null or body_dist < poss_dist.call(collider):
 				collider = body
 
 		if collider != null:

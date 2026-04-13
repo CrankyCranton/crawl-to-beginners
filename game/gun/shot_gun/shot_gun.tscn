@@ -8,7 +8,7 @@
 resource_local_to_scene = true
 script = ExtResource("2_sxsy4")
 ammo_type = ExtResource("2_hkwnd")
-max_ammo = 2
+max_ammo = 3
 metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
 
 [node name="ShotGun" unique_id=738278615 instance=ExtResource("1_wga7x")]
@@ -17,7 +17,7 @@ collision_mask = 512
 range = 64.0
 
 [node name="Cooldown" parent="." index="0" unique_id=500018778]
-wait_time = 1.5
+wait_time = 0.2
 
 [node name="Barrel" parent="." index="2" unique_id=1811445942]
 position = Vector2(16, 0)

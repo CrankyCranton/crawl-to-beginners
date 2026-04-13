@@ -260,6 +260,9 @@ collision_layer = 2560
 [node name="CollisionShape" parent="HitBox" index="0" unique_id=672786274]
 shape = SubResource("CircleShape2D_4ojoo")
 
+[node name="ImmuneTimer" parent="HitBox" index="1" unique_id=1380030965]
+wait_time = 3.0
+
 [node name="NavigationAgent" type="NavigationAgent2D" parent="." unique_id=1848058624]
 avoidance_enabled = true
 radius = 15.0

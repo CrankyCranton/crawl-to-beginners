@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bxgcm2uyt1qg7" path="res://game/gun/gun.tscn" id="1_hoa6r"]
 [ext_resource type="PackedScene" uid="uid://cfb8piwhbwlhf" path="res://game/combat_collision/hurt_box/bullet/laser.tscn" id="2_fr7tr"]
 [ext_resource type="Script" uid="uid://dedfsv5rhjqa1" path="res://game/gun/magazine.gd" id="2_ql0ky"]
+[ext_resource type="Texture2D" uid="uid://coruxjgv4nioq" path="res://assets/laser_gun.png" id="4_w1mcr"]
 
 [sub_resource type="Resource" id="Resource_fr7tr"]
 resource_local_to_scene = true
@@ -16,7 +17,9 @@ magazine = SubResource("Resource_fr7tr")
 [node name="Cooldown" parent="." index="0" unique_id=500018778]
 wait_time = 0.3
 
+[node name="Barrel" parent="." index="2" unique_id=1811445942]
+position = Vector2(32, 0)
+
 [node name="Sprite2D" parent="." index="3" unique_id=1184722041]
-position = Vector2(24, 0)
 rotation = 1.5707964
-scale = Vector2(0.125, 0.05)
+texture = ExtResource("4_w1mcr")

@@ -19,6 +19,8 @@ const PATH_DESIRED_DISTANCE: float = pow(8.0, 2.0)
 @export var gun: Node2D
 @export var health: int = 2:
 	set(value):
+		if value < health:
+			Utils.hit_flash(sprite)
 		health = value
 		if health <= 0:
 			die()
@@ -43,6 +45,7 @@ var state: State = State.NORMAL:
 @onready var collision_shape: CollisionShape2D = $CollisionShape
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var playback: AnimationNodeStateMachinePlayback = animation_tree.get(&"parameters/playback")
+@onready var sprite: Sprite2D = $Sprite
 @onready var max_health: int = health
 @onready var anim_dir := Vector2.DOWN:
 	set(value):

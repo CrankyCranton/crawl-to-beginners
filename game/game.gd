@@ -143,5 +143,5 @@ func _on_hero_health_set(health: int) -> void:
 	var tween: Tween = create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS
 			).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CIRC).set_parallel()
 	tween.tween_property(health_bar_tween, ^"value", tween_value, 0.75)
-	health_bar_hud.modulate = Color.LIGHT_BLUE * 2.0
+	health_bar_hud.modulate = Color.WHITE * 2.0
 	tween.tween_property(health_bar_hud, ^"modulate", Color.WHITE, 0.75)

@@ -250,14 +250,11 @@ wall_min_slide_angle = 0.0
 script = ExtResource("1_2mvqj")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="." unique_id=363437164]
-visible = false
 shape = SubResource("CircleShape2D_8s3bx")
 
 [node name="SoftCollision" parent="." unique_id=1353088001 instance=ExtResource("2_q106d")]
-visible = false
 
 [node name="HitBox" parent="." unique_id=456550994 instance=ExtResource("3_8s3bx")]
-visible = false
 collision_layer = 1536
 
 [node name="CollisionShape" parent="HitBox" index="0" unique_id=672786274]
@@ -276,7 +273,6 @@ vframes = 4
 
 [node name="LOS" type="ShapeCast2D" parent="Hand" unique_id=315253745]
 unique_name_in_owner = true
-visible = false
 shape = SubResource("CircleShape2D_glrgy")
 target_position = Vector2(0, 0)
 
@@ -284,7 +280,6 @@ target_position = Vector2(0, 0)
 path_postprocessing = 1
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." unique_id=179663014]
-visible = false
 radius = 16.0
 avoidance_enabled = false
 
