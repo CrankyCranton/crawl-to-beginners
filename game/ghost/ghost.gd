@@ -5,6 +5,8 @@ const SPEED: float = 256.0
 # Potentially move this to the gun so that different guns can feel heavier than others.
 const AIM_SPEED: float = 15.0
 const POSSESS_FOLLOW_SPEED: float = 5.0
+const POSSESSION_SHADER: ShaderMaterial = preload("res://game/vfx/possession.material")
+const PRE_POSSESSION_SHADER: ShaderMaterial = preload("res://game/vfx/pre_possession.material")
 
 var possessing: CharacterBody2D = self
 var can_possess := true
@@ -13,6 +15,7 @@ var room: Room
 @onready var point_light_2d: PointLight2D = $PointLight2D
 @onready var sprite: Sprite2D = $Sprite
 @onready var possession_detector: Area2D = $PossessionDetector
+@onready var possess_notifier: Marker2D = $PossessNotifier
 
 
 func _process(delta: float) -> void:
@@ -31,6 +34,29 @@ func _physics_process(delta: float) -> void:
 		global_position = global_position.lerp(possessing.global_position,
 				POSSESS_FOLLOW_SPEED * delta)
 	possession_detector.global_position = get_global_mouse_position()
+
+	var collider: Node2D = null
+	var poss_dist: Callable = func(a: Node2D) -> float:
+		return possession_detector.global_position.distance_squared_to(a.global_position)
+	for body: Node2D in possession_detector.get_overlapping_bodies():
+		if body != possessing:
+			if (collider == null or poss_dist.call(body) < poss_dist.call(collider)):
+				if can_possess:
+					collider = body
+			else:
+				body.material = null
+
+	var target: Vector2 = (collider if collider != null else possession_detector).global_position
+	possess_notifier.position = possess_notifier.position.lerp(target, 10.0 * delta)
+	possess_notifier.modulate.a = move_toward(possess_notifier.modulate.a,
+			float(collider != null), 10.0 * delta)
+
+	if collider:
+		collider.material = PRE_POSSESSION_SHADER
+		@warning_ignore("shadowed_variable")
+		var sprite: Sprite2D = possessing.get_node(^"Sprite")
+		var grid_size := Vector2(sprite.hframes, sprite.vframes)
+		PRE_POSSESSION_SHADER.set_shader_parameter(&"number_of_images", grid_size)
 
 
 func _input(event: InputEvent) -> void:
@@ -51,9 +77,11 @@ func _input(event: InputEvent) -> void:
 				collider = body
 
 		if collider != null:
+			possessing.material = null
 			if possessing != self:
 				possessing.state = possessing.State.NORMAL
 				possessing.died.disconnect(_on_possessing_died)
+				possessing.material = null
 				if possessing is Enemy:
 					possessing.reparent(room.enemies)
 					room.set_up_enemy(possessing)
@@ -61,6 +89,11 @@ func _input(event: InputEvent) -> void:
 					flip_mask()
 
 			possessing = collider
+			possessing.material = POSSESSION_SHADER
+			@warning_ignore("shadowed_variable")
+			var sprite: Sprite2D = possessing.get_node(^"Sprite")
+			var grid_size := Vector2(sprite.hframes, sprite.vframes)
+			POSSESSION_SHADER.set_shader_parameter(&"number_of_images", grid_size)
 			if collider is Enemy:
 				collider.reparent(get_parent())
 				collider.remove_from_group(&"enemies")
@@ -91,3 +124,8 @@ func set_light_enabled(enabled: bool) -> void:
 
 func _on_possessing_died() -> void:
 	possessing = self
+
+
+func _on_possession_detector_body_exited(body: Node2D) -> void:
+	if body != possessing:
+		body.material = null

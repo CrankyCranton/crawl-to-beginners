@@ -4,11 +4,12 @@ class_name Room extends Node2D
 
 signal unlocked
 
-const ENEMY_TYPES: Array[PackedScene] = [
-	preload("uid://df6a8qn3gwxbg"),
-	preload("uid://gm0er2jonp50"),
-	preload("uid://bmihvidakaood"),
-	preload("uid://binfmuy2x2bt0"),
+# Supposed to be a constant, but oh well.
+var ENEMY_TYPES: Array[PackedScene] = [
+	load("uid://df6a8qn3gwxbg"),
+	load("uid://gm0er2jonp50"),
+	load("uid://bmihvidakaood"),
+	load("uid://binfmuy2x2bt0"),
 ]
 
 signal door_entered(direction: Vector2i)

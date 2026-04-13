@@ -7,7 +7,7 @@ func _ready() -> void:
 	force_shapecast_update()
 	if is_colliding():
 		get_collider(0).take_damage(-1)
-		print(get_collider(0).get_parent())
+		#print(get_collider(0).get_parent())
 	#get_tree().paused = true
 	#var freeze_frames: int = 10
 	#for i: int in freeze_frames:
