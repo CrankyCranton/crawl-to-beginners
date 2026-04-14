@@ -24,7 +24,7 @@ var room_data: Dictionary[Vector2i, Dictionary] = {
 		"unknown": false,
 	},
 	Vector2i(0, -3): {
-		"type": preload("uid://dqy3xw22pfpyi"),
+		"type": preload("uid://famvsevwf6s8"),
 		"mod": Room.Mod.NM,
 		"unknown": false,
 	},
@@ -97,6 +97,8 @@ func generate_data() -> void:
 func enter_room(coords: Vector2i) -> void:
 	assert(room_data.has(coords))
 
+	if hero.state != Hero.State.POSSESSED:
+		hero.state = Hero.State.NORMAL
 	Engine.time_scale = 0.8
 	var enter_direction := Vector2i()
 	if current_room != null:
@@ -125,12 +127,9 @@ func enter_room(coords: Vector2i) -> void:
 	hero.room = room
 	ghost.room = room
 
-	for dir: Vector2i in [Vector2i.RIGHT, Vector2i.LEFT, Vector2i.UP, Vector2i.DOWN]:
-		if not MAP_BOUNDS.has_point(coords + dir):
-			room.disable_door(dir)
 	#room.set_mod(room_data[coords].mod)
 
-	await get_tree().create_timer(0.0).timeout
+	#await get_tree().create_timer(0.0).timeout
 	if enter_direction != Vector2i.ZERO:
 		var spawn_point: Vector2 = (room.spawn_point if room.spawn_point != null
 				else room.get_door(-enter_direction).spawn_point).global_position
@@ -141,6 +140,9 @@ func enter_room(coords: Vector2i) -> void:
 			ghost.possessing.global_position = ghost.global_position
 			ghost.possessing.room = room
 
+	for dir: Vector2i in [Vector2i.RIGHT, Vector2i.LEFT, Vector2i.UP, Vector2i.DOWN]:
+		if dir != Vector2i.UP or not MAP_BOUNDS.has_point(coords + dir):
+			room.disable_door(dir)
 
 	hero.process_mode = Node.PROCESS_MODE_INHERIT
 	ghost.process_mode = Node.PROCESS_MODE_INHERIT
@@ -153,6 +155,8 @@ func _on_room_door_entered(direction: Vector2i) -> void:
 
 func _on_room_unlocked() -> void:
 	ghost.can_possess = false
+	if hero.state != Hero.State.POSSESSED:
+		hero.state = Hero.State.FOLLOW
 	if current_room.scene_file_path == "res://game/room/boss_room.tscn":
 		pass # Win.
 

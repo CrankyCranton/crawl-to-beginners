@@ -6,10 +6,13 @@ signal died
 const MAX_HEALTH: int = 30
 const MIN_IDLE_TIME: float = 1.0
 const MAX_IDLE_TIME: float = 2.0
-const RAMPAGE_SPEED: float = 2.0
+const RAMPAGE_SPEED: float = 1.5
 const FAKE_CHANCE: float = 0.2
+const RAMPAGE_START: int = 7
 
 @export var randomizations: Dictionary[Node2D, float] = {  }
+@export var spawn_doors: Array[Door] = []
+@export var room: Room
 
 var hero: Hero
 var rampaging := false
@@ -19,6 +22,7 @@ var rampaging := false
 @onready var static_body: StaticBody2D = $StaticBody
 @onready var health_bar: ProgressBar = %HealthBar
 @onready var sprite: Sprite2D = $Sprite
+@onready var spawn_timer: Timer = $Timer
 @onready var health: int = MAX_HEALTH:
 	set(value):
 		health = value
@@ -26,6 +30,9 @@ var rampaging := false
 		Utils.hit_flash(sprite)
 		if health <= 0:
 			died.emit()
+		elif health <= RAMPAGE_START:
+			rampaging = true
+			spawn_timer.wait_time /= RAMPAGE_SPEED
 
 
 func _ready() -> void:
@@ -33,6 +40,11 @@ func _ready() -> void:
 	for gun_type: Node2D in guns.get_children():
 		for gun: Gun in gun_type.get_children():
 			gun.exceptions.append(static_body)
+
+	await get_tree().create_timer(0.1).timeout
+	for door: Door in spawn_doors:
+		door.unlock()
+		door.direction = Vector2.UP
 
 
 func _process(_delta: float) -> void:
@@ -74,3 +86,8 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			animation_player.play(anims.pick_random())
 		_:
 			idle()
+
+
+func _on_timer_timeout() -> void:
+	for door: Door in spawn_doors:
+		room.add_enemy(door.spawn_point.global_position)

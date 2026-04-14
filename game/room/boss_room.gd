@@ -5,10 +5,11 @@ class_name BossRoom extends Room
 
 
 func _on_enemy_removed() -> void:
-	for enemy: Enemy in enemies.get_children():
-		if not enemy.dead:
-			return
-	boss.rampaging = true
+	pass
+	#for enemy: Enemy in enemies.get_children():
+		#if not enemy.dead:
+			#return
+	#boss.rampaging = true
 
 
 func _on_boss_died() -> void:

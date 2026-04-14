@@ -7,7 +7,7 @@ const SPEED: float = 256.0
 # Potentially move this to the gun so that different guns can feel heavier than others.
 const AIM_SPEED: float = 15.0
 const POSSESS_FOLLOW_SPEED: float = 5.0
-const HERO_POSSESS_PREFERENCE: float = 10.0
+const HERO_POSSESS_PREFERENCE: float = 2.0
 const POSSESSION_SHADER: ShaderMaterial = preload("res://game/vfx/possession.material")
 const PRE_POSSESSION_SHADER: ShaderMaterial = preload("res://game/vfx/pre_possession.material")
 

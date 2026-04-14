@@ -19,13 +19,15 @@ enum State {
 	POSSESSED,
 }
 
+@export var ghost: Ghost
+
 var state: State = State.NORMAL
 var safe_vel := Vector2()
 var astar: AStarGrid2D
 var path: PackedVector2Array = []
 var target_cell := Vector2i.MAX
 var room: Room
-var max_health: int = 10:
+var max_health: int = 8:
 	set(value):
 		max_health = value
 		health = health
@@ -93,7 +95,13 @@ func _physics_process(_delta: float) -> void:
 			velocity = path_vel + safe_vel
 
 		State.FOLLOW:
-			pass
+			if global_position.distance_to(ghost.global_position) > 64.0:
+				nav_agent.target_position = ghost.global_position
+				var path_vel: Vector2 = global_position.direction_to(
+						nav_agent.get_next_path_position()) * SPEED
+				velocity = path_vel + safe_vel
+			else:
+				velocity = safe_vel
 
 	if state != State.POSSESSED:
 		#velocity = velocity.limit_length(SPEED)

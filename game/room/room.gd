@@ -63,10 +63,7 @@ func _ready() -> void:
 
 	@warning_ignore("shadowed_variable")
 	for spawn_point: Marker2D in enemy_spawn_points.get_children():
-		var enemy: Enemy = ENEMY_TYPES.pick_random().instantiate()
-		enemy.position = spawn_point.position
-		enemies.add_child(enemy)
-		set_up_enemy(enemy)
+		add_enemy(spawn_point.global_position)
 
 
 # WARNING:
@@ -79,6 +76,14 @@ func _ready() -> void:
 		#var color: Color = heatmap_color.sample(remap(point_data.weight_scale, 1.0, 64.0, 0.0, 1.0))
 		#draw_rect(rect, color)
 		#draw_rect(rect, Color(1.0, 1.0, 1.0, 0.1), false, 1.0)
+
+
+func add_enemy(location: Vector2) -> void:
+	var enemy: Enemy = ENEMY_TYPES.pick_random().instantiate()
+	enemy.hero = hero
+	enemies.add_child(enemy)
+	enemy.global_position = location
+	set_up_enemy(enemy)
 
 
 func set_up_enemy(enemy: Enemy) -> void:

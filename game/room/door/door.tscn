@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bowswbnekcuuf"]
 
 [ext_resource type="Script" uid="uid://cjc3pytkqbyy5" path="res://game/room/door/door.gd" id="1_pwali"]
-[ext_resource type="Texture2D" uid="uid://dnpoq1nirc2ow" path="res://icon.svg" id="2_msbca"]
+[ext_resource type="Texture2D" uid="uid://wv4vm80hituc" path="res://assets/door_front.png" id="2_msbca"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nhatn"]
 resource_local_to_scene = true
@@ -32,6 +32,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_msbca"]
@@ -121,6 +133,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id="Animation_bf8yf"]
 resource_name = "locked_top"
 loop_mode = 1
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -144,6 +157,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_y3kbq"]
@@ -196,7 +221,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_el0pf"]
 resource_name = "open_top"
-loop_mode = 1
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -208,6 +233,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y3kbq"]
@@ -307,8 +344,8 @@ parameters/open/blend_position = Vector2(0, 0)
 [node name="SpawnPoint" type="Marker2D" parent="." unique_id=1670167194]
 position = Vector2(0, -48)
 
-[node name="Icon" type="Sprite2D" parent="SpawnPoint" unique_id=823693860]
-scale = Vector2(0.1, 0.1)
+[node name="Sprite" type="Sprite2D" parent="." unique_id=498320788]
 texture = ExtResource("2_msbca")
+hframes = 11
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
