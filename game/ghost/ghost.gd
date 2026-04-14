@@ -34,14 +34,15 @@ func _ready() -> void:
 	POSSESSION_SHADER.set_shader_parameter(&"number_of_images", Vector2.ONE)
 
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	if possessing == null:
+		return
+
 	if possessing.get(&"hand") != null:
 		var hand: Node2D = possessing.hand
 		var aim_angle: float = hand.global_position.angle_to_point(get_global_mouse_position())
 		hand.global_rotation = lerp_angle(hand.global_rotation, aim_angle, AIM_SPEED * delta)
 
-
-func _physics_process(delta: float) -> void:
 	var input: Vector2 = Input.get_vector(&"left", &"right", &"up", &"down")
 	possessing.velocity = input * SPEED
 	possessing.move_and_slide()

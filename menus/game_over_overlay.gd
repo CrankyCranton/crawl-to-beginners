@@ -2,6 +2,7 @@ class_name LoseOverlay extends ColorRect
 
 
 func _ready() -> void:
+	MusicManager.set(&"parameters/switch_to_clip", &"menu")
 	Engine.time_scale = 1.0
 	get_tree().paused = true
 

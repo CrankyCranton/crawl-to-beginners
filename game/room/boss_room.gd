@@ -16,6 +16,7 @@ func _on_boss_died() -> void:
 	for enemy: Enemy in enemies.get_children():
 		enemy.die()
 	unlock()
+	get_parent().add_child(preload("uid://6k3a6jrklndg").instantiate())
 
 
 func _on_hero_set() -> void:

@@ -19,7 +19,7 @@ var room_data: Dictionary[Vector2i, Dictionary] = {
 		"unknown": false,
 	},
 	Vector2i(0, -2): {
-		"type": preload("uid://dqy3xw22pfpyi"),
+		"type": preload("uid://vqhvkb0qfi7q"),
 		"mod": Room.Mod.NM,
 		"unknown": false,
 	},
@@ -29,7 +29,7 @@ var room_data: Dictionary[Vector2i, Dictionary] = {
 		"unknown": false,
 	},
 	Vector2i(0, -4): {
-		"type": preload("uid://dqy3xw22pfpyi"),
+		"type": preload("uid://bbgl2jgxth2d3"),
 		"mod": Room.Mod.NM,
 		"unknown": false,
 	},
