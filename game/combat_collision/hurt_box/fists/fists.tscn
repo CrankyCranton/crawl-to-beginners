@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://rf3ntbrhu7an" path="res://game/combat_collision/hurt_box/hurt_box.tscn" id="1_ts824"]
 [ext_resource type="Script" uid="uid://d1tbcn24coj85" path="res://game/combat_collision/hurt_box/fists/fists.gd" id="2_aseoe"]
-[ext_resource type="Texture2D" uid="uid://dnpoq1nirc2ow" path="res://icon.svg" id="3_q8poh"]
+[ext_resource type="Texture2D" uid="uid://bjrlvn7vjjwhl" path="res://assets/fist.png" id="3_q8poh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ts824"]
 size = Vector2(42, 20)
@@ -21,6 +21,30 @@ tracks/0/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(32, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_aseoe"]
 resource_name = "punch"
@@ -33,10 +57,34 @@ tracks/0/path = NodePath("CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [false, true]
+"values": [true, false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(32, 0), Vector2(16, 0), Vector2(32, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(1.5, 1.5), Vector2(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_q8poh"]
@@ -49,10 +97,11 @@ _data = {
 collision_mask = 2048
 script = ExtResource("2_aseoe")
 
-[node name="Icon" type="Sprite2D" parent="." index="0" unique_id=872635594]
+[node name="Sprite" type="Sprite2D" parent="." index="0" unique_id=872635594]
 position = Vector2(32, 0)
-scale = Vector2(0.2, 0.2)
+rotation = 1.5707964
 texture = ExtResource("3_q8poh")
+flip_h = true
 
 [node name="CollisionShape2D" parent="." index="1" unique_id=1319386538]
 position = Vector2(21, 0)

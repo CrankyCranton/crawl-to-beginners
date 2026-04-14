@@ -2,12 +2,14 @@ class_name Gun extends Marker2D
 
 
 signal mag_empty
+signal shot(ammo: int, cooldown: float)
 
 @export var magazine: Magazine
 @export_flags_2d_physics var collision_mask: int = 513
 @warning_ignore("shadowed_global_identifier")
 @export var range: float = INF
 @export var exceptions: Array[Node] = []
+@export var flip := false
 
 var cooling := false
 var reloading := false
@@ -15,6 +17,12 @@ var reloading := false
 @onready var cooldown: Timer = $Cooldown
 @onready var reload_time: Timer = $ReloadTime
 @onready var barrel: Marker2D = $Barrel
+@onready var sprite: Sprite2D = $Sprite2D
+
+
+func _process(_delta: float) -> void:
+	if flip:
+		sprite.flip_v = sprite.global_transform.x.x < 0.0
 
 
 func shoot() -> void:
@@ -26,17 +34,21 @@ func shoot() -> void:
 	# Kinda redundant.
 	if bullet is CollisionObject2D or bullet is RayCast2D or bullet is ShapeCast2D:
 		bullet.collision_mask = collision_mask
+
 	if bullet is PhysicsBody2D or bullet is RayCast2D or bullet is ShapeCast2D:
 		var method: Callable = (bullet.add_collision_exception_with if bullet is PhysicsBody2D
 			else bullet.add_exception)
 		for exception: Node in exceptions:
 			method.call(exception)
+	elif bullet is Bullet:
+		bullet.exceptions = exceptions
 
 
 	get_room().add_child(bullet)
 	bullet.global_transform = barrel.global_transform
 	cooling = true
 	cooldown.start()
+	shot.emit(magazine.ammo, cooldown.time_left)
 	if magazine.ammo == 0:
 		mag_empty.emit()
 

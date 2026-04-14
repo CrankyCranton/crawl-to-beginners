@@ -4,15 +4,18 @@ class_name Utils extends Node
 
 
 static func hit_flash(item: CanvasItem, duration: float = 0.2) -> void:
+	if item.get_tree() == null:
+		return
+
 	const HIT_FLASH: ShaderMaterial = preload("res://game/vfx/hit_flash.material")
 	var used_parent_material := item.use_parent_material
 	item.use_parent_material = false
-	var previous_material: Material = item.material
+	#var previous_material: Material = item.material
 	item.material = HIT_FLASH
 
 	await item.get_tree().create_timer(duration, false).timeout
 	if item != null:
-		item.material = previous_material
+		item.material = null
 		item.use_parent_material = used_parent_material
 
 

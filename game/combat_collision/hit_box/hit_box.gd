@@ -9,13 +9,14 @@ var immune := false
 
 
 func take_damage(damage: int) -> bool:
-	if immune:
+	if immune and damage > 0:
 		return false
 
 	damage_taken.emit(damage)
 
-	immune = true
-	immune_timer.start()
+	if damage > 0:
+		immune = true
+		immune_timer.start()
 	return true
 
 

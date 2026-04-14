@@ -3,6 +3,7 @@ class_name Enemy extends CharacterBody2D
 
 signal died
 signal removed
+signal shot(ammo: int, cooldown: float)
 
 enum State {
 	NORMAL,
@@ -16,7 +17,11 @@ const PATH_DESIRED_DISTANCE: float = pow(8.0, 2.0)
 @export var speed: float = 72.0
 @export var aim_speed: float = 15.0
 @export var aim_margin: float = 1.0
-@export var gun: Node2D
+@export var gun: Node2D:
+	set(value):
+		gun = value
+		if gun:
+			gun.shot.connect(shot.emit)
 @export var health: int = 2:
 	set(value):
 		if value < health:

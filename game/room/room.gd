@@ -3,6 +3,7 @@ class_name Room extends Node2D
 
 
 signal unlocked
+signal hero_set
 
 # Supposed to be a constant, but oh well.
 var ENEMY_TYPES: Array[PackedScene] = [
@@ -23,6 +24,7 @@ enum Mod {
 
 @export var heatmap_color: Gradient
 @export var track := &"game"
+@export var spawn_point: Marker2D
 
 var coords: Vector2i
 var astar := AStarGrid2D.new()
@@ -39,6 +41,7 @@ var astar_heatmap := AStarGrid2D.new()
 		hero.astar = astar_heatmap
 		for enemy: Enemy in enemies.get_children():
 			enemy.hero = hero
+		hero_set.emit()
 
 
 func _ready() -> void:
@@ -58,6 +61,7 @@ func _ready() -> void:
 			#match tile_data.get_custom_data("type"):
 				#pass
 
+	@warning_ignore("shadowed_variable")
 	for spawn_point: Marker2D in enemy_spawn_points.get_children():
 		var enemy: Enemy = ENEMY_TYPES.pick_random().instantiate()
 		enemy.position = spawn_point.position

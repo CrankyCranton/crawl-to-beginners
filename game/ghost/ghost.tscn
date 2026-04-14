@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dud6rlfqfc7j8" path="res://game/ghost/ghost.gd" id="1_xe3x1"]
 [ext_resource type="Texture2D" uid="uid://dnpoq1nirc2ow" path="res://icon.svg" id="2_2iaaw"]
 [ext_resource type="PackedScene" uid="uid://dxcwnd01jn8s8" path="res://game/combat_collision/hit_box/hit_box.tscn" id="6_13suh"]
+[ext_resource type="Texture2D" uid="uid://yjy5bu3oa418" path="res://assets/light_high_res.png" id="6_h2o8k"]
 [ext_resource type="PackedScene" uid="uid://blsg4naun2754" path="res://game/enemy/soft_collision/soft_collision.tscn" id="7_h2o8k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1vx3s"]
@@ -19,14 +20,6 @@ radius = 16.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_1vx3s"]
 resource_local_to_scene = true
 radius = 16.0
-
-[sub_resource type="Gradient" id="Gradient_dk5tg"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_c2int"]
-gradient = SubResource("Gradient_dk5tg")
-width = 1024
-height = 1024
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_14dsv"]
 radius = 32.0
@@ -108,10 +101,12 @@ shape = SubResource("CircleShape2D_1vx3s")
 disabled = true
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=706404092]
-visible = false
+texture_filter = 2
+color = Color(1, 0.75031644, 0.39999998, 1)
+energy = 0.3
 shadow_enabled = true
 shadow_color = Color(0, 0, 0, 1)
-texture = SubResource("GradientTexture2D_c2int")
+texture = ExtResource("6_h2o8k")
 
 [node name="PossessionDetector" type="Area2D" parent="." unique_id=1685347127]
 collision_layer = 0
@@ -124,7 +119,7 @@ shape = SubResource("CircleShape2D_14dsv")
 [node name="PossessNotifier" type="Marker2D" parent="." unique_id=2106169084]
 modulate = Color(1, 1, 1, 0)
 top_level = true
-z_index = 2
+z_index = 3
 
 [node name="Label" type="Label" parent="PossessNotifier" unique_id=407316122]
 anchors_preset = 7
@@ -135,7 +130,7 @@ anchor_bottom = 1.0
 offset_left = -30.5
 offset_top = -43.0
 offset_right = 30.5
-offset_bottom = -20.0
+offset_bottom = 6.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Possess"

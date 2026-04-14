@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ccravkxuofnl3" path="res://game/hero/hero.tscn" id="2_h7iqs"]
 [ext_resource type="PackedScene" uid="uid://bks3i1d362lr" path="res://game/minimap/minimap.tscn" id="4_4fuuu"]
 [ext_resource type="Texture2D" uid="uid://b0ypjuxa4f3ep" path="res://assets/health_bar.png" id="4_dxrkv"]
+[ext_resource type="Texture2D" uid="uid://t4qqgrndew5l" path="res://assets/bullet_icon.png" id="5_dakft"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dakft"]
 atlas = ExtResource("4_dxrkv")
@@ -17,6 +18,13 @@ bg_color = Color(0.7019608, 0.08235294, 0.1882353, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dxrkv"]
 bg_color = Color(0.88, 0.73421335, 0.25520003, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5opy"]
+atlas = ExtResource("5_dakft")
+region = Rect2(0, 0, 13, 6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u5opy"]
+bg_color = Color(0.36659998, 0.39589664, 0.47, 1)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4fuuu"]
 
@@ -62,19 +70,22 @@ offset_right = 128.0
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="HealthBarHUD" type="HBoxContainer" parent="HUD/BarLeft" unique_id=98675420]
-unique_name_in_owner = true
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/BarLeft" unique_id=1071112753]
 layout_mode = 0
-offset_right = 112.0
+offset_right = 116.0
 offset_bottom = 40.0
 
-[node name="Icon" type="TextureRect" parent="HUD/BarLeft/HealthBarHUD" unique_id=360189235]
+[node name="HealthBarHUD" type="HBoxContainer" parent="HUD/BarLeft/VBoxContainer" unique_id=98675420]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HUD/BarLeft/VBoxContainer/HealthBarHUD" unique_id=360189235]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 texture = SubResource("AtlasTexture_dakft")
 stretch_mode = 5
 
-[node name="HealthBar" type="ProgressBar" parent="HUD/BarLeft/HealthBarHUD" unique_id=274431851]
+[node name="HealthBar" type="ProgressBar" parent="HUD/BarLeft/VBoxContainer/HealthBarHUD" unique_id=274431851]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
@@ -86,7 +97,7 @@ max_value = 5.0
 value = 2.0
 show_percentage = false
 
-[node name="BG" type="ColorRect" parent="HUD/BarLeft/HealthBarHUD/HealthBar" unique_id=1397690275]
+[node name="BG" type="ColorRect" parent="HUD/BarLeft/VBoxContainer/HealthBarHUD/HealthBar" unique_id=1397690275]
 modulate = Color(0.26, 0.041600004, 0.17991997, 1)
 show_behind_parent = true
 layout_mode = 1
@@ -100,7 +111,7 @@ offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HealthBarTween" type="ProgressBar" parent="HUD/BarLeft/HealthBarHUD/HealthBar" unique_id=139407289]
+[node name="HealthBarTween" type="ProgressBar" parent="HUD/BarLeft/VBoxContainer/HealthBarHUD/HealthBar" unique_id=139407289]
 unique_name_in_owner = true
 show_behind_parent = true
 custom_minimum_size = Vector2(0, 16)
@@ -117,6 +128,56 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_dxrkv")
 max_value = 5.0
 value = 5.0
 show_percentage = false
+
+[node name="AmmoHUD" type="HBoxContainer" parent="HUD/BarLeft/VBoxContainer" unique_id=2127532921]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Icon" type="TextureRect" parent="HUD/BarLeft/VBoxContainer/AmmoHUD" unique_id=25314935]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_u5opy")
+stretch_mode = 5
+
+[node name="ReloadBar" type="ProgressBar" parent="HUD/BarLeft/VBoxContainer/AmmoHUD" unique_id=1556233818]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxEmpty_dxrkv")
+theme_override_styles/fill = SubResource("StyleBoxFlat_u5opy")
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="BG" type="ColorRect" parent="HUD/BarLeft/VBoxContainer/AmmoHUD/ReloadBar" unique_id=23185676]
+modulate = Color(0.11696554, 0.043137252, 0.25882357, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AmmoCounter" type="Label" parent="HUD/BarLeft/VBoxContainer/AmmoHUD/ReloadBar" unique_id=1834236448]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="SideBar" type="PanelContainer" parent="HUD" unique_id=312929444]
 visible = false
@@ -165,5 +226,6 @@ shape = SubResource("WorldBoundaryShape2D_dakft")
 position = Vector2(128, 256)
 shape = SubResource("WorldBoundaryShape2D_u5opy")
 
+[connection signal="shot" from="Ghost" to="." method="_on_ghost_shot"]
 [connection signal="died" from="Hero" to="." method="_on_hero_died"]
 [connection signal="health_set" from="Hero" to="." method="_on_hero_health_set"]

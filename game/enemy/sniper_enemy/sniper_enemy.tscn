@@ -10,7 +10,6 @@
 resource_local_to_scene = true
 script = ExtResource("5_bhvkp")
 ammo_type = ExtResource("4_8mlk5")
-max_ammo = 2
 metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
 
 [node name="SniperEnemy" unique_id=618280856 node_paths=PackedStringArray("gun") instance=ExtResource("1_inwsk")]

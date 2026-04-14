@@ -9,7 +9,7 @@
 resource_local_to_scene = true
 script = ExtResource("4_ir3kn")
 ammo_type = ExtResource("3_of11n")
-max_ammo = 3
+max_ammo = 8
 metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
 
 [node name="GrenadeEnemy" unique_id=618280856 node_paths=PackedStringArray("gun") instance=ExtResource("1_2umdm")]
@@ -18,6 +18,6 @@ gun = NodePath("Hand/GrenadeLauncher")
 
 [node name="GrenadeLauncher" parent="Hand" parent_id_path=PackedInt32Array(1151683513) index="1" unique_id=738278615 instance=ExtResource("2_6351x")]
 magazine = SubResource("Resource_of11n")
-collision_mask = 2063
+collision_mask = 2055
 
 [editable path="HitBox"]

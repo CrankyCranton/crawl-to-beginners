@@ -1,9 +1,11 @@
 class_name Game extends Node
 
 
-const MAP_BOUNDS := Rect2i(Vector2i(-1, -5), Vector2i(3, 5))
+const MAP_BOUNDS := Rect2i(Vector2i(0, -5), Vector2i(1, 5))
 const ROOM_TYPES: Array[PackedScene] = [
 	preload("uid://b7382teb2u2p"),
+	preload("uid://famvsevwf6s8"),
+
 ]
 
 var current_room: Room = null
@@ -12,6 +14,21 @@ var current_room: Room = null
 # a room's data: { "type": <PackedScene>, "mod": <Room.Mod>, "unknown": <bool> }
 var room_data: Dictionary[Vector2i, Dictionary] = {
 	Vector2i(0, -1): {
+		"type": preload("uid://dqy3xw22pfpyi"),
+		"mod": Room.Mod.NM,
+		"unknown": false,
+	},
+	Vector2i(0, -2): {
+		"type": preload("uid://dqy3xw22pfpyi"),
+		"mod": Room.Mod.NM,
+		"unknown": false,
+	},
+	Vector2i(0, -3): {
+		"type": preload("uid://dqy3xw22pfpyi"),
+		"mod": Room.Mod.NM,
+		"unknown": false,
+	},
+	Vector2i(0, -4): {
 		"type": preload("uid://dqy3xw22pfpyi"),
 		"mod": Room.Mod.NM,
 		"unknown": false,
@@ -31,9 +48,13 @@ var room_data: Dictionary[Vector2i, Dictionary] = {
 @onready var health_bar: ProgressBar = %HealthBar
 @onready var health_bar_tween: ProgressBar = %HealthBarTween
 @onready var health_bar_hud: HBoxContainer = %HealthBarHUD
+@onready var ammo_hud: HBoxContainer = %AmmoHUD
+@onready var reload_bar: ProgressBar = %ReloadBar
+@onready var ammo_counter: Label = %AmmoCounter
 
 
 func _ready() -> void:
+	Engine.time_scale = 1.0
 	health_bar.max_value = hero.max_health
 	health_bar.value = hero.health
 	generate_data()
@@ -75,6 +96,8 @@ func generate_data() -> void:
 
 func enter_room(coords: Vector2i) -> void:
 	assert(room_data.has(coords))
+
+	Engine.time_scale = 0.8
 	var enter_direction := Vector2i()
 	if current_room != null:
 		# NOTE:
@@ -82,7 +105,7 @@ func enter_room(coords: Vector2i) -> void:
 		# don't forget to reparent the enemy to the next room.
 		enter_direction = coords - current_room.coords
 		current_room.queue_free()
-		Engine.time_scale = 1.0
+		#Engine.time_scale += 0.2
 
 	# FIXME: Needs to reveal the adjacent rooms as well, and show the room you're currently in.
 	minimap.set_unknown(coords, false)
@@ -109,7 +132,8 @@ func enter_room(coords: Vector2i) -> void:
 
 	await get_tree().create_timer(0.0).timeout
 	if enter_direction != Vector2i.ZERO:
-		var spawn_point: Vector2 = room.get_door(-enter_direction).spawn_point.global_position
+		var spawn_point: Vector2 = (room.spawn_point if room.spawn_point != null
+				else room.get_door(-enter_direction).spawn_point).global_position
 		const RAND_OFFSET: float = 8.0
 		hero.global_position = spawn_point + Utils.rand_vec2_radial(RAND_OFFSET)
 		ghost.global_position = spawn_point + Utils.rand_vec2_radial(RAND_OFFSET)
@@ -129,6 +153,8 @@ func _on_room_door_entered(direction: Vector2i) -> void:
 
 func _on_room_unlocked() -> void:
 	ghost.can_possess = false
+	if current_room.scene_file_path == "res://game/room/boss_room.tscn":
+		pass # Win.
 
 
 func _on_hero_died() -> void:
@@ -145,3 +171,11 @@ func _on_hero_health_set(health: int) -> void:
 	tween.tween_property(health_bar_tween, ^"value", tween_value, 0.75)
 	health_bar_hud.modulate = Color.WHITE * 2.0
 	tween.tween_property(health_bar_hud, ^"modulate", Color.WHITE, 0.75)
+
+
+func _on_ghost_shot(ammo: int, cooldown: float) -> void:
+	ammo_hud.visible = ammo != 0
+	ammo_counter.visible = ammo > 0
+	ammo_counter.text = str(ammo)
+	reload_bar.value = 1.0
+	create_tween().tween_property(reload_bar, ^"value", 0.0, cooldown)

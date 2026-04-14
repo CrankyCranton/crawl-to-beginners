@@ -1,0 +1,599 @@
+[gd_scene format=3 uid="uid://c0v3vixyh34n8"]
+
+[ext_resource type="PackedScene" uid="uid://dxcwnd01jn8s8" path="res://game/combat_collision/hit_box/hit_box.tscn" id="1_8idto"]
+[ext_resource type="Texture2D" uid="uid://cgse3g7iop80d" path="res://assets/boss.png" id="2_8k625"]
+[ext_resource type="Script" uid="uid://c8n3xxaljmctd" path="res://game/combat_collision/hit_box/boss/boss.gd" id="2_t0hc0"]
+[ext_resource type="PackedScene" uid="uid://corwmiwuxj2w6" path="res://game/gun/grenade_launcher/grenade_launcher.tscn" id="4_u0ue3"]
+[ext_resource type="PackedScene" uid="uid://dmdxf7xv5sgwu" path="res://game/gun/grenade_launcher/grenade/grenade.tscn" id="5_q1kdk"]
+[ext_resource type="Script" uid="uid://dedfsv5rhjqa1" path="res://game/gun/magazine.gd" id="6_f03rb"]
+[ext_resource type="PackedScene" uid="uid://dt0jywpm04ogf" path="res://game/gun/sniper_rifle/sniper_rifle.tscn" id="7_f03rb"]
+[ext_resource type="PackedScene" uid="uid://c11ky7q8072ol" path="res://game/combat_collision/hurt_box/bullet/sniper_bullet.tscn" id="8_2xx2c"]
+[ext_resource type="PackedScene" uid="uid://d2oxbvp4kbxhu" path="res://game/gun/pistol/pistol.tscn" id="9_vo8bf"]
+[ext_resource type="PackedScene" uid="uid://cfb8piwhbwlhf" path="res://game/combat_collision/hurt_box/bullet/laser.tscn" id="10_hflfj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8idto"]
+size = Vector2(128, 64)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8idto"]
+radius = 48.0
+
+[sub_resource type="Resource" id="Resource_d33g0"]
+resource_local_to_scene = true
+script = ExtResource("6_f03rb")
+ammo_type = ExtResource("5_q1kdk")
+max_ammo = -1
+metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
+
+[sub_resource type="Resource" id="Resource_qo2v4"]
+resource_local_to_scene = true
+script = ExtResource("6_f03rb")
+ammo_type = ExtResource("5_q1kdk")
+max_ammo = -1
+metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
+
+[sub_resource type="Resource" id="Resource_0g06n"]
+resource_local_to_scene = true
+script = ExtResource("6_f03rb")
+ammo_type = ExtResource("5_q1kdk")
+max_ammo = -1
+metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
+
+[sub_resource type="Resource" id="Resource_emgyw"]
+resource_local_to_scene = true
+script = ExtResource("6_f03rb")
+ammo_type = ExtResource("5_q1kdk")
+max_ammo = -1
+metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
+
+[sub_resource type="Resource" id="Resource_ddyu0"]
+resource_local_to_scene = true
+script = ExtResource("6_f03rb")
+ammo_type = ExtResource("8_2xx2c")
+max_ammo = -1
+metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
+
+[sub_resource type="Resource" id="Resource_xrckk"]
+resource_local_to_scene = true
+script = ExtResource("6_f03rb")
+ammo_type = ExtResource("8_2xx2c")
+max_ammo = -1
+metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
+
+[sub_resource type="Resource" id="Resource_0roj6"]
+resource_local_to_scene = true
+script = ExtResource("6_f03rb")
+ammo_type = ExtResource("10_hflfj")
+max_ammo = -1
+metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
+
+[sub_resource type="Resource" id="Resource_t0lww"]
+resource_local_to_scene = true
+script = ExtResource("6_f03rb")
+ammo_type = ExtResource("10_hflfj")
+max_ammo = -1
+metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
+
+[sub_resource type="Resource" id="Resource_6ldqq"]
+resource_local_to_scene = true
+script = ExtResource("6_f03rb")
+ammo_type = ExtResource("10_hflfj")
+max_ammo = -1
+metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
+
+[sub_resource type="Resource" id="Resource_as1b4"]
+resource_local_to_scene = true
+script = ExtResource("6_f03rb")
+ammo_type = ExtResource("10_hflfj")
+max_ammo = -1
+metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
+
+[sub_resource type="Resource" id="Resource_oa70l"]
+resource_local_to_scene = true
+script = ExtResource("6_f03rb")
+ammo_type = ExtResource("10_hflfj")
+max_ammo = -1
+metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
+
+[sub_resource type="Resource" id="Resource_h7lt1"]
+resource_local_to_scene = true
+script = ExtResource("6_f03rb")
+ammo_type = ExtResource("10_hflfj")
+max_ammo = -1
+metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8k625"]
+bg_color = Color(0.30928105, 0.15667452, 0.25610754, 1)
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t0hc0"]
+bg_color = Color(0.76862746, 0.18431373, 0.26419282, 1)
+
+[sub_resource type="Animation" id="Animation_t0hc0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_vo8bf"]
+resource_name = "pre_shoot"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.39999998, 0.5, 0.59999996, 0.7, 0.79999995),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.17453292, 0.0, -0.17453292, 0.0, 0.17453292, 0.0, -0.17453292, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.39999998, 0.5, 0.59999996, 0.7, 0.79999995, 0.90000004, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -8), Vector2(0, 0), Vector2(0, -8), Vector2(0, 0), Vector2(0, -8), Vector2(0, 0), Vector2(0, -8), Vector2(0, 0), Vector2(0, -8), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hflfj"]
+resource_name = "shoot_grenades"
+length = 0.2
+step = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [NodePath("Guns/GrenadeLaunchers")],
+"method": &"shoot"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -16), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.75), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_d33g0"]
+resource_name = "shoot_pistols"
+length = 0.8
+step = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [NodePath("Guns/Pistols")],
+"method": &"shoot"
+}, {
+"args": [NodePath("Guns/Pistols")],
+"method": &"shoot"
+}, {
+"args": [NodePath("Guns/Pistols")],
+"method": &"shoot"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -16), Vector2(0, 0), Vector2(0, 0), Vector2(0, -16), Vector2(0, 0), Vector2(0, 0), Vector2(0, -16), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.75), Vector2(1, 1), Vector2(1, 1), Vector2(1, 0.75), Vector2(1, 1), Vector2(1, 1), Vector2(1, 0.75), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2xx2c"]
+resource_name = "shoot_snipers"
+length = 0.2
+step = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [NodePath("Guns/SniperRifles")],
+"method": &"shoot"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -16), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.75), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_8k625"]
+resource_name = "warning"
+length = 2.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.70000005, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4000001, 1.5000001, 1.6000001, 1.7, 1.8000001, 1.9000001, 2, 2.1000001, 2.2, 2.3000002, 2.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -4), Vector2(0, 0), Vector2(0, -4), Vector2(0, 0), Vector2(0, -4), Vector2(0, 0), Vector2(0, -4), Vector2(0, 0), Vector2(0, -4), Vector2(0, 0), Vector2(0, -4), Vector2(0, 0), Vector2(0, -4), Vector2(0, 0), Vector2(0, -4), Vector2(0, 0), Vector2(0, -4), Vector2(0, 0), Vector2(0, -4), Vector2(0, 0), Vector2(0, -4), Vector2(0, 0), Vector2(0, -4), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.70000005, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4000001, 1.5000001, 1.6000001, 1.7, 1.8000001, 1.9000001, 2, 2.1000001, 2.2, 2.3000002, 2.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.08726646, 0.0, -0.08726646, 0.0, 0.08726646, 0.0, -0.08726646, 0.0, 0.08726646, 0.0, -0.08726646, 0.0, 0.08726646, 0.0, -0.08726646, 0.0, 0.08726646, 0.0, -0.08726646, 0.0, 0.08726646, 0.0, -0.08726646, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t0hc0"]
+_data = {
+&"RESET": SubResource("Animation_t0hc0"),
+&"pre_shoot": SubResource("Animation_vo8bf"),
+&"shoot_grenades": SubResource("Animation_hflfj"),
+&"shoot_pistols": SubResource("Animation_d33g0"),
+&"shoot_snipers": SubResource("Animation_2xx2c"),
+&"warning": SubResource("Animation_8k625")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vo8bf"]
+size = Vector2(128, 32)
+
+[node name="Boss" unique_id=456550994 node_paths=PackedStringArray("randomizations") instance=ExtResource("1_8idto")]
+collision_layer = 1536
+script = ExtResource("2_t0hc0")
+randomizations = {
+NodePath("Guns/GrenadeLaunchers"): 90.0,
+NodePath("Guns/SniperRifles"): 0.0,
+NodePath("Guns/Pistols"): 45.0
+}
+
+[node name="CollisionShape" parent="." index="0" unique_id=672786274]
+position = Vector2(0, 32)
+shape = SubResource("RectangleShape2D_8idto")
+
+[node name="CollisionShape2" type="CollisionShape2D" parent="." index="1" unique_id=1395184384]
+rotation = 1.5707964
+shape = SubResource("CircleShape2D_8idto")
+
+[node name="ImmuneTimer" parent="." index="2" unique_id=1380030965]
+wait_time = 0.001
+
+[node name="Sprite" type="Sprite2D" parent="." index="3" unique_id=1193737112]
+texture = ExtResource("2_8k625")
+
+[node name="Guns" type="Node2D" parent="." index="4" unique_id=1872474041]
+
+[node name="GrenadeLaunchers" type="Node2D" parent="Guns" index="0" unique_id=377049417]
+
+[node name="GrenadeLauncher" parent="Guns/GrenadeLaunchers" index="0" unique_id=738278615 node_paths=PackedStringArray("exceptions") instance=ExtResource("4_u0ue3")]
+position = Vector2(-46, 26)
+magazine = SubResource("Resource_d33g0")
+exceptions = [NodePath("../../..")]
+
+[node name="Barrel" parent="Guns/GrenadeLaunchers/GrenadeLauncher" index="2" unique_id=1811445942]
+position = Vector2(0, 0)
+
+[node name="Sprite2D" parent="Guns/GrenadeLaunchers/GrenadeLauncher" index="3" unique_id=1184722041]
+visible = false
+
+[node name="GrenadeLauncher2" parent="Guns/GrenadeLaunchers" index="1" unique_id=330792460 node_paths=PackedStringArray("exceptions") instance=ExtResource("4_u0ue3")]
+position = Vector2(46, 26)
+magazine = SubResource("Resource_qo2v4")
+exceptions = [NodePath("../../..")]
+
+[node name="Barrel" parent="Guns/GrenadeLaunchers/GrenadeLauncher2" index="2" unique_id=1811445942]
+position = Vector2(0, 0)
+
+[node name="Sprite2D" parent="Guns/GrenadeLaunchers/GrenadeLauncher2" index="3" unique_id=1184722041]
+visible = false
+
+[node name="GrenadeLauncher3" parent="Guns/GrenadeLaunchers" index="2" unique_id=1530319843 node_paths=PackedStringArray("exceptions") instance=ExtResource("4_u0ue3")]
+position = Vector2(28, 27)
+magazine = SubResource("Resource_0g06n")
+exceptions = [NodePath("../../..")]
+
+[node name="Barrel" parent="Guns/GrenadeLaunchers/GrenadeLauncher3" index="2" unique_id=1811445942]
+position = Vector2(0, 0)
+
+[node name="Sprite2D" parent="Guns/GrenadeLaunchers/GrenadeLauncher3" index="3" unique_id=1184722041]
+visible = false
+
+[node name="GrenadeLauncher4" parent="Guns/GrenadeLaunchers" index="3" unique_id=953182701 node_paths=PackedStringArray("exceptions") instance=ExtResource("4_u0ue3")]
+position = Vector2(-29, 27)
+magazine = SubResource("Resource_emgyw")
+exceptions = [NodePath("../../..")]
+
+[node name="Barrel" parent="Guns/GrenadeLaunchers/GrenadeLauncher4" index="2" unique_id=1811445942]
+position = Vector2(0, 0)
+
+[node name="Sprite2D" parent="Guns/GrenadeLaunchers/GrenadeLauncher4" index="3" unique_id=1184722041]
+visible = false
+
+[node name="SniperRifles" type="Node2D" parent="Guns" index="1" unique_id=5490689]
+
+[node name="SniperRifle" parent="Guns/SniperRifles" index="0" unique_id=123433090 instance=ExtResource("7_f03rb")]
+position = Vector2(37, 11)
+magazine = SubResource("Resource_ddyu0")
+collision_mask = 10241
+
+[node name="Barrel" parent="Guns/SniperRifles/SniperRifle" index="2" unique_id=1811445942]
+position = Vector2(0, 0)
+
+[node name="Sprite2D" parent="Guns/SniperRifles/SniperRifle" index="3" unique_id=1184722041]
+visible = false
+
+[node name="SniperRifle2" parent="Guns/SniperRifles" index="1" unique_id=88771070 instance=ExtResource("7_f03rb")]
+position = Vector2(-37, 11)
+magazine = SubResource("Resource_xrckk")
+collision_mask = 10241
+
+[node name="Barrel" parent="Guns/SniperRifles/SniperRifle2" index="2" unique_id=1811445942]
+position = Vector2(0, 0)
+
+[node name="Sprite2D" parent="Guns/SniperRifles/SniperRifle2" index="3" unique_id=1184722041]
+visible = false
+
+[node name="Pistols" type="Node2D" parent="Guns" index="2" unique_id=1800354450]
+
+[node name="Pistol" parent="Guns/Pistols" index="0" unique_id=1257003675 instance=ExtResource("9_vo8bf")]
+position = Vector2(-46, 15)
+magazine = SubResource("Resource_0roj6")
+collision_mask = 10241
+
+[node name="Barrel" parent="Guns/Pistols/Pistol" index="2" unique_id=1811445942]
+position = Vector2(0, 0)
+
+[node name="Sprite2D" parent="Guns/Pistols/Pistol" index="3" unique_id=1184722041]
+visible = false
+
+[node name="Pistol2" parent="Guns/Pistols" index="1" unique_id=66000292 instance=ExtResource("9_vo8bf")]
+position = Vector2(-30, 16)
+magazine = SubResource("Resource_t0lww")
+collision_mask = 10241
+
+[node name="Barrel" parent="Guns/Pistols/Pistol2" index="2" unique_id=1811445942]
+position = Vector2(0, 0)
+
+[node name="Sprite2D" parent="Guns/Pistols/Pistol2" index="3" unique_id=1184722041]
+visible = false
+
+[node name="Pistol3" parent="Guns/Pistols" index="2" unique_id=1495846340 instance=ExtResource("9_vo8bf")]
+position = Vector2(-39, 33)
+magazine = SubResource("Resource_6ldqq")
+collision_mask = 10241
+
+[node name="Barrel" parent="Guns/Pistols/Pistol3" index="2" unique_id=1811445942]
+position = Vector2(0, 0)
+
+[node name="Sprite2D" parent="Guns/Pistols/Pistol3" index="3" unique_id=1184722041]
+visible = false
+
+[node name="Pistol4" parent="Guns/Pistols" index="3" unique_id=93673708 instance=ExtResource("9_vo8bf")]
+position = Vector2(30, 17)
+magazine = SubResource("Resource_as1b4")
+collision_mask = 10241
+
+[node name="Barrel" parent="Guns/Pistols/Pistol4" index="2" unique_id=1811445942]
+position = Vector2(0, 0)
+
+[node name="Sprite2D" parent="Guns/Pistols/Pistol4" index="3" unique_id=1184722041]
+visible = false
+
+[node name="Pistol5" parent="Guns/Pistols" index="4" unique_id=1387080166 instance=ExtResource("9_vo8bf")]
+position = Vector2(46, 15)
+magazine = SubResource("Resource_oa70l")
+collision_mask = 10241
+
+[node name="Barrel" parent="Guns/Pistols/Pistol5" index="2" unique_id=1811445942]
+position = Vector2(0, 0)
+
+[node name="Sprite2D" parent="Guns/Pistols/Pistol5" index="3" unique_id=1184722041]
+visible = false
+
+[node name="Pistol6" parent="Guns/Pistols" index="5" unique_id=1929502467 instance=ExtResource("9_vo8bf")]
+position = Vector2(39, 34)
+magazine = SubResource("Resource_h7lt1")
+collision_mask = 10241
+
+[node name="Barrel" parent="Guns/Pistols/Pistol6" index="2" unique_id=1811445942]
+position = Vector2(0, 0)
+
+[node name="Sprite2D" parent="Guns/Pistols/Pistol6" index="3" unique_id=1184722041]
+visible = false
+
+[node name="HUD" type="CanvasLayer" parent="." index="5" unique_id=1406784273]
+layer = 2
+
+[node name="HealthBar" type="ProgressBar" parent="HUD" index="0" unique_id=1092380211]
+unique_name_in_owner = true
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -224.0
+offset_top = 16.0
+offset_right = 224.0
+offset_bottom = 48.0
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_8k625")
+theme_override_styles/fill = SubResource("StyleBoxFlat_t0hc0")
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="HUD/HealthBar" index="0" unique_id=748896433]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Boss"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6" unique_id=1378883922]
+libraries/ = SubResource("AnimationLibrary_t0hc0")
+
+[node name="StaticBody" type="StaticBody2D" parent="." index="7" unique_id=897659678]
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody" index="0" unique_id=1515883083]
+position = Vector2(0, 32)
+shape = SubResource("RectangleShape2D_vo8bf")
+
+[connection signal="damage_taken" from="." to="." method="_on_damage_taken"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+
+[editable path="Guns/GrenadeLaunchers/GrenadeLauncher"]
+[editable path="Guns/GrenadeLaunchers/GrenadeLauncher2"]
+[editable path="Guns/GrenadeLaunchers/GrenadeLauncher3"]
+[editable path="Guns/GrenadeLaunchers/GrenadeLauncher4"]
+[editable path="Guns/SniperRifles/SniperRifle"]
+[editable path="Guns/SniperRifles/SniperRifle2"]
+[editable path="Guns/Pistols/Pistol"]
+[editable path="Guns/Pistols/Pistol2"]
+[editable path="Guns/Pistols/Pistol3"]
+[editable path="Guns/Pistols/Pistol4"]
+[editable path="Guns/Pistols/Pistol5"]
+[editable path="Guns/Pistols/Pistol6"]

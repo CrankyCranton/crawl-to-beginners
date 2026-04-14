@@ -63,8 +63,7 @@ show_behind_parent = true
 navigation_polygon = SubResource("NavigationPolygon_fmuou")
 
 [node name="Darkness" type="CanvasModulate" parent="." unique_id=2041015111]
-visible = false
-color = Color(0, 0, 0, 1)
+color = Color(0.62299997, 0.72090006, 0.89, 1)
 
 [node name="HeatmapUpdateInterval" type="Timer" parent="." unique_id=712556650]
 wait_time = 0.2

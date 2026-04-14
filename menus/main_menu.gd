@@ -2,6 +2,7 @@ class_name MainMenu extends Control
 
 
 func _ready() -> void:
+	Engine.time_scale = 1.0
 	MusicManager.set(&"parameters/switch_to_clip", &"menu")
 
 
