@@ -157,11 +157,15 @@ func _on_room_door_entered(direction: Vector2i) -> void:
 
 
 func _on_room_unlocked() -> void:
-	ghost.can_possess = false
-	if hero.state != Hero.State.POSSESSED:
-		hero.state = Hero.State.FOLLOW
 	if ghost.possessing in [ghost, null]:
 		ghost.possess(hero)
+	ghost.can_possess = false
+	if hero.state != Hero.State.POSSESSED:
+		hero.state = Hero.State.NORMAL
+		var finished_room: Room = current_room
+		await get_tree().create_timer(1.0).timeout
+		if finished_room == current_room:
+			hero.state = Hero.State.FOLLOW
 	#if current_room.scene_file_path == "res://game/room/boss_room.tscn":
 		#pass # Win.
 

@@ -27,6 +27,7 @@ var state: State = State.NORMAL:
 		if not is_node_ready():
 			await ready
 		eek_label.visible = state == State.PANIC
+		invincible_label.visible = state == State.FOLLOW
 var safe_vel := Vector2()
 var astar: AStarGrid2D
 var path: PackedVector2Array = []
@@ -57,6 +58,7 @@ var speed: float:
 @onready var sprite: Sprite2D = $Sprite
 @onready var hurt_sound: AudioStreamPlayer2D = $HurtSound
 @onready var eek_label: Label = $EekLabel
+@onready var invincible_label: Label = $InvincibleLabel
 @onready var anim_dir := Vector2.DOWN:
 	set(value):
 		anim_dir = value

@@ -74,7 +74,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.20000002),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [1.0, 0.0]
+"values": [3.0, 0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3gvk6"]
@@ -134,7 +134,7 @@ explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_divq5")
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1592052794]
-color = Color(0.91, 0.78881836, 0.48229998, 1)
+color = Color(0.9098039, 0.5528975, 0.24705882, 1)
 shadow_enabled = true
 shadow_color = Color(0, 0, 0, 1)
 texture = ExtResource("5_kbsm1")

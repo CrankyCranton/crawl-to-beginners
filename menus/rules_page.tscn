@@ -63,19 +63,19 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = 194.0
-offset_top = -64.0
+offset_top = -61.0
 offset_right = 300.0
-offset_bottom = -21.0
+offset_bottom = -18.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Let's Go!"
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=154142536]
 layout_mode = 0
-offset_left = 355.0
-offset_top = 4.0
-offset_right = 763.0
-offset_bottom = 251.0
+offset_left = 357.0
+offset_top = 7.0
+offset_right = 765.0
+offset_bottom = 254.0
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer" unique_id=115397189]
 layout_mode = 2
@@ -84,12 +84,12 @@ layout_mode = 2
 layout_mode = 2
 text = "Tools"
 
-[node name="VBoxContainer" type="GridContainer" parent="PanelContainer/VBoxContainer2" unique_id=60749145]
+[node name="VBoxContainer" type="FlowContainer" parent="PanelContainer/VBoxContainer2" unique_id=1802083917]
 layout_mode = 2
-columns = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/VBoxContainer" unique_id=1999761377]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer2/VBoxContainer/HBoxContainer" unique_id=984480431]
 custom_minimum_size = Vector2(64, 64)
@@ -98,22 +98,11 @@ texture = ExtResource("3_sd3bx")
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer2/VBoxContainer/HBoxContainer" unique_id=1792161024]
 layout_mode = 2
-text = "= Sniper"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/VBoxContainer" unique_id=550140514]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer2/VBoxContainer/HBoxContainer2" unique_id=413310104]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-texture = ExtResource("4_2vcm1")
-
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer2/VBoxContainer/HBoxContainer2" unique_id=935472882]
-layout_mode = 2
-text = "= Laser Gun"
+text = "= Sniper Rifle"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/VBoxContainer" unique_id=670035441]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer2/VBoxContainer/HBoxContainer3" unique_id=1994461325]
 custom_minimum_size = Vector2(64, 64)
@@ -125,27 +114,22 @@ stretch_mode = 5
 layout_mode = 2
 text = "= Fists"
 
-[node name="HBoxContainer5" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/VBoxContainer" unique_id=423181659]
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/VBoxContainer" unique_id=550140514]
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer2/VBoxContainer/HBoxContainer5" unique_id=171062181]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer2/VBoxContainer/HBoxContainer2" unique_id=413310104]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-texture = SubResource("AtlasTexture_siv3r")
-stretch_mode = 5
+texture = ExtResource("4_2vcm1")
 
-[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer2/VBoxContainer/HBoxContainer5" unique_id=718777686]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer2/VBoxContainer/HBoxContainer2" unique_id=935472882]
 layout_mode = 2
-text = "= "
-horizontal_alignment = 2
-
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer2/VBoxContainer/HBoxContainer5" unique_id=1283060454]
-layout_mode = 2
-text = "Grenade
-Launcher"
+text = "= Laser Gun"
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/VBoxContainer" unique_id=834934997]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer2/VBoxContainer/HBoxContainer4" unique_id=358937533]
 custom_minimum_size = Vector2(64, 64)
@@ -154,6 +138,20 @@ layout_mode = 2
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer2/VBoxContainer/HBoxContainer4" unique_id=2137722889]
 layout_mode = 2
 text = "= Med Pack"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/VBoxContainer" unique_id=423181659]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer2/VBoxContainer/HBoxContainer5" unique_id=171062181]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = SubResource("AtlasTexture_siv3r")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer2/VBoxContainer/HBoxContainer5" unique_id=1283060454]
+layout_mode = 2
+text = "= Grenade Launcher"
 
 [node name="PanelContainer2" type="PanelContainer" parent="." unique_id=1756347096]
 layout_mode = 1
@@ -228,9 +226,9 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -764.0
-offset_top = 115.0
+offset_top = 111.0
 offset_right = -417.0
-offset_bottom = 430.0
+offset_bottom = 426.0
 grow_horizontal = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer3" unique_id=136361689]
@@ -250,7 +248,7 @@ texture = SubResource("AtlasTexture_3ad8q")
 
 [node name="Label" type="Label" parent="PanelContainer3/VBoxContainer/HBoxContainer" unique_id=1971068971]
 layout_mode = 2
-text = "= Hero (protect him!)"
+text = "= Henry (protect him!)"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer3/VBoxContainer" unique_id=1202196242]
 layout_mode = 2
