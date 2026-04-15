@@ -316,6 +316,7 @@ hframes = 7
 vframes = 4
 
 [node name="Hand" type="Marker2D" parent="." unique_id=1151683513]
+z_index = 1
 
 [node name="LOS" type="ShapeCast2D" parent="Hand" unique_id=315253745]
 unique_name_in_owner = true
