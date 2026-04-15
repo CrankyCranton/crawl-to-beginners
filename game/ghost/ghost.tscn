@@ -22,7 +22,7 @@ radius = 15.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_13suh"]
 radius = 16.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_dt6bv"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_q2hs5"]
 resource_local_to_scene = true
 radius = 16.0
 
@@ -71,7 +71,7 @@ radius = 15.0
 [node name="EnemyShover" parent="." unique_id=1353088001 instance=ExtResource("7_h2o8k")]
 
 [node name="CollisionShape" parent="EnemyShover" index="0" unique_id=1699220739]
-shape = SubResource("CircleShape2D_dt6bv")
+shape = SubResource("CircleShape2D_q2hs5")
 disabled = true
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=706404092]
@@ -91,6 +91,7 @@ monitorable = false
 shape = SubResource("CircleShape2D_14dsv")
 
 [node name="PossessNotifier" type="Marker2D" parent="." unique_id=2106169084]
+modulate = Color(1, 1, 1, 0)
 top_level = true
 z_index = 3
 

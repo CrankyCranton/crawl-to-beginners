@@ -3,6 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://dnpoq1nirc2ow" path="res://icon.svg" id="2_3gvk6"]
 [ext_resource type="Script" uid="uid://chcpjqhlh4a3g" path="res://game/gun/grenade_launcher/grenade/explosion/explosion.gd" id="2_d21ko"]
 [ext_resource type="AudioStream" uid="uid://e173iluom11p" path="res://assets/sfx_exp_short_hard8.wav" id="3_t3vrv"]
+[ext_resource type="Texture2D" uid="uid://ddpu75lqq5i1x" path="res://assets/effect.png" id="4_nxbsv"]
+[ext_resource type="Texture2D" uid="uid://cip0i51gvqoae" path="res://assets/explosion_light_mask.png" id="5_kbsm1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nnd2y"]
 radius = 128.0
@@ -20,6 +22,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PointLight2D:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
 }
 
 [sub_resource type="Animation" id="Animation_wa86l"]
@@ -50,12 +64,37 @@ tracks/1/keys = {
 "method": &"queue_free"
 }]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PointLight2D:energy")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.20000002),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3gvk6"]
 _data = {
 &"RESET": SubResource("Animation_3gvk6"),
 &"explode": SubResource("Animation_wa86l")
 }
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbsm1"]
+atlas = ExtResource("4_nxbsv")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_divq5"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 1024.0
+initial_velocity_max = 1024.0
+gravity = Vector3(0, 0, 0)
+damping_min = 3072.0002
+damping_max = 6144.0005
 
 [node name="Explosion" type="Area2D" unique_id=1457563552]
 collision_layer = 0
@@ -64,11 +103,13 @@ monitorable = false
 script = ExtResource("2_d21ko")
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=1389931744]
+visible = false
 modulate = Color(1, 1, 1, 0.2509804)
 scale = Vector2(2, 2)
 texture = ExtResource("2_3gvk6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1319386538]
+visible = false
 shape = SubResource("CircleShape2D_nnd2y")
 
 [node name="LOS" type="RayCast2D" parent="." unique_id=1511013529]
@@ -84,5 +125,18 @@ autoplay = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=883403549]
 libraries/ = SubResource("AnimationLibrary_3gvk6")
 autoplay = &"explode"
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=745682378]
+visible = false
+amount = 256
+texture = SubResource("AtlasTexture_kbsm1")
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_divq5")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1592052794]
+color = Color(0.91, 0.78881836, 0.48229998, 1)
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+texture = ExtResource("5_kbsm1")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

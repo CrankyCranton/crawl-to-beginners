@@ -43,6 +43,7 @@ _data = {
 [node name="WinOverlay" type="ColorRect" unique_id=575272660]
 process_mode = 3
 modulate = Color(1, 1, 1, 0)
+light_mask = 2
 z_index = 2
 anchors_preset = 15
 anchor_right = 1.0
@@ -54,6 +55,7 @@ script = ExtResource("1_h2p6f")
 play_jingle = false
 
 [node name="Label" type="Label" parent="." unique_id=387475666]
+light_mask = 2
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -68,6 +70,7 @@ label_settings = ExtResource("2_gau44")
 horizontal_alignment = 1
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=276597502]
+light_mask = 2
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -83,13 +86,16 @@ grow_vertical = 2
 theme_override_constants/separation = 64
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2" unique_id=681467446]
+light_mask = 2
 layout_mode = 2
 
 [node name="BackToTitleButton" type="Button" parent="VBoxContainer2/VBoxContainer" unique_id=201264963]
+light_mask = 2
 layout_mode = 2
 text = "Back to Title"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer2/VBoxContainer" unique_id=1371244370]
+light_mask = 2
 layout_mode = 2
 text = "Quit"
 
