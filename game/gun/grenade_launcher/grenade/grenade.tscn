@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bcmc448x3h7yi" path="res://game/gun/grenade_launcher/grenade/grenade.gd" id="1_h4leg"]
 [ext_resource type="Texture2D" uid="uid://di55ftuhkjgmo" path="res://assets/grenade_ammo.png" id="2_7c235"]
+[ext_resource type="AudioStream" uid="uid://8u0xj3xpq6tc" path="res://assets/sfx_wpn_grenadewhistle2.wav" id="3_5l4ou"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8p8jd"]
 friction = 0.0
@@ -28,5 +29,11 @@ autostart = true
 position = Vector2(-1, -1)
 rotation = -1.5707964
 texture = ExtResource("2_7c235")
+
+[node name="SfxWpnGrenadewhistle1" type="AudioStreamPlayer2D" parent="." unique_id=932289770]
+stream = ExtResource("3_5l4ou")
+volume_db = -10.0
+autoplay = true
+panning_strength = 2.5
 
 [connection signal="timeout" from="ExplodeTimer" to="." method="_on_explode_timer_timeout"]

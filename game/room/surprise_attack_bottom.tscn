@@ -34,19 +34,10 @@ position = Vector2(400, 48)
 [node name="Marker2D8" type="Marker2D" parent="EnemySpawnPoints" parent_id_path=PackedInt32Array(1664263378) index="5" unique_id=1060645390]
 position = Vector2(400, 80)
 
-[node name="Marker2D9" type="Marker2D" parent="EnemySpawnPoints" parent_id_path=PackedInt32Array(1664263378) index="6" unique_id=1996909039]
-position = Vector2(400, 112)
-
-[node name="Marker2D10" type="Marker2D" parent="EnemySpawnPoints" parent_id_path=PackedInt32Array(1664263378) index="7" unique_id=954507823]
-position = Vector2(432, 112)
-
-[node name="Marker2D11" type="Marker2D" parent="EnemySpawnPoints" parent_id_path=PackedInt32Array(1664263378) index="8" unique_id=1229477389]
-position = Vector2(464, 112)
-
-[node name="Marker2D2" type="Marker2D" parent="EnemySpawnPoints" parent_id_path=PackedInt32Array(1664263378) index="9" unique_id=833206087]
+[node name="Marker2D2" type="Marker2D" parent="EnemySpawnPoints" parent_id_path=PackedInt32Array(1664263378) index="6" unique_id=833206087]
 position = Vector2(48, 464)
 
-[node name="Marker2D3" type="Marker2D" parent="EnemySpawnPoints" parent_id_path=PackedInt32Array(1664263378) index="10" unique_id=1382086742]
+[node name="Marker2D3" type="Marker2D" parent="EnemySpawnPoints" parent_id_path=PackedInt32Array(1664263378) index="7" unique_id=1382086742]
 position = Vector2(464, 464)
 
 [node name="NavigationRegion2D" parent="." index="5" unique_id=977941482]

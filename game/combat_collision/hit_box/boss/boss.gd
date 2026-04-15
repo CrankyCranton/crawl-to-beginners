@@ -8,7 +8,7 @@ const MIN_IDLE_TIME: float = 1.0
 const MAX_IDLE_TIME: float = 2.0
 const RAMPAGE_SPEED: float = 1.5
 const FAKE_CHANCE: float = 0.2
-const RAMPAGE_START: int = 7
+const RAMPAGE_START: int = 9
 
 @export var randomizations: Dictionary[Node2D, float] = {  }
 @export var spawn_doors: Array[Door] = []
@@ -23,6 +23,7 @@ var rampaging := false
 @onready var health_bar: ProgressBar = %HealthBar
 @onready var sprite: Sprite2D = $Sprite
 @onready var spawn_timer: Timer = $Timer
+@onready var hurt_sound: AudioStreamPlayer2D = $HurtSound
 @onready var health: int = MAX_HEALTH:
 	set(value):
 		health = value
@@ -32,6 +33,7 @@ var rampaging := false
 			died.emit()
 		elif health <= RAMPAGE_START:
 			rampaging = true
+			sprite.texture = preload("uid://dtcmpljxx38db")
 			spawn_timer.wait_time /= RAMPAGE_SPEED
 
 
@@ -72,6 +74,7 @@ func idle() -> void:
 
 func _on_damage_taken(damage: int) -> void:
 	health -= damage
+	hurt_sound.play()
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:

@@ -3,22 +3,26 @@
 [ext_resource type="PackedScene" uid="uid://bxgcm2uyt1qg7" path="res://game/gun/gun.tscn" id="1_hoa6r"]
 [ext_resource type="PackedScene" uid="uid://cfb8piwhbwlhf" path="res://game/combat_collision/hurt_box/bullet/laser.tscn" id="2_fr7tr"]
 [ext_resource type="Script" uid="uid://dedfsv5rhjqa1" path="res://game/gun/magazine.gd" id="2_ql0ky"]
+[ext_resource type="AudioStream" uid="uid://w5kyll8ot07n" path="res://assets/sfx_sounds_interaction25.wav" id="4_tiald"]
 [ext_resource type="Texture2D" uid="uid://coruxjgv4nioq" path="res://assets/laser_gun.png" id="4_w1mcr"]
 
-[sub_resource type="Resource" id="Resource_fr7tr"]
+[sub_resource type="Resource" id="Resource_tiald"]
 resource_local_to_scene = true
 script = ExtResource("2_ql0ky")
 ammo_type = ExtResource("2_fr7tr")
 metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
 
 [node name="Pistol" unique_id=738278615 instance=ExtResource("1_hoa6r")]
-magazine = SubResource("Resource_fr7tr")
+magazine = SubResource("Resource_tiald")
 
 [node name="Cooldown" parent="." index="0" unique_id=500018778]
 wait_time = 0.3
 
 [node name="Barrel" parent="." index="2" unique_id=1811445942]
-position = Vector2(32, 0)
+position = Vector2(16, 0)
+
+[node name="ShootSound" parent="Barrel" index="0" unique_id=154974930]
+stream = ExtResource("4_tiald")
 
 [node name="Sprite2D" parent="." index="3" unique_id=1184722041]
 rotation = 1.5707964

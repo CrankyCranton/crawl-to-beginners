@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cr7tsk20q0ilt" path="res://game/room/room.gd" id="1_ppkfq"]
 [ext_resource type="TileSet" uid="uid://drrag0uxgijfc" path="res://game/room/tile_set.tres" id="2_0jn80"]
 [ext_resource type="PackedScene" uid="uid://bowswbnekcuuf" path="res://game/room/door/door.tscn" id="3_fmuou"]
+[ext_resource type="AudioStream" uid="uid://bdhap3jr4gxcd" path="res://assets/sfx_sounds_fanfare3.wav" id="4_tip2s"]
 
 [sub_resource type="Gradient" id="Gradient_fmuou"]
 offsets = PackedFloat32Array(0, 0.5, 1)
@@ -68,5 +69,9 @@ color = Color(0.62299997, 0.72090006, 0.89, 1)
 [node name="HeatmapUpdateInterval" type="Timer" parent="." unique_id=712556650]
 wait_time = 0.2
 autostart = true
+
+[node name="ClearSound" type="AudioStreamPlayer" parent="." unique_id=558281904]
+process_mode = 3
+stream = ExtResource("4_tip2s")
 
 [connection signal="timeout" from="HeatmapUpdateInterval" to="." method="_on_heatmap_update_interval_timeout"]

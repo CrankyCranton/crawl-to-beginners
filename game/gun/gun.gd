@@ -18,6 +18,7 @@ var reloading := false
 @onready var reload_time: Timer = $ReloadTime
 @onready var barrel: Marker2D = $Barrel
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var shoot_sound: AudioStreamPlayer2D = $Barrel/ShootSound
 
 
 func _process(_delta: float) -> void:
@@ -29,6 +30,7 @@ func shoot() -> void:
 	if magazine.ammo == 0 or cooling or reloading:
 		return
 
+	shoot_sound.play()
 	magazine.ammo -= 1
 	var bullet: Node2D = magazine.ammo_type.instantiate()
 	# Kinda redundant.

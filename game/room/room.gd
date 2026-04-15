@@ -35,6 +35,7 @@ var astar_heatmap := AStarGrid2D.new()
 @onready var enemies: Node2D = $Enemies
 @onready var enemy_spawn_points: Node2D = $EnemySpawnPoints
 @onready var doors: Node2D = $Doors
+@onready var clear_sound: AudioStreamPlayer = $ClearSound
 @onready var hero: Hero:
 	set(value):
 		hero = value
@@ -130,6 +131,7 @@ func get_cell_id(global_pos: Vector2) -> Vector2i:
 
 
 func unlock() -> void:
+	clear_sound.play()
 	for door: Door in doors.get_children():
 		door.unlock()
 	unlocked.emit()

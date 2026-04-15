@@ -26,6 +26,7 @@ const PATH_DESIRED_DISTANCE: float = pow(8.0, 2.0)
 	set(value):
 		if value < health:
 			Utils.hit_flash(sprite)
+			hurt_sound.play()
 		health = value
 		if health <= 0:
 			die()
@@ -51,6 +52,7 @@ var state: State = State.NORMAL:
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var playback: AnimationNodeStateMachinePlayback = animation_tree.get(&"parameters/playback")
 @onready var sprite: Sprite2D = $Sprite
+@onready var hurt_sound: AudioStreamPlayer2D = $HurtSound
 @onready var max_health: int = health
 @onready var anim_dir := Vector2.DOWN:
 	set(value):

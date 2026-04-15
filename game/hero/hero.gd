@@ -35,6 +35,7 @@ var health: int = max_health:
 	set(value):
 		if value < health:
 			Utils.hit_flash(sprite)
+			hurt_sound.play()
 		health = mini(max_health, value)
 		health_set.emit(health)
 		if health <= 0:
@@ -49,6 +50,7 @@ var speed: float:
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var playback: AnimationNodeStateMachinePlayback = animation_tree.get(&"parameters/playback")
 @onready var sprite: Sprite2D = $Sprite
+@onready var hurt_sound: AudioStreamPlayer2D = $HurtSound
 @onready var anim_dir := Vector2.DOWN:
 	set(value):
 		anim_dir = value

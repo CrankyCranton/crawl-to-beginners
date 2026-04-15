@@ -28,6 +28,9 @@ var possessing: CharacterBody2D = self:
 @onready var sprite: Sprite2D = $Sprite
 @onready var possession_detector: Area2D = $PossessionDetector
 @onready var possess_notifier: Marker2D = $PossessNotifier
+@onready var empty_mag_sound: AudioStreamPlayer = $EmptyMagSound
+@onready var possess_sound: AudioStreamPlayer2D = $PossessSound
+@onready var unpossess_sound: AudioStreamPlayer2D = $UnpossessSound
 
 
 func _ready() -> void:
@@ -102,6 +105,8 @@ func _input(event: InputEvent) -> void:
 				collider = body
 
 		if collider != null:
+			possess_sound.pitch_scale = 1.0 if collider is Enemy else 1.2
+			possess_sound.play()
 			possessing.material = null
 			if possessing != self:
 				possessing.state = possessing.State.NORMAL
@@ -150,6 +155,7 @@ func set_light_enabled(enabled: bool) -> void:
 
 
 func _on_possessing_died() -> void:
+	unpossess_sound.play()
 	possessing = self
 
 
@@ -157,3 +163,8 @@ func _on_possession_detector_body_exited(body: Node2D) -> void:
 	if body != possessing:
 		body.material = null
 		body.get_node(^"Sprite").z_index = 0
+
+
+func _on_shot(ammo: int, _cooldown: float) -> void:
+	if ammo == 0 and possessing is Enemy:
+		empty_mag_sound.play()

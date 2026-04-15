@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bsdrsnnco6xng"]
 
 [ext_resource type="Texture2D" uid="uid://b0ypjuxa4f3ep" path="res://assets/health_bar.png" id="1_rq0yu"]
+[ext_resource type="AudioStream" uid="uid://c2y0mouh7khaj" path="res://assets/sfx_sounds_powerup17.wav" id="2_m8xtw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m8xtw"]
 atlas = ExtResource("1_rq0yu")
@@ -42,5 +43,10 @@ one_shot = true
 speed_scale = 1.5
 explosiveness = 0.5
 process_material = SubResource("ParticleProcessMaterial_ywmdi")
+
+[node name="SfxSoundsPowerup17" type="AudioStreamPlayer2D" parent="." unique_id=1474142246]
+stream = ExtResource("2_m8xtw")
+volume_db = 5.0
+autoplay = true
 
 [connection signal="finished" from="." to="." method="queue_free"]

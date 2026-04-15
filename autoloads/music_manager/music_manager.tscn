@@ -4,9 +4,10 @@
 [ext_resource type="Script" uid="uid://bn2of2tr4rqau" path="res://autoloads/music_manager/music_manager.gd" id="1_pldsu"]
 [ext_resource type="AudioStream" uid="uid://b758o4xjy1msd" path="res://assets/Projectprotect.ogg" id="2_eyql3"]
 [ext_resource type="AudioStream" uid="uid://8owy3iva02wk" path="res://assets/Decisivebattle.ogg" id="3_ajsr5"]
+[ext_resource type="AudioStream" uid="uid://bysd4gqwxtc8n" path="res://assets/silence.ogg" id="4_3r5e8"]
 
 [sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_rc5gr"]
-clip_count = 3
+clip_count = 4
 clip_0/name = &"menu"
 clip_0/stream = ExtResource("1_2yvag")
 clip_0/auto_advance = 0
@@ -16,11 +17,20 @@ clip_1/auto_advance = 0
 clip_2/name = &"boss"
 clip_2/stream = ExtResource("3_ajsr5")
 clip_2/auto_advance = 0
+clip_3/name = &"mute"
+clip_3/stream = ExtResource("4_3r5e8")
+clip_3/auto_advance = 0
 _transitions = {
 Vector2i(-1, -1): {
 "fade_beats": 1.0,
 "fade_mode": 4,
 "from_time": 0,
+"to_time": 0
+},
+Vector2i(-1, 2): {
+"fade_beats": 1.0,
+"fade_mode": 4,
+"from_time": 2,
 "to_time": 0
 },
 Vector2i(0, 0): {
@@ -40,6 +50,12 @@ Vector2i(2, 2): {
 "fade_mode": 4,
 "from_time": 0,
 "to_time": 0
+},
+Vector2i(3, 3): {
+"fade_beats": 1.0,
+"fade_mode": 4,
+"from_time": 0,
+"to_time": 0
 }
 }
 
@@ -47,4 +63,5 @@ Vector2i(2, 2): {
 process_mode = 3
 stream = SubResource("AudioStreamInteractive_rc5gr")
 autoplay = true
+bus = &"Music"
 script = ExtResource("1_pldsu")

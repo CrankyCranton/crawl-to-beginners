@@ -10,19 +10,13 @@
 [ext_resource type="PackedScene" uid="uid://c11ky7q8072ol" path="res://game/combat_collision/hurt_box/bullet/sniper_bullet.tscn" id="8_2xx2c"]
 [ext_resource type="PackedScene" uid="uid://d2oxbvp4kbxhu" path="res://game/gun/pistol/pistol.tscn" id="9_vo8bf"]
 [ext_resource type="PackedScene" uid="uid://cfb8piwhbwlhf" path="res://game/combat_collision/hurt_box/bullet/laser.tscn" id="10_hflfj"]
+[ext_resource type="AudioStream" uid="uid://d301opjes8hfc" path="res://assets/freesound_community-grunt1-68324.mp3" id="11_hflfj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8idto"]
 size = Vector2(128, 64)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8idto"]
 radius = 48.0
-
-[sub_resource type="Resource" id="Resource_vo8bf"]
-resource_local_to_scene = true
-script = ExtResource("6_f03rb")
-ammo_type = ExtResource("5_q1kdk")
-max_ammo = -1
-metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
 
 [sub_resource type="Resource" id="Resource_hflfj"]
 resource_local_to_scene = true
@@ -48,7 +42,7 @@ metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
 [sub_resource type="Resource" id="Resource_0g06n"]
 resource_local_to_scene = true
 script = ExtResource("6_f03rb")
-ammo_type = ExtResource("8_2xx2c")
+ammo_type = ExtResource("5_q1kdk")
 max_ammo = -1
 metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
 
@@ -62,7 +56,7 @@ metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
 [sub_resource type="Resource" id="Resource_ddyu0"]
 resource_local_to_scene = true
 script = ExtResource("6_f03rb")
-ammo_type = ExtResource("10_hflfj")
+ammo_type = ExtResource("8_2xx2c")
 max_ammo = -1
 metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
 
@@ -95,6 +89,13 @@ max_ammo = -1
 metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
 
 [sub_resource type="Resource" id="Resource_as1b4"]
+resource_local_to_scene = true
+script = ExtResource("6_f03rb")
+ammo_type = ExtResource("10_hflfj")
+max_ammo = -1
+metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
+
+[sub_resource type="Resource" id="Resource_oa70l"]
 resource_local_to_scene = true
 script = ExtResource("6_f03rb")
 ammo_type = ExtResource("10_hflfj")
@@ -409,7 +410,7 @@ texture = ExtResource("2_8k625")
 
 [node name="GrenadeLauncher" parent="Guns/GrenadeLaunchers" index="0" unique_id=738278615 node_paths=PackedStringArray("exceptions") instance=ExtResource("4_u0ue3")]
 position = Vector2(-46, 26)
-magazine = SubResource("Resource_vo8bf")
+magazine = SubResource("Resource_hflfj")
 exceptions = [NodePath("../../..")]
 
 [node name="Barrel" parent="Guns/GrenadeLaunchers/GrenadeLauncher" index="2" unique_id=1811445942]
@@ -420,7 +421,7 @@ visible = false
 
 [node name="GrenadeLauncher2" parent="Guns/GrenadeLaunchers" index="1" unique_id=330792460 node_paths=PackedStringArray("exceptions") instance=ExtResource("4_u0ue3")]
 position = Vector2(46, 26)
-magazine = SubResource("Resource_hflfj")
+magazine = SubResource("Resource_d33g0")
 exceptions = [NodePath("../../..")]
 
 [node name="Barrel" parent="Guns/GrenadeLaunchers/GrenadeLauncher2" index="2" unique_id=1811445942]
@@ -431,7 +432,7 @@ visible = false
 
 [node name="GrenadeLauncher3" parent="Guns/GrenadeLaunchers" index="2" unique_id=1530319843 node_paths=PackedStringArray("exceptions") instance=ExtResource("4_u0ue3")]
 position = Vector2(28, 27)
-magazine = SubResource("Resource_d33g0")
+magazine = SubResource("Resource_qo2v4")
 exceptions = [NodePath("../../..")]
 
 [node name="Barrel" parent="Guns/GrenadeLaunchers/GrenadeLauncher3" index="2" unique_id=1811445942]
@@ -442,7 +443,7 @@ visible = false
 
 [node name="GrenadeLauncher4" parent="Guns/GrenadeLaunchers" index="3" unique_id=953182701 node_paths=PackedStringArray("exceptions") instance=ExtResource("4_u0ue3")]
 position = Vector2(-29, 27)
-magazine = SubResource("Resource_qo2v4")
+magazine = SubResource("Resource_0g06n")
 exceptions = [NodePath("../../..")]
 
 [node name="Barrel" parent="Guns/GrenadeLaunchers/GrenadeLauncher4" index="2" unique_id=1811445942]
@@ -455,7 +456,7 @@ visible = false
 
 [node name="SniperRifle" parent="Guns/SniperRifles" index="0" unique_id=123433090 instance=ExtResource("7_f03rb")]
 position = Vector2(37, 11)
-magazine = SubResource("Resource_0g06n")
+magazine = SubResource("Resource_emgyw")
 collision_mask = 10241
 
 [node name="Barrel" parent="Guns/SniperRifles/SniperRifle" index="2" unique_id=1811445942]
@@ -466,7 +467,7 @@ visible = false
 
 [node name="SniperRifle2" parent="Guns/SniperRifles" index="1" unique_id=88771070 instance=ExtResource("7_f03rb")]
 position = Vector2(-37, 11)
-magazine = SubResource("Resource_emgyw")
+magazine = SubResource("Resource_ddyu0")
 collision_mask = 10241
 
 [node name="Barrel" parent="Guns/SniperRifles/SniperRifle2" index="2" unique_id=1811445942]
@@ -479,7 +480,7 @@ visible = false
 
 [node name="Pistol" parent="Guns/Pistols" index="0" unique_id=1257003675 instance=ExtResource("9_vo8bf")]
 position = Vector2(-46, 15)
-magazine = SubResource("Resource_ddyu0")
+magazine = SubResource("Resource_xrckk")
 collision_mask = 10241
 
 [node name="Barrel" parent="Guns/Pistols/Pistol" index="2" unique_id=1811445942]
@@ -490,7 +491,7 @@ visible = false
 
 [node name="Pistol2" parent="Guns/Pistols" index="1" unique_id=66000292 instance=ExtResource("9_vo8bf")]
 position = Vector2(-30, 16)
-magazine = SubResource("Resource_xrckk")
+magazine = SubResource("Resource_0roj6")
 collision_mask = 10241
 
 [node name="Barrel" parent="Guns/Pistols/Pistol2" index="2" unique_id=1811445942]
@@ -501,7 +502,7 @@ visible = false
 
 [node name="Pistol3" parent="Guns/Pistols" index="2" unique_id=1495846340 instance=ExtResource("9_vo8bf")]
 position = Vector2(-39, 33)
-magazine = SubResource("Resource_0roj6")
+magazine = SubResource("Resource_t0lww")
 collision_mask = 10241
 
 [node name="Barrel" parent="Guns/Pistols/Pistol3" index="2" unique_id=1811445942]
@@ -512,7 +513,7 @@ visible = false
 
 [node name="Pistol4" parent="Guns/Pistols" index="3" unique_id=93673708 instance=ExtResource("9_vo8bf")]
 position = Vector2(30, 17)
-magazine = SubResource("Resource_t0lww")
+magazine = SubResource("Resource_6ldqq")
 collision_mask = 10241
 
 [node name="Barrel" parent="Guns/Pistols/Pistol4" index="2" unique_id=1811445942]
@@ -523,7 +524,7 @@ visible = false
 
 [node name="Pistol5" parent="Guns/Pistols" index="4" unique_id=1387080166 instance=ExtResource("9_vo8bf")]
 position = Vector2(46, 15)
-magazine = SubResource("Resource_6ldqq")
+magazine = SubResource("Resource_as1b4")
 collision_mask = 10241
 
 [node name="Barrel" parent="Guns/Pistols/Pistol5" index="2" unique_id=1811445942]
@@ -534,7 +535,7 @@ visible = false
 
 [node name="Pistol6" parent="Guns/Pistols" index="5" unique_id=1929502467 instance=ExtResource("9_vo8bf")]
 position = Vector2(39, 34)
-magazine = SubResource("Resource_as1b4")
+magazine = SubResource("Resource_oa70l")
 collision_mask = 10241
 
 [node name="Barrel" parent="Guns/Pistols/Pistol6" index="2" unique_id=1811445942]
@@ -586,6 +587,11 @@ shape = SubResource("RectangleShape2D_vo8bf")
 [node name="Timer" type="Timer" parent="." index="8" unique_id=624533978]
 wait_time = 7.0
 autostart = true
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="." index="9" unique_id=1858370981]
+stream = ExtResource("11_hflfj")
+volume_db = 10.0
+pitch_scale = 0.7
 
 [connection signal="damage_taken" from="." to="." method="_on_damage_taken"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

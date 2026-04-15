@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://blsg4naun2754" path="res://game/enemy/soft_collision/soft_collision.tscn" id="2_q106d"]
 [ext_resource type="PackedScene" uid="uid://dxcwnd01jn8s8" path="res://game/combat_collision/hit_box/hit_box.tscn" id="3_8s3bx"]
 [ext_resource type="Texture2D" uid="uid://ctppffagiimld" path="res://assets/enemy_spritesheet.png" id="4_lw4yu"]
+[ext_resource type="AudioStream" uid="uid://dkkuf66m7a8h0" path="res://assets/sfx_damage_hit3.wav" id="5_7388b"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8s3bx"]
 radius = 14.0
@@ -291,6 +292,9 @@ tree_root = SubResource("AnimationNodeStateMachine_7vy84")
 anim_player = NodePath("../AnimationPlayer")
 parameters/idle/blend_position = Vector2(0, 0)
 parameters/walk/blend_position = Vector2(0, 0)
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="." unique_id=610758508]
+stream = ExtResource("5_7388b")
 
 [connection signal="damage_taken" from="HitBox" to="." method="_on_hit_box_damage_taken"]
 

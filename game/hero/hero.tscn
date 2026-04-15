@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://ddpvmt1ruyxxq" path="res://game/hero/hero.gd" id="1_dpa0h"]
 [ext_resource type="Texture2D" uid="uid://cr1uid6kg1qi3" path="res://assets/player_spritesheet.png" id="2_dk5tg"]
 [ext_resource type="PackedScene" uid="uid://dxcwnd01jn8s8" path="res://game/combat_collision/hit_box/hit_box.tscn" id="2_msmgc"]
+[ext_resource type="AudioStream" uid="uid://dr4py7ddx2yum" path="res://assets/sfx_deathscream_human5.wav" id="4_t00gq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dk5tg"]
 radius = 15.0
@@ -279,6 +280,11 @@ tree_root = SubResource("AnimationNodeStateMachine_bu3nj")
 anim_player = NodePath("../AnimationPlayer")
 parameters/idle/blend_position = Vector2(0, 0)
 parameters/walk/blend_position = Vector2(0, 0)
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="." unique_id=1654741988]
+stream = ExtResource("4_t00gq")
+volume_db = 5.0
+pitch_scale = 2.0
 
 [connection signal="damage_taken" from="HitBox" to="." method="_on_hit_box_damage_taken"]
 [connection signal="target_reached" from="NavigationAgent" to="." method="_on_navigation_agent_target_reached"]

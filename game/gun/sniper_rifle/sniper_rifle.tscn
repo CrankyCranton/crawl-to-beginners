@@ -3,9 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://bxgcm2uyt1qg7" path="res://game/gun/gun.tscn" id="1_wal6r"]
 [ext_resource type="PackedScene" uid="uid://c11ky7q8072ol" path="res://game/combat_collision/hurt_box/bullet/sniper_bullet.tscn" id="2_jq7m2"]
 [ext_resource type="Script" uid="uid://dedfsv5rhjqa1" path="res://game/gun/magazine.gd" id="3_6x3e7"]
+[ext_resource type="AudioStream" uid="uid://b22t2m5crhy3i" path="res://assets/sfx_exp_shortest_soft5.wav" id="4_0hef4"]
 [ext_resource type="Texture2D" uid="uid://2hx16f0lobwy" path="res://assets/sniper_rifle.png" id="4_6x3e7"]
 
-[sub_resource type="Resource" id="Resource_6x3e7"]
+[sub_resource type="Resource" id="Resource_0hef4"]
 resource_local_to_scene = true
 script = ExtResource("3_6x3e7")
 ammo_type = ExtResource("2_jq7m2")
@@ -13,14 +14,17 @@ max_ammo = 3
 metadata/_custom_type_script = "uid://dedfsv5rhjqa1"
 
 [node name="SniperRifle" unique_id=738278615 instance=ExtResource("1_wal6r")]
-magazine = SubResource("Resource_6x3e7")
+magazine = SubResource("Resource_0hef4")
 flip = true
 
 [node name="Cooldown" parent="." index="0" unique_id=500018778]
 wait_time = 2.0
 
 [node name="Barrel" parent="." index="2" unique_id=1811445942]
-position = Vector2(32, 0)
+position = Vector2(16, 0)
+
+[node name="ShootSound" parent="Barrel" index="0" unique_id=154974930]
+stream = ExtResource("4_0hef4")
 
 [node name="Sprite2D" parent="." index="3" unique_id=1184722041]
 texture = ExtResource("4_6x3e7")

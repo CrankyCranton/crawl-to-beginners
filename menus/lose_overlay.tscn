@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://beiuvxh8fcqp4"]
 
 [ext_resource type="Script" uid="uid://b6j14gsw5ml85" path="res://menus/game_over_overlay.gd" id="1_xc37i"]
+[ext_resource type="AudioStream" uid="uid://d3bf7icu4txax" path="res://assets/shidenbeatsmusic-no-luck-too-bad-disappointing-sound-effect-112943.mp3" id="2_01tll"]
 
 [sub_resource type="Animation" id="Animation_xc37i"]
 length = 0.001
@@ -97,6 +98,11 @@ text = "Quit"
 libraries/ = SubResource("AnimationLibrary_6pnbb")
 autoplay = &"lose"
 
+[node name="Jingle" type="AudioStreamPlayer" parent="." unique_id=1586969793]
+stream = ExtResource("2_01tll")
+autoplay = true
+
 [connection signal="pressed" from="VBoxContainer2/VBoxContainer/TryAgainButton" to="." method="_on_try_again_button_pressed"]
 [connection signal="pressed" from="VBoxContainer2/VBoxContainer/BackToTitleButton" to="." method="_on_back_to_title_button_pressed"]
 [connection signal="pressed" from="VBoxContainer2/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="finished" from="Jingle" to="." method="_on_jingle_finished"]

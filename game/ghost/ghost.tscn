@@ -5,7 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://dnpoq1nirc2ow" path="res://icon.svg" id="2_2iaaw"]
 [ext_resource type="PackedScene" uid="uid://dxcwnd01jn8s8" path="res://game/combat_collision/hit_box/hit_box.tscn" id="6_13suh"]
 [ext_resource type="Texture2D" uid="uid://yjy5bu3oa418" path="res://assets/light_high_res.png" id="6_h2o8k"]
+[ext_resource type="AudioStream" uid="uid://dxwafr6mqmotb" path="res://assets/sfx_wpn_noammo3.wav" id="7_c2int"]
 [ext_resource type="PackedScene" uid="uid://blsg4naun2754" path="res://game/enemy/soft_collision/soft_collision.tscn" id="7_h2o8k"]
+[ext_resource type="AudioStream" uid="uid://w2onwp4gmquq" path="res://assets/sfx_sounds_interaction24.wav" id="8_c2int"]
+[ext_resource type="AudioStream" uid="uid://nehubigtfg6x" path="res://assets/sfx_sounds_interaction20.wav" id="9_04txm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1vx3s"]
 atlas = ExtResource("2_2iaaw")
@@ -17,7 +20,7 @@ radius = 15.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_13suh"]
 radius = 16.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_1vx3s"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_04txm"]
 resource_local_to_scene = true
 radius = 16.0
 
@@ -97,7 +100,7 @@ radius = 15.0
 [node name="EnemyShover" parent="." unique_id=1353088001 instance=ExtResource("7_h2o8k")]
 
 [node name="CollisionShape" parent="EnemyShover" index="0" unique_id=1699220739]
-shape = SubResource("CircleShape2D_1vx3s")
+shape = SubResource("CircleShape2D_04txm")
 disabled = true
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=706404092]
@@ -142,6 +145,18 @@ root_node = NodePath("../Label")
 libraries/ = SubResource("AnimationLibrary_h2o8k")
 autoplay = &"bob"
 
+[node name="EmptyMagSound" type="AudioStreamPlayer" parent="." unique_id=111070818]
+stream = ExtResource("7_c2int")
+
+[node name="UnpossessSound" type="AudioStreamPlayer2D" parent="." unique_id=1800041284]
+stream = ExtResource("8_c2int")
+volume_db = 10.0
+
+[node name="PossessSound" type="AudioStreamPlayer2D" parent="." unique_id=30489809]
+stream = ExtResource("9_04txm")
+volume_db = 10.0
+
+[connection signal="shot" from="." to="." method="_on_shot"]
 [connection signal="body_exited" from="PossessionDetector" to="." method="_on_possession_detector_body_exited"]
 
 [editable path="Sheild"]

@@ -124,6 +124,8 @@ func enter_room(coords: Vector2i) -> void:
 	await room.ready
 
 	room.hero = hero
+	if room.scene_file_path == "res://game/room/boss_room.tscn":
+		hero.health = hero.max_health
 	hero.room = room
 	ghost.room = room
 
