@@ -64,7 +64,8 @@ func _ready() -> void:
 		var data: Dictionary = room_data[coords]
 		minimap.add_room(coords, data.mod, data.unknown)
 
-	enter_room(Vector2(0, -1))
+	enter_room(Global.start_coords)
+	Global.start_coords = Vector2(0, -1)
 
 
 func _process(_delta: float) -> void:
@@ -159,13 +160,22 @@ func _on_room_unlocked() -> void:
 	ghost.can_possess = false
 	if hero.state != Hero.State.POSSESSED:
 		hero.state = Hero.State.FOLLOW
-	if current_room.scene_file_path == "res://game/room/boss_room.tscn":
-		pass # Win.
+	if ghost.possessing in [ghost, null]:
+		ghost.possess(hero)
+	#if current_room.scene_file_path == "res://game/room/boss_room.tscn":
+		#pass # Win.
 
 
 func _on_hero_died() -> void:
 	# IDK about these UIDs, they're hard to read.
-	hud.add_child(preload("uid://beiuvxh8fcqp4").instantiate())
+	var lose_overlay: LoseOverlay = preload("uid://beiuvxh8fcqp4").instantiate()
+	hud.add_child(lose_overlay)
+	lose_overlay.try_again_pressed.connect(
+		func() -> void:
+			if current_room.scene_file_path == "res://game/room/boss_room.tscn":
+				Global.start_coords = current_room.coords
+			get_tree().reload_current_scene()
+	)
 
 
 func _on_hero_health_set(health: int) -> void:

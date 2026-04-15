@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b6j14gsw5ml85" path="res://menus/game_over_overlay.gd" id="1_xc37i"]
 [ext_resource type="AudioStream" uid="uid://d3bf7icu4txax" path="res://assets/shidenbeatsmusic-no-luck-too-bad-disappointing-sound-effect-112943.mp3" id="2_01tll"]
+[ext_resource type="LabelSettings" uid="uid://tdnrek37e15r" path="res://assets/title_font.tres" id="2_6pnbb"]
 
 [sub_resource type="Animation" id="Animation_xc37i"]
 length = 0.001
@@ -57,11 +58,13 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 23.0
+offset_left = -126.0
+offset_top = 112.0
+offset_right = 126.0
+offset_bottom = 177.0
 grow_horizontal = 2
 text = "Game Over"
+label_settings = ExtResource("2_6pnbb")
 horizontal_alignment = 1
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=276597502]
@@ -71,10 +74,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -51.5
-offset_top = -50.5
-offset_right = 51.5
-offset_bottom = 50.5
+offset_left = -76.5
+offset_top = -20.5
+offset_right = 76.5
+offset_bottom = 116.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 64

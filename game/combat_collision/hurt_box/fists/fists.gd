@@ -9,6 +9,7 @@ var range: float = 64.0
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite2D = $Sprite
+@onready var woosh_sound: AudioStreamPlayer2D = $WooshSound
 
 
 func _process(_delta: float) -> void:
@@ -19,6 +20,7 @@ func shoot() -> void:
 	if cooling:
 		return
 	cooling = true
+	woosh_sound.play()
 	animation_player.play(&"punch")
 	shot.emit(-1, get_remaining_time())
 	await animation_player.animation_finished

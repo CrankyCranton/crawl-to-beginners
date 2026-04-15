@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cr1uid6kg1qi3" path="res://assets/player_spritesheet.png" id="2_dk5tg"]
 [ext_resource type="PackedScene" uid="uid://dxcwnd01jn8s8" path="res://game/combat_collision/hit_box/hit_box.tscn" id="2_msmgc"]
 [ext_resource type="AudioStream" uid="uid://dr4py7ddx2yum" path="res://assets/sfx_deathscream_human5.wav" id="4_t00gq"]
+[ext_resource type="FontFile" uid="uid://c3e27ryxs84wi" path="res://assets/Jersey_10/Jersey10-Regular.ttf" id="5_4ojoo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dk5tg"]
 radius = 15.0
@@ -240,6 +241,13 @@ states/walk/node = SubResource("AnimationNodeBlendSpace2D_7388b")
 states/walk/position = Vector2(540.5, 100)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_glrgy"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_s5ebu"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_lw4yu")]
 
+[sub_resource type="LabelSettings" id="LabelSettings_tlrx4"]
+font = ExtResource("5_4ojoo")
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(-1, 1)
+
 [node name="Hero" type="CharacterBody2D" unique_id=1983593253]
 collision_layer = 2
 motion_mode = 1
@@ -283,8 +291,26 @@ parameters/walk/blend_position = Vector2(0, 0)
 
 [node name="HurtSound" type="AudioStreamPlayer2D" parent="." unique_id=1654741988]
 stream = ExtResource("4_t00gq")
-volume_db = 5.0
+volume_db = 10.0
 pitch_scale = 2.0
+
+[node name="EekLabel" type="Label" parent="." unique_id=1300845506]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = -33.0
+offset_right = 48.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "EEEEEEEEEEEK!!!"
+label_settings = SubResource("LabelSettings_tlrx4")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="damage_taken" from="HitBox" to="." method="_on_hit_box_damage_taken"]
 [connection signal="target_reached" from="NavigationAgent" to="." method="_on_navigation_agent_target_reached"]

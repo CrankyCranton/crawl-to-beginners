@@ -25,5 +25,5 @@ position = Vector2(16, 0)
 stream = ExtResource("4_tiald")
 
 [node name="Sprite2D" parent="." index="3" unique_id=1184722041]
-rotation = 1.5707964
+rotation = -1.5707964
 texture = ExtResource("4_w1mcr")

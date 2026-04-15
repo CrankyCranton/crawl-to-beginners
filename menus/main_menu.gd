@@ -7,7 +7,7 @@ func _ready() -> void:
 
 
 func _on_play_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://game/game.tscn")
+	get_tree().change_scene_to_file("res://menus/rules_page.tscn")
 
 
 func _on_quit_button_pressed() -> void:

@@ -54,6 +54,7 @@ var state: State = State.NORMAL:
 @onready var sprite: Sprite2D = $Sprite
 @onready var hurt_sound: AudioStreamPlayer2D = $HurtSound
 @onready var max_health: int = health
+@onready var label_animator: AnimationPlayer = $EmpyLabel/LabelAnimator
 @onready var anim_dir := Vector2.DOWN:
 	set(value):
 		anim_dir = value

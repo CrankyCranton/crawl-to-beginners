@@ -1,0 +1,11 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://bfdlf2t2x2f7l"]
+
+[ext_resource type="FontFile" uid="uid://c3e27ryxs84wi" path="res://assets/Jersey_10/Jersey10-Regular.ttf" id="1_68x24"]
+
+[resource]
+font = ExtResource("1_68x24")
+font_size = 32
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(-1, 1)

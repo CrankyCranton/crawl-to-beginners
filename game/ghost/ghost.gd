@@ -105,34 +105,39 @@ func _input(event: InputEvent) -> void:
 				collider = body
 
 		if collider != null:
-			possess_sound.pitch_scale = 1.0 if collider is Enemy else 1.2
-			possess_sound.play()
-			possessing.material = null
-			if possessing != self:
-				possessing.state = possessing.State.NORMAL
-				possessing.died.disconnect(_on_possessing_died)
-				possessing.material = null
-				if possessing is Enemy:
-					possessing.shot.disconnect(shot.emit)
-					possessing.reparent(room.enemies)
-					room.set_up_enemy(possessing)
-					possessing.add_to_group(&"enemies")
-					flip_mask()
+			possess(collider)
 
-			possessing = collider
-			possessing.material = POSSESSION_SHADER
-			@warning_ignore("shadowed_variable")
-			var sprite: Sprite2D = possessing.get_node(^"Sprite")
-			var grid_size := Vector2(sprite.hframes, sprite.vframes)
-			POSSESSION_SHADER.set_shader_parameter(&"number_of_images", grid_size)
-			if collider is Enemy:
-				possessing.shot.connect(shot.emit)
-				collider.reparent(get_parent())
-				collider.remove_from_group(&"enemies")
-				flip_mask()
-			collider.state = collider.State.POSSESSED
-			#sprite.visible = possessing == self
-			collider.died.connect(_on_possessing_died)
+
+func possess(collider: Node2D) -> void:
+	possess_sound.pitch_scale = 1.0 if collider is Enemy else 1.2
+	possess_sound.play()
+	possessing.material = null
+	if possessing != self:
+		possessing.state = possessing.State.NORMAL
+		possessing.died.disconnect(_on_possessing_died)
+		possessing.material = null
+		if possessing is Enemy:
+			possessing.shot.disconnect(shot.emit)
+			possessing.reparent(room.enemies)
+			room.set_up_enemy(possessing)
+			possessing.add_to_group(&"enemies")
+			flip_mask()
+
+	possessing = collider
+	possessing.material = POSSESSION_SHADER
+	@warning_ignore("shadowed_variable")
+	var sprite: Sprite2D = possessing.get_node(^"Sprite")
+	var grid_size := Vector2(sprite.hframes, sprite.vframes)
+	POSSESSION_SHADER.set_shader_parameter(&"number_of_images", grid_size)
+	if collider is Enemy:
+		possessing.shot.connect(shot.emit)
+		collider.reparent(get_parent())
+		collider.remove_from_group(&"enemies")
+		flip_mask()
+	collider.state = collider.State.POSSESSED
+	#sprite.visible = possessing == self
+	collider.died.connect(_on_possessing_died)
+
 
 
 # OK, the entire code base is messy, but this might just take the cake.
@@ -168,3 +173,4 @@ func _on_possession_detector_body_exited(body: Node2D) -> void:
 func _on_shot(ammo: int, _cooldown: float) -> void:
 	if ammo == 0 and possessing is Enemy:
 		empty_mag_sound.play()
+		possessing.label_animator.play(&"show")

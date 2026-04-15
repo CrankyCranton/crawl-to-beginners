@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c11ky7q8072ol" path="res://game/combat_collision/hurt_box/bullet/sniper_bullet.tscn" id="8_2xx2c"]
 [ext_resource type="PackedScene" uid="uid://d2oxbvp4kbxhu" path="res://game/gun/pistol/pistol.tscn" id="9_vo8bf"]
 [ext_resource type="PackedScene" uid="uid://cfb8piwhbwlhf" path="res://game/combat_collision/hurt_box/bullet/laser.tscn" id="10_hflfj"]
+[ext_resource type="LabelSettings" uid="uid://bfdlf2t2x2f7l" path="res://assets/jersey_font.tres" id="11_d33g0"]
 [ext_resource type="AudioStream" uid="uid://d301opjes8hfc" path="res://assets/freesound_community-grunt1-68324.mp3" id="11_hflfj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8idto"]
@@ -571,6 +572,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Boss"
+label_settings = ExtResource("11_d33g0")
 horizontal_alignment = 1
 vertical_alignment = 1
 

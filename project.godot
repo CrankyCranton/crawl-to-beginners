@@ -15,17 +15,26 @@ run/main_scene="uid://bv8sni2cunh1t"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://t7tqy5f4lrq4"
+
 [autoload]
 
 MusicManager="*uid://dao0lp2lh3cxj"
+Global="*uid://fcing7wqru3l"
 
 [display]
 
 window/size/viewport_width=768
 window/size/viewport_height=512
 window/size/mode=2
-window/stretch/mode="viewport"
-window/stretch/scale_mode="integer"
+window/stretch/mode="canvas_items"
+window/defaults/default_clear_color=Color(0.3, 0.3, 0.3, 1)
+
+[gui]
+
+theme/custom="uid://d4bvcissyyalx"
 
 [input]
 
@@ -114,3 +123,4 @@ textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.05591666, 0.045100003, 0.11, 1)

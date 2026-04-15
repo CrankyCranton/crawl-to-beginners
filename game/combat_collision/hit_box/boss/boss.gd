@@ -8,7 +8,7 @@ const MIN_IDLE_TIME: float = 1.0
 const MAX_IDLE_TIME: float = 2.0
 const RAMPAGE_SPEED: float = 1.5
 const FAKE_CHANCE: float = 0.2
-const RAMPAGE_START: int = 9
+const RAMPAGE_START: int = 15
 
 @export var randomizations: Dictionary[Node2D, float] = {  }
 @export var spawn_doors: Array[Door] = []
@@ -34,7 +34,7 @@ var rampaging := false
 		elif health <= RAMPAGE_START:
 			rampaging = true
 			sprite.texture = preload("uid://dtcmpljxx38db")
-			spawn_timer.wait_time /= RAMPAGE_SPEED
+			spawn_timer.wait_time = 2.0
 
 
 func _ready() -> void:

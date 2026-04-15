@@ -25,4 +25,4 @@ position = Vector2(32, 0)
 [node name="Sprite2D" parent="." index="3" unique_id=1184722041]
 texture = ExtResource("4_ji4px")
 hframes = 4
-frame = 3
+frame = 2

@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bks3i1d362lr" path="res://game/minimap/minimap.tscn" id="4_4fuuu"]
 [ext_resource type="Texture2D" uid="uid://b0ypjuxa4f3ep" path="res://assets/health_bar.png" id="4_dxrkv"]
 [ext_resource type="Texture2D" uid="uid://t4qqgrndew5l" path="res://assets/bullet_icon.png" id="5_dakft"]
+[ext_resource type="LabelSettings" uid="uid://bfdlf2t2x2f7l" path="res://assets/jersey_font.tres" id="6_u5opy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dakft"]
 atlas = ExtResource("4_dxrkv")
@@ -177,6 +178,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "0"
+label_settings = ExtResource("6_u5opy")
 horizontal_alignment = 1
 vertical_alignment = 1
 

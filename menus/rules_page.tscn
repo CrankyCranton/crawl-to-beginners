@@ -1,0 +1,290 @@
+[gd_scene format=3 uid="uid://dgywjbo7gcsyi"]
+
+[ext_resource type="Script" uid="uid://bmoe3qmg3jxc5" path="res://menus/rules_page.gd" id="1_ecvfp"]
+[ext_resource type="LabelSettings" uid="uid://tdnrek37e15r" path="res://assets/title_font.tres" id="1_wuuew"]
+[ext_resource type="Texture2D" uid="uid://2hx16f0lobwy" path="res://assets/sniper_rifle.png" id="3_sd3bx"]
+[ext_resource type="Texture2D" uid="uid://coruxjgv4nioq" path="res://assets/laser_gun.png" id="4_2vcm1"]
+[ext_resource type="Texture2D" uid="uid://bjrlvn7vjjwhl" path="res://assets/fist.png" id="5_cfgwo"]
+[ext_resource type="Texture2D" uid="uid://dh3tws236i3vy" path="res://assets/tilemap_packed.png" id="6_bct27"]
+[ext_resource type="Texture2D" uid="uid://cr1uid6kg1qi3" path="res://assets/player_spritesheet.png" id="6_cujbb"]
+[ext_resource type="Texture2D" uid="uid://2e7yl76blew8" path="res://assets/grenade_launcher.png" id="6_t4dh6"]
+[ext_resource type="Texture2D" uid="uid://ctppffagiimld" path="res://assets/enemy_spritesheet.png" id="7_pmlru"]
+[ext_resource type="Texture2D" uid="uid://dyawiyx05w7my" path="res://assets/arrow_keys.png" id="7_vr15c"]
+[ext_resource type="Texture2D" uid="uid://d355w6qiqplra" path="res://assets/question_mark_icon.png" id="8_bct27"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_siv3r"]
+atlas = ExtResource("6_t4dh6")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4dh6"]
+atlas = ExtResource("6_bct27")
+region = Rect2(144, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c8jxe"]
+atlas = ExtResource("6_bct27")
+region = Rect2(160, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ad8q"]
+atlas = ExtResource("6_cujbb")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vr15c"]
+atlas = ExtResource("7_pmlru")
+region = Rect2(0, 96, 32, 32)
+
+[node name="RulesPage" type="Control" unique_id=182140535]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ecvfp")
+
+[node name="Label" type="Label" parent="." unique_id=120451255]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -359.5
+offset_top = 15.0
+offset_right = -76.5
+offset_bottom = 80.0
+grow_horizontal = 2
+text = "How to Play"
+label_settings = ExtResource("1_wuuew")
+horizontal_alignment = 1
+
+[node name="StartButton" type="Button" parent="." unique_id=1918995765]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 194.0
+offset_top = -64.0
+offset_right = 300.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Let's Go!"
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=154142536]
+layout_mode = 0
+offset_left = 355.0
+offset_top = 4.0
+offset_right = 763.0
+offset_bottom = 251.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer" unique_id=115397189]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer2" unique_id=119473649]
+layout_mode = 2
+text = "Tools"
+
+[node name="VBoxContainer" type="GridContainer" parent="PanelContainer/VBoxContainer2" unique_id=60749145]
+layout_mode = 2
+columns = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/VBoxContainer" unique_id=1999761377]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer2/VBoxContainer/HBoxContainer" unique_id=984480431]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_sd3bx")
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer2/VBoxContainer/HBoxContainer" unique_id=1792161024]
+layout_mode = 2
+text = "= Sniper"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/VBoxContainer" unique_id=550140514]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer2/VBoxContainer/HBoxContainer2" unique_id=413310104]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("4_2vcm1")
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer2/VBoxContainer/HBoxContainer2" unique_id=935472882]
+layout_mode = 2
+text = "= Laser Gun"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/VBoxContainer" unique_id=670035441]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer2/VBoxContainer/HBoxContainer3" unique_id=1994461325]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("5_cfgwo")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer2/VBoxContainer/HBoxContainer3" unique_id=1710552918]
+layout_mode = 2
+text = "= Fists"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/VBoxContainer" unique_id=423181659]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer2/VBoxContainer/HBoxContainer5" unique_id=171062181]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = SubResource("AtlasTexture_siv3r")
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer2/VBoxContainer/HBoxContainer5" unique_id=718777686]
+layout_mode = 2
+text = "= "
+horizontal_alignment = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer2/VBoxContainer/HBoxContainer5" unique_id=1283060454]
+layout_mode = 2
+text = "Grenade
+Launcher"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/VBoxContainer" unique_id=834934997]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer2/VBoxContainer/HBoxContainer4" unique_id=358937533]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer2/VBoxContainer/HBoxContainer4" unique_id=2137722889]
+layout_mode = 2
+text = "= Med Pack"
+
+[node name="PanelContainer2" type="PanelContainer" parent="." unique_id=1756347096]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -377.0
+offset_top = 266.0
+offset_right = -12.0
+offset_bottom = 439.0
+grow_horizontal = 0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer2" unique_id=77041761]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer2/VBoxContainer2" unique_id=153094172]
+layout_mode = 2
+text = "Controls"
+
+[node name="VBoxContainer" type="HBoxContainer" parent="PanelContainer2/VBoxContainer2" unique_id=360034462]
+layout_mode = 2
+
+[node name="HBoxContainer5" type="VBoxContainer" parent="PanelContainer2/VBoxContainer2/VBoxContainer" unique_id=1402833125]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer2/VBoxContainer2/VBoxContainer/HBoxContainer5" unique_id=830493790]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = SubResource("AtlasTexture_t4dh6")
+
+[node name="Label" type="Label" parent="PanelContainer2/VBoxContainer2/VBoxContainer/HBoxContainer5" unique_id=1014624349]
+layout_mode = 2
+text = "Shoot"
+horizontal_alignment = 1
+
+[node name="HBoxContainer4" type="VBoxContainer" parent="PanelContainer2/VBoxContainer2/VBoxContainer" unique_id=729391811]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer2/VBoxContainer2/VBoxContainer/HBoxContainer4" unique_id=119020352]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = SubResource("AtlasTexture_c8jxe")
+
+[node name="Label" type="Label" parent="PanelContainer2/VBoxContainer2/VBoxContainer/HBoxContainer4" unique_id=2018737614]
+layout_mode = 2
+text = "Possess"
+horizontal_alignment = 1
+
+[node name="HBoxContainer6" type="VBoxContainer" parent="PanelContainer2/VBoxContainer2/VBoxContainer" unique_id=1156369074]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer2/VBoxContainer2/VBoxContainer/HBoxContainer6" unique_id=1095502608]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("7_vr15c")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="PanelContainer2/VBoxContainer2/VBoxContainer/HBoxContainer6" unique_id=572017567]
+layout_mode = 2
+text = "Move"
+horizontal_alignment = 1
+
+[node name="PanelContainer3" type="PanelContainer" parent="." unique_id=262074823]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -764.0
+offset_top = 115.0
+offset_right = -417.0
+offset_bottom = 430.0
+grow_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer3" unique_id=136361689]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer3/VBoxContainer" unique_id=324739070]
+layout_mode = 2
+text = "Characters"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer3/VBoxContainer" unique_id=913975731]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer3/VBoxContainer/HBoxContainer" unique_id=1914076454]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = SubResource("AtlasTexture_3ad8q")
+
+[node name="Label" type="Label" parent="PanelContainer3/VBoxContainer/HBoxContainer" unique_id=1971068971]
+layout_mode = 2
+text = "= Hero (protect him!)"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer3/VBoxContainer" unique_id=1202196242]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer3/VBoxContainer/HBoxContainer2" unique_id=1193012384]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer3/VBoxContainer/HBoxContainer2" unique_id=569895899]
+layout_mode = 2
+text = "= You (possess others!)"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer3/VBoxContainer" unique_id=372631871]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer3/VBoxContainer/HBoxContainer3" unique_id=2045567579]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = SubResource("AtlasTexture_vr15c")
+
+[node name="Label" type="Label" parent="PanelContainer3/VBoxContainer/HBoxContainer3" unique_id=347357905]
+layout_mode = 2
+text = "= Enemy (shoot them!)"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="PanelContainer3/VBoxContainer" unique_id=218676933]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer3/VBoxContainer/HBoxContainer4" unique_id=1117617532]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("8_bct27")
+
+[node name="Label" type="Label" parent="PanelContainer3/VBoxContainer/HBoxContainer4" unique_id=1341954241]
+layout_mode = 2
+text = "= The Boss"
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
